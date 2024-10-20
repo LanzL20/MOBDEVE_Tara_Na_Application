@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F6F6">
+
+    <ImageButton
+        android:id="@+id/settings_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_settings"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:scaleType="centerInside"/>
+
+    <ImageButton
+        android:id="@+id/back_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_left_arrow"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:scaleType="centerInside"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/activity_profile_friend_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/activity_profile_friend_iv_logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo_chat" />
+
+        <TextView
+            android:id="@+id/activity_profile_friend_tv_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/monument_extended_regular"
+            android:text="@string/app_name"
+            android:textColor="#070802"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="back_profile_btn"
+            app:layout_constraintStart_toEndOf="@+id/activity_profile_friend_iv_logo"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/activity_friends_view_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/back_profile_line"
+        app:layout_constraintTop_toBottomOf="@id/activity_profile_friend_logo"
+        app:layout_constraintVertical_bias="0.478"
+        tools:layout_editor_absoluteX="0dp">
+
+        <ImageView
+            android:id="@+id/profile_user2"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/asset_profile2" />
+
+        <TextView
+            android:id="@+id/activity_profile_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="25dp"
+            android:fontFamily="@font/jeko_demo_extrabold"
+            android:gravity="center"
+            android:text="Marissa Villaceran"
+            android:textColor="#070802"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/activity_profile_user_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="25dp"
+            android:fontFamily="@font/jeko_demo_extralight"
+            android:gravity="center"
+            android:text="\@vmarissaann"
+            android:textColor="#070802"
+            android:textSize="22sp" />
+
+        <LinearLayout
+            android:id="@+id/activity_profile_friends_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="30dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/friends_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:srcCompat="@drawable/ic_friends"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerInside"/>
+
+            <TextView
+                android:id="@+id/activity_profile_user_num_friends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="7dp"
+                android:fontFamily="@font/jeko_demo_extrabold"
+                android:gravity="center"
+                android:text="3"
+                android:textColor="#070802"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/activity_profile_user_friends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/jeko_demo_medium"
+                android:gravity="center"
+                android:text="friends"
+                android:textColor="#070802"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_friend_buttons_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:paddingBottom="25dp">
+
+            <LinearLayout
+                android:id="@+id/following_btn"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@drawable/btn_round_green_30"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <ImageView
+                    android:id="@+id/friend_icon"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginEnd="10dp"
+                    app:srcCompat="@drawable/ic_friend" />
+
+                <TextView
+                    android:id="@+id/following_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/jeko_demo_extrabold"
+                    android:gravity="center"
+                    android:text="Following"
+                    android:textAllCaps="false"
+                    android:textColor="#070802"
+                    android:textSize="28sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/friend_schedule_btn"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/btn_round_orange_30"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <ImageView
+                    android:id="@+id/calendar_icon"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginEnd="10dp"
+                    app:srcCompat="@drawable/ic_calendar" />
+
+                <TextView
+                    android:id="@+id/schedule_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/jeko_demo_extrabold"
+                    android:gravity="center"
+                    android:text="Schedule"
+                    android:textAllCaps="false"
+                    android:textColor="#070802"
+                    android:textSize="28sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/back_profile_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#59070802"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="60dp" />
+
+    <View
+        android:id="@+id/back_profile_bg"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#F8F6F6"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageButton
+        android:id="@+id/profile_user1"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="25dp"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/asset_profile1"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:scaleType="centerInside"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

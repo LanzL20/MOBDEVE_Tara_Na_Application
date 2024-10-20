@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F8F6F6"
     android:gravity="center_vertical"
     android:orientation="vertical">
 
@@ -11,7 +12,7 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_gravity="center"
-        android:src="@drawable/logo3" />
+        android:src="@drawable/logo_non_chat" />
 
     <TextView
         android:id="@+id/activity_boarding_login_tv_1"
@@ -25,29 +26,29 @@
         android:fontFamily="@font/jeko_demo_extrabold"
         android:gravity="center"
         android:text="Welcome back!"
-        android:textColor="#000000"
+        android:textColor="#070802"
         android:textSize="34sp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/activity_boarding_login_etl_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge"
         android:layout_marginLeft="25dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="25dp"
-        android:layout_marginTop="5dp">
+        android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/activity_boarding_login_et_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
+            android:background="@drawable/btn_round_white_80"
             android:fontFamily="@font/jeko_demo_medium"
-            android:paddingStart="25dp"
-            android:paddingEnd="25dp"
-            android:background="@drawable/round_button_white"
             android:hint="Phone Number"
-            android:inputType="text" />
+            android:inputType="text"
+            android:padding="15dp"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -55,23 +56,23 @@
         android:id="@+id/activity_boarding_login_etl_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true"
-        android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge"
         android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="25dp"
-        android:layout_marginTop="20dp">
+        android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/activity_boarding_login_et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
+            android:background="@drawable/btn_round_white_80"
             android:fontFamily="@font/jeko_demo_medium"
-            android:paddingStart="25dp"
-            android:paddingEnd="25dp"
-            android:background="@drawable/round_button_white"
             android:hint="Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:padding="15dp"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -83,11 +84,11 @@
         android:layout_marginTop="35dp"
         android:layout_marginRight="25dp"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/round_button_orange"
+        android:background="@drawable/btn_round_orange_30"
         android:fontFamily="@font/jeko_demo_extrabold"
         android:text="Log In"
         android:textAllCaps="false"
-        android:textColor="#FFFFFF"
+        android:textColor="#F8F6F6"
         android:textSize="20sp" />
 
     <LinearLayout

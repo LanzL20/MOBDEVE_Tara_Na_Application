@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F6F6">
+
+    <ImageButton
+        android:id="@+id/settings_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_settings"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:scaleType="centerInside"/>
+
+    <ImageButton
+        android:id="@+id/inbox_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_left_arrow"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:scaleType="centerInside"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/activity_lakwatsa_create_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/activity_lakwatsa_create_iv_logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo_chat" />
+
+        <TextView
+            android:id="@+id/activity_lakwatsa_create_tv_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/monument_extended_regular"
+            android:text="@string/app_name"
+            android:textColor="#070802"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/activity_lakwatsa_create_iv_logo"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/activity_lakwatsa_create_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/activity_lakwatsa_create_logo"
+        tools:layout_editor_absoluteX="0dp">
+
+        <TextView
+            android:id="@+id/activity_plakwatsa_create_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:fontFamily="@font/jeko_demo_extrabold"
+            android:text="Create Lakwatsa"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#070802"
+            android:textSize="32sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/activity_lakwatsa_create_etl_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/activity_lakwatsa_create_et_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_round_white_80"
+                android:fontFamily="@font/jeko_demo_medium"
+                android:inputType="text"
+                android:padding="10dp"
+                android:paddingStart="25dp"
+                android:paddingEnd="25dp"
+                android:hint="Add lakwatsa title"
+                android:drawableStart="@drawable/ic_pencil"
+                android:drawablePadding="10dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/activity_lakwatsa_create_etl_friends"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/activity_lakwatsa_create_et_friends"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_round_white_80"
+                android:fontFamily="@font/jeko_demo_medium"
+                android:hint="Invite friends"
+                android:inputType="text"
+                android:padding="10dp"
+                android:paddingStart="25dp"
+                android:paddingEnd="25dp"
+                android:drawableStart="@drawable/ic_add_user_small"
+                android:drawablePadding="10dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/activity_lakwatsa_create_etl_datetime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/activity_lakwatsa_create_et_datetime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_round_white_80"
+                android:fontFamily="@font/jeko_demo_medium"
+                android:inputType="text"
+                android:padding="10dp"
+                android:paddingStart="25dp"
+                android:paddingEnd="25dp"
+                android:hint="Tentative date and time"
+                android:drawableStart="@drawable/ic_calendar_small"
+                android:drawablePadding="10dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/activity_datetime_etl_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/activity_datetime_et_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_round_white_80"
+                android:fontFamily="@font/jeko_demo_medium"
+                android:inputType="text"
+                android:padding="10dp"
+                android:paddingStart="25dp"
+                android:paddingEnd="25dp"
+                android:hint="Add location (Optional)"
+                android:drawableStart="@drawable/ic_location"
+                android:drawablePadding="10dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/activity_lakwatsa_create_delete_btn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="75dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/btn_round_orange_30"
+            android:fontFamily="@font/jeko_demo_extrabold"
+            android:text="Create"
+            android:textAllCaps="false"
+            android:textColor="#F8F6F6"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/back_profile_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#59070802"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="60dp" />
+
+    <View
+        android:id="@+id/back_profile_bg"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#F8F6F6"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageButton
+        android:id="@+id/profile_user1"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="25dp"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/asset_profile1"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:scaleType="centerInside"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

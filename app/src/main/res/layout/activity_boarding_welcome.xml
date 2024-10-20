@@ -4,37 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F8F6F6"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/activity_boarding_welcome_cl"
+        android:id="@+id/activity_profile_settings_logo_iv_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/activity_boarding_welcome_iv_logo"
+            android:id="@+id/activity_profile_user_iv_logo"
             android:layout_width="40dp"
             android:layout_height="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/logo2" />
+            app:srcCompat="@drawable/logo_chat" />
 
         <TextView
-            android:id="@+id/activity_boarding_welcome_tv_app_name"
+            android:id="@+id/activity_profile_user_tv_app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:fontFamily="@font/monument_extended_regular"
             android:text="@string/app_name"
-            android:textColor="#000000"
+            android:textColor="#070802"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/activity_boarding_welcome_iv_logo"
+            app:layout_constraintStart_toEndOf="@+id/activity_profile_user_iv_logo"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -45,11 +46,11 @@
         android:layout_marginTop="60dp"
         android:fontFamily="@font/jeko_demo_medium"
         android:text="Simplify your"
-        android:textColor="#000000"
+        android:textColor="#070802"
         android:textSize="38sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_boarding_welcome_cl" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_profile_settings_logo_iv_logo" />
 
     <LinearLayout
         android:id="@+id/activity_boarding_welcome_ll"
@@ -67,7 +68,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/jeko_demo_extrabolditalic"
             android:text="lakwasta "
-            android:textColor="#000000"
+            android:textColor="#070802"
             android:textSize="38sp" />
 
         <TextView
@@ -77,7 +78,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/jeko_demo_medium"
             android:text="plans!"
-            android:textColor="#000000"
+            android:textColor="#070802"
             android:textSize="38sp" />
     </LinearLayout>
 
@@ -86,11 +87,11 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:background="@drawable/round_button_orange"
+        android:background="@drawable/btn_round_orange_30"
         android:fontFamily="@font/jeko_demo_extrabold"
         android:text="Sign Up"
         android:textAllCaps="false"
-        android:textColor="#FFFFFF"
+        android:textColor="#F8F6F6"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Log In"
-        android:textColor="#000000"
+        android:textColor="#070802"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -118,5 +119,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_boarding_welcome_tv_login"
         app:layout_constraintVertical_bias="0.41000003"
-        app:srcCompat="@drawable/boarding_welcome_friends" />
+        app:srcCompat="@drawable/asset_welcome" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F6F6">
+
+    <ImageButton
+        android:id="@+id/settings_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_settings"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:scaleType="centerInside"/>
+
+    <ImageButton
+        android:id="@+id/inbox_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_inbox"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:scaleType="centerInside"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/activity_profile_settings_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/activity_profile_settings_iv_logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo_chat" />
+
+        <TextView
+            android:id="@+id/activity_profile_settings_tv_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/monument_extended_regular"
+            android:text="@string/app_name"
+            android:textColor="#070802"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/activity_profile_settings_iv_logo"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/activity_profile_settings_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/activity_profile_settings_logo"
+        tools:layout_editor_absoluteX="0dp">
+
+        <TextView
+            android:id="@+id/activity_profile_settings_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:fontFamily="@font/jeko_demo_extrabold"
+            android:text="Settings"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#070802"
+            android:textSize="32sp" />
+
+        <TextView
+            android:id="@+id/activity_profile_settings_name_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:fontFamily="@font/jeko_demo_extrabold"
+            android:text="Full Name"
+            android:textAllCaps="false"
+            android:textColor="#070802"
+            android:textSize="24sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/activity_profile_settings_etl_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/activity_profile_settings_et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_round_white_80"
+                android:fontFamily="@font/jeko_demo_medium"
+                android:inputType="text"
+                android:padding="15dp"
+                android:paddingStart="25dp"
+                android:paddingEnd="25dp"
+                android:text="Tyler Tan" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/activity_profile_settings_username_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="25dp"
+            android:fontFamily="@font/jeko_demo_extrabold"
+            android:text="Username"
+            android:textAllCaps="false"
+            android:textColor="#070802"
+            android:textSize="24sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/activity_profile_settings_etl_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/activity_profile_settings_et_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_round_white_80"
+                android:fontFamily="@font/jeko_demo_medium"
+                android:hint="Add username"
+                android:inputType="text"
+                android:padding="15dp"
+                android:paddingStart="25dp"
+                android:paddingEnd="25dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/activity_profile_settings_password_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="25dp"
+            android:fontFamily="@font/jeko_demo_extrabold"
+            android:text="Password"
+            android:textAllCaps="false"
+            android:textColor="#070802"
+            android:textSize="24sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/activity_profile_settings_etl_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/activity_profile_settings_et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_round_white_80"
+                android:fontFamily="@font/jeko_demo_medium"
+                android:inputType="text"
+                android:padding="15dp"
+                android:paddingStart="25dp"
+                android:paddingEnd="25dp"
+                android:text="*************" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/activity_profile_settings_phone_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="25dp"
+            android:fontFamily="@font/jeko_demo_extrabold"
+            android:text="Phone Number"
+            android:textAllCaps="false"
+            android:textColor="#070802"
+            android:textSize="24sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/activity_profile_settings_etl_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/activity_profile_settings_et_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_round_white_80"
+                android:fontFamily="@font/jeko_demo_medium"
+                android:inputType="text"
+                android:padding="15dp"
+                android:paddingStart="25dp"
+                android:paddingEnd="25dp"
+                android:text="+65 905 467 2750" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/activity_profile_settings_delete_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="75dp"
+            android:layout_marginRight="25dp"
+            android:background="@drawable/btn_round_orange_30"
+            android:fontFamily="@font/jeko_demo_extrabold"
+            android:text="Delete Account"
+            android:textAllCaps="false"
+            android:textColor="#F8F6F6"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/activity_profile_settings_add_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/btn_round_white_80"
+            android:fontFamily="@font/jeko_demo_extrabold"
+            android:text="Log Out"
+            android:textAllCaps="false"
+            android:textColor="#070802"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
