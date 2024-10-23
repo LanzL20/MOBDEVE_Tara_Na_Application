@@ -23,7 +23,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/logo_chat" />
+            android:src="@drawable/logo_chat" />
 
         <TextView
             android:id="@+id/activity_profile_user_tv_app_name"
@@ -119,5 +119,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_boarding_welcome_tv_login"
         app:layout_constraintVertical_bias="0.41000003"
-        app:srcCompat="@drawable/asset_welcome" />
+        android:src="@drawable/asset_welcome" />
 </androidx.constraintlayout.widget.ConstraintLayout>

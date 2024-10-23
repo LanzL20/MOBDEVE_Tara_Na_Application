@@ -14,7 +14,7 @@
         android:layout_marginRight="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_settings"
+        android:src="@drawable/ic_settings"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:scaleType="centerInside"/>
 
@@ -26,7 +26,7 @@
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_inbox"
+        android:src="@drawable/ic_inbox"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:scaleType="centerInside"/>
 
@@ -46,7 +46,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/logo_chat" />
+            android:src="@drawable/logo_chat" />
 
         <TextView
             android:id="@+id/activity_lakwatsa_list_tv_app_name"
@@ -95,7 +95,7 @@
             android:layout_width="0dp"
             android:layout_height="35dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_add"
+            android:src="@drawable/ic_add"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:scaleType="centerInside"/>
     </LinearLayout>
@@ -205,21 +205,21 @@
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_marginRight="5dp"
-                                app:srcCompat="@drawable/asset_profile1" />
+                                android:src="@drawable/asset_profile1" />
 
                             <ImageView
                                 android:id="@+id/upcoming_lakwatsa_friend2_iv"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_marginRight="5dp"
-                                app:srcCompat="@drawable/asset_profile2" />
+                                android:src="@drawable/asset_profile2" />
 
                             <ImageView
                                 android:id="@+id/upcoming_lakwatsa_friend3_iv"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_marginRight="5dp"
-                                app:srcCompat="@drawable/asset_profile3" />
+                                android:src="@drawable/asset_profile3" />
 
                             <FrameLayout
                                 android:id="@+id/more_friends"
@@ -336,14 +336,14 @@
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_marginRight="5dp"
-                                app:srcCompat="@drawable/asset_profile1" />
+                                android:src="@drawable/asset_profile1" />
 
                             <ImageView
                                 android:id="@+id/ongoing_lakwatsa_friend2_iv"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_marginRight="5dp"
-                                app:srcCompat="@drawable/asset_profile2" />
+                                android:src="@drawable/asset_profile2" />
 
                         </LinearLayout>
 
@@ -444,14 +444,14 @@
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_marginRight="5dp"
-                                app:srcCompat="@drawable/asset_profile1" />
+                                android:src="@drawable/asset_profile1" />
 
                             <ImageView
                                 android:id="@+id/completed_lakwatsa_friend2_iv"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_marginRight="5dp"
-                                app:srcCompat="@drawable/asset_profile2" />
+                                android:src="@drawable/asset_profile2" />
 
                         </LinearLayout>
 
@@ -539,14 +539,14 @@
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_marginRight="5dp"
-                                app:srcCompat="@drawable/asset_profile1" />
+                                android:src="@drawable/asset_profile1" />
 
                             <ImageView
                                 android:id="@+id/completed_lakwatsa_friend2_2_iv"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_marginRight="5dp"
-                                app:srcCompat="@drawable/asset_profile2" />
+                                android:src="@drawable/asset_profile2" />
 
                         </LinearLayout>
 
@@ -596,7 +596,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/asset_profile1"
+        android:src="@drawable/asset_profile1"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:scaleType="centerInside"/>
 

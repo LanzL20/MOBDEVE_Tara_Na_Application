@@ -164,7 +164,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/logo_chat" />
+            android:src="@drawable/logo_chat" />
 
         <TextView
             android:id="@+id/activity_boarding_signup_tv_app_name"

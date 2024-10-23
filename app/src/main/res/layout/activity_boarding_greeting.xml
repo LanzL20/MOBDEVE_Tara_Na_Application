@@ -23,7 +23,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/logo_chat" />
+            android:src="@drawable/logo_chat" />
 
         <TextView
             android:id="@+id/activity_boarding_signup_tv_app_name"
@@ -61,7 +61,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/asset_greeting" />
+        android:src="@drawable/asset_greeting" />
 
     <Space
         android:id="@+id/spaceView"
@@ -73,7 +73,7 @@
         android:id="@+id/ic_right_arrow"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:srcCompat="@drawable/ic_right_arrow"
+        android:src="@drawable/ic_right_arrow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginEnd="16dp"

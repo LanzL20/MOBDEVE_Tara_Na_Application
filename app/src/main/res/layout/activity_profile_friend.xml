@@ -14,7 +14,7 @@
         android:layout_marginRight="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_settings"
+        android:src="@drawable/ic_settings"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:scaleType="centerInside"/>
 
@@ -26,7 +26,7 @@
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_left_arrow"
+        android:src="@drawable/ic_left_arrow"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:scaleType="centerInside"/>
 
@@ -46,7 +46,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/logo_chat" />
+            android:src="@drawable/logo_chat" />
 
         <TextView
             android:id="@+id/activity_profile_friend_tv_app_name"
@@ -57,7 +57,7 @@
             android:text="@string/app_name"
             android:textColor="#070802"
             android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="back_profile_btn"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/activity_profile_friend_iv_logo"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -79,7 +79,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/asset_profile2" />
+            android:src="@drawable/asset_profile2" />
 
         <TextView
             android:id="@+id/activity_profile_user_name"
@@ -125,7 +125,7 @@
                 android:id="@+id/friends_icon"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                app:srcCompat="@drawable/ic_friends"
+                android:src="@drawable/ic_friends"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:scaleType="centerInside"/>
 
@@ -178,7 +178,7 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginEnd="10dp"
-                    app:srcCompat="@drawable/ic_friend" />
+                    android:src="@drawable/ic_friend" />
 
                 <TextView
                     android:id="@+id/following_text"
@@ -210,7 +210,7 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginEnd="10dp"
-                    app:srcCompat="@drawable/ic_calendar" />
+                    android:src="@drawable/ic_calendar" />
 
                 <TextView
                     android:id="@+id/schedule_text"
@@ -255,7 +255,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/asset_profile1"
+        android:src="@drawable/asset_profile1"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:scaleType="centerInside"/>
 
