@@ -121,6 +121,7 @@
             android:rowOrderPreserved="false">
 
             <FrameLayout
+                android:id="@+id/album_item1"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_columnWeight="1"
@@ -144,6 +145,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/album_item2"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_columnWeight="1"
@@ -167,6 +169,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/album_item3"
                 android:layout_width="0dp"
                 android:layout_height="160dp"
                 android:layout_columnWeight="1"

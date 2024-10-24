@@ -10,6 +10,13 @@ class AdapterInbox(private val notifications: ArrayList<Notification>): Recycler
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderInbox {
         val inflater = LayoutInflater.from(parent.context)
         val viewBinding = ItemLayoutNotificationBinding.inflate(inflater, parent, false)
+        val viewHolder= ViewHolderInbox(viewBinding)
+
+        viewHolder.itemView.setOnClickListener {
+            //TODO: Add a click listener for the notification
+
+        }
+
         return ViewHolderInbox(viewBinding)
     }
 

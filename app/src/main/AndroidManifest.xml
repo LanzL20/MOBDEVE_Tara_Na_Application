@@ -35,6 +35,7 @@
         <activity android:name=".LakwatsaListActivity"/>
         <activity android:name=".LakwatsaOngoingActivity"/>
         <activity android:name=".LakwatsaUpcomingActivity"/>
+        <activity android:name=".ProfileFriendActivity"/>
         <activity android:name=".ProfileInboxActivity"/>
         <activity android:name=".ProfileSettingActivity"/>
         <activity android:name=".ProfileUserActivity"/>

@@ -8,9 +8,10 @@ import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityProfileInboxBi
 class ProfileInboxActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile_inbox)
+
 
         val viewBinding = ActivityProfileInboxBinding.inflate(layoutInflater)
+        setContentView(viewBinding.root)
         var data = ArrayList<Notification>()
         viewBinding.rvNotifications.adapter = AdapterInbox(data)
 
@@ -21,6 +22,11 @@ class ProfileInboxActivity: AppCompatActivity() {
 
         viewBinding.settingsIcon.setOnClickListener {
             val intent = Intent(this, ProfileSettingActivity::class.java)
+            startActivity(intent)
+        }
+        //TODO: Maybe do finish() after returning to the user profile and clear screen stack
+        viewBinding.profileUser1.setOnClickListener{
+            val intent = Intent(this, ProfileUserActivity::class.java)
             startActivity(intent)
         }
 
