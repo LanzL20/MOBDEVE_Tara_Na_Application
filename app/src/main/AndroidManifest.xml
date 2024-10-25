@@ -39,7 +39,7 @@
         <activity android:name=".ProfileInboxActivity"/>
         <activity android:name=".ProfileSettingActivity"/>
         <activity android:name=".ProfileUserActivity"/>
-        <activity android:name=".CalendarMainActivity"
+        <activity android:name=".ScheduleMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

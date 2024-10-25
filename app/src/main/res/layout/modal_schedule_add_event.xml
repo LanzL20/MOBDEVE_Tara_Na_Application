@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="370dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/btn_round_white_20">
+
+    <TextView
+        android:id="@+id/modal_schedule_add_event_tv_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/jeko_demo_extrabold"
+        android:text="New Event"
+        android:textColor="#070802"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/modal_schedule_add_event_cl_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modal_schedule_add_event_tv_new">
+
+        <TextView
+            android:id="@+id/modal_schedule_add_event_tv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jeko_demo_medium"
+            android:text="Name: "
+            android:textColor="#070802"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/modal_schedule_add_event_et_1"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/et_round_gray_no_outline"
+            android:ems="10"
+            android:fontFamily="@font/jeko_demo_medium"
+            android:hint="Midterms"
+            android:inputType="text"
+            android:paddingStart="15dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="8dp"
+            android:textColor="#070802"
+            android:textColorHint="#4E4E4E"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/modal_schedule_add_event_cl_2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modal_schedule_add_event_cl_1">
+
+        <TextView
+            android:id="@+id/modal_schedule_add_event_tv_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jeko_demo_medium"
+            android:text="Starts: "
+            android:textColor="#070802"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/modal_schedule_add_event_et_2"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/et_round_gray_no_outline"
+            android:ems="10"
+            android:clickable="true"
+            android:focusable="false"
+            android:fontFamily="@font/jeko_demo_medium"
+            android:inputType="none"
+            android:paddingStart="15dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="8dp"
+            android:hint="2024/10/14"
+            android:textColor="#070802"
+            android:textColorHint="#4E4E4E"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/modal_schedule_add_event_cl_3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modal_schedule_add_event_cl_2">
+
+        <TextView
+            android:id="@+id/modal_schedule_add_event_tv_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jeko_demo_medium"
+            android:text="Ends: "
+            android:textColor="#070802"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/modal_schedule_add_event_et_3"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/et_round_gray_no_outline"
+            android:ems="10"
+            android:clickable="true"
+            android:focusable="false"
+            android:hint="2024/10/18"
+            android:fontFamily="@font/jeko_demo_medium"
+            android:inputType="none"
+            android:paddingStart="15dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="8dp"
+            android:textColor="#070802"
+            android:textColorHint="#4E4E4E"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/modal_schedule_add_event_btn"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/btn_round_orange_30"
+        android:fontFamily="@font/jeko_demo_extrabold"
+        android:text="Submit"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modal_schedule_add_event_cl_3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

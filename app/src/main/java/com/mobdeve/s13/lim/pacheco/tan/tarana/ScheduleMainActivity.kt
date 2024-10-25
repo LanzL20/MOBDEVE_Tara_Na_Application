@@ -1,7 +1,9 @@
 package com.mobdeve.s13.lim.pacheco.tan.tarana
 
+import android.app.DatePickerDialog
+import android.app.Dialog
+import android.app.TimePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.LinearLayout
@@ -16,22 +18,74 @@ import com.kizitonwose.calendar.core.CalendarMonth
 import com.kizitonwose.calendar.core.daysOfWeek
 import com.kizitonwose.calendar.view.MonthDayBinder
 import com.kizitonwose.calendar.view.MonthHeaderFooterBinder
-import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityCalendarMainBinding
+import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityScheduleMainBinding
+import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ModalScheduleAddEventBinding
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.TextStyle
+import java.util.Calendar
 import java.util.Locale
 
 
-class CalendarMainActivity: AppCompatActivity() {
-    private lateinit var binding: ActivityCalendarMainBinding
+class ScheduleMainActivity: AppCompatActivity() {
+    private lateinit var binding: ActivityScheduleMainBinding
+    private lateinit var modalBinding: ModalScheduleAddEventBinding
+    private lateinit var modal: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCalendarMainBinding.inflate(layoutInflater)
+        binding = ActivityScheduleMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.activityCalendarMainCalendarView.dayBinder = object : MonthDayBinder<DayViewContainer> {
+        modal = Dialog(this)
+        modalBinding = ModalScheduleAddEventBinding.inflate(layoutInflater)
+        modal.setContentView(modalBinding.root)
+        modal.window!!.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+
+        binding.activityScheduleMainIb.setOnClickListener {
+            // reset fields
+            modalBinding.modalScheduleAddEventEt1.setText("")
+            modalBinding.modalScheduleAddEventEt2.setText("")
+            modalBinding.modalScheduleAddEventEt3.setText("")
+            modal.show()
+        }
+        modalBinding.modalScheduleAddEventBtn.setOnClickListener {
+            if(modalBinding.modalScheduleAddEventEt1.text.toString().isEmpty() || modalBinding.modalScheduleAddEventEt2.text.toString().isEmpty() || modalBinding.modalScheduleAddEventEt3.text.toString().isEmpty()){
+                Toast.makeText(this, "Please fill up all fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            modal.dismiss()
+        }
+
+        modalBinding.modalScheduleAddEventEt2.setOnClickListener{
+            var cal = Calendar.getInstance()
+            var year = cal.get(Calendar.YEAR)
+            var month = cal.get(Calendar.MONTH)
+            var day = cal.get(Calendar.DAY_OF_MONTH)
+
+            var datePickerDialog = DatePickerDialog(this,  { view, year, month, dayOfMonth ->
+                var month = month + 1
+                var date = "$year/$month/$dayOfMonth"
+                modalBinding.modalScheduleAddEventEt2.setText(date)
+            }, year, month, day)
+            datePickerDialog.show()
+        }
+
+        modalBinding.modalScheduleAddEventEt3.setOnClickListener{
+            var cal = Calendar.getInstance()
+            var year = cal.get(Calendar.YEAR)
+            var month = cal.get(Calendar.MONTH)
+            var day = cal.get(Calendar.DAY_OF_MONTH)
+
+            var datePickerDialog = DatePickerDialog(this, { view, year, month, dayOfMonth ->
+                var month = month + 1
+                var date = "$year/$month/$dayOfMonth"
+                modalBinding.modalScheduleAddEventEt3.setText(date)
+            }, year, month, day)
+            datePickerDialog.show()
+        }
+
+        binding.activityScheduleMainCalendarView.dayBinder = object : MonthDayBinder<DayViewContainer> {
             // Called only when a new container is needed.
             override fun create(view: View) = DayViewContainer(view)
 
@@ -54,7 +108,7 @@ class CalendarMainActivity: AppCompatActivity() {
                 container.textView.text = data.date.dayOfMonth.toString()
 
                 container.constraintLayout.setOnClickListener {
-                    Toast.makeText(this@CalendarMainActivity, "Clicked: ${data.date}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ScheduleMainActivity, "Clicked: ${data.date}", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -63,22 +117,22 @@ class CalendarMainActivity: AppCompatActivity() {
         val startMonth = currentMonth.minusMonths(100) // Adjust as needed
         val endMonth = currentMonth.plusMonths(100) // Adjust as needed
         val daysOfWeek = daysOfWeek() // Available from the library
-        binding.activityCalendarMainCalendarView.setup(startMonth, endMonth, daysOfWeek.first())
-        binding.activityCalendarMainCalendarView.scrollToMonth(currentMonth)
+        binding.activityScheduleMainCalendarView.setup(startMonth, endMonth, daysOfWeek.first())
+        binding.activityScheduleMainCalendarView.scrollToMonth(currentMonth)
 
-        binding.activityCalendarMainCalendarView.monthHeaderBinder = object :
+        binding.activityScheduleMainCalendarView.monthHeaderBinder = object :
             MonthHeaderFooterBinder<MonthViewContainer> {
             override fun create(view: View) = MonthViewContainer(view)
             override fun bind(container: MonthViewContainer, data: CalendarMonth) {
-                (container.titlesContainer.findViewById<TextView>(R.id.calendar_day_titles_container_tv) as TextView).text =
+                (container.titlesContainer.findViewById<TextView>(R.id.calendar_day_titles_container_tv)).text =
                     data.yearMonth.month.getDisplayName(TextStyle.FULL, Locale.getDefault()) +
                             " " + data.yearMonth.year
 
                 container.titlesContainer.findViewById<ImageButton>(R.id.calendar_day_titles_container_ib_left).setOnClickListener {
-                    binding.activityCalendarMainCalendarView.smoothScrollToMonth(data.yearMonth.minusMonths(1))
+                    binding.activityScheduleMainCalendarView.smoothScrollToMonth(data.yearMonth.minusMonths(1))
                 }
                 container.titlesContainer.findViewById<ImageButton>(R.id.calendar_day_titles_container_ib_right).setOnClickListener {
-                    binding.activityCalendarMainCalendarView.smoothScrollToMonth(data.yearMonth.plusMonths(1))
+                    binding.activityScheduleMainCalendarView.smoothScrollToMonth(data.yearMonth.plusMonths(1))
                 }
 
                 if (container.titlesContainer.tag == null) {
@@ -99,13 +153,13 @@ class CalendarMainActivity: AppCompatActivity() {
         eventList.add(Event(3, "Movie Night", LocalDate.of(2021, 8, 22), Event.EVENT_TYPE_LAKWATSA))
 
         val adapter = AdapterSchedule(eventList)
-        binding.activityCalendarMainRv.adapter = adapter
-        binding.activityCalendarMainRv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.activityScheduleMainRv.adapter = adapter
+        binding.activityScheduleMainRv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         val dividerItemDecoration = DividerItemDecoration(
             this, LinearLayoutManager.VERTICAL
         )
-        binding.activityCalendarMainRv.addItemDecoration(dividerItemDecoration)
+        binding.activityScheduleMainRv.addItemDecoration(dividerItemDecoration)
 
     }
 }
