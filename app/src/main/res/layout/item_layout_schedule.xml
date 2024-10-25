@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:background="#F6F4F4"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.5"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/item_layout_schedule_tv_month"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/jeko_demo_medium"
+            android:gravity="center_horizontal"
+            android:text="(MONTH)"
+            android:textColor="#070802" />
+
+        <TextView
+            android:id="@+id/item_layout_schedule_tv_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/jeko_demo_extrabold"
+            android:gravity="center_horizontal"
+            android:text="(DATE)"
+            android:textColor="#070802" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/item_layout_schedule_tv_event_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jeko_demo_medium"
+            android:text="(EVENT NAME)"
+            android:textColor="#070802" />
+
+        <TextView
+            android:id="@+id/item_layout_schedule_tv_reason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jeko_demo_extrabold"
+            android:text="(REASON)"
+            android:textColor="#070802" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.6"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/item_layout_schedule_tv_dots"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="26dp"
+            android:fontFamily="@font/jeko_demo_medium"
+            android:gravity="center_horizontal"
+            android:text="..."
+            android:textColor="#070802"
+            android:textSize="48sp" />
+
+    </LinearLayout>
+</LinearLayout>

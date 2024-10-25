@@ -39,6 +39,13 @@
         <activity android:name=".ProfileInboxActivity"/>
         <activity android:name=".ProfileSettingActivity"/>
         <activity android:name=".ProfileUserActivity"/>
+        <activity android:name=".CalendarMainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
