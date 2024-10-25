@@ -11,6 +11,16 @@ class LakwatsaOngoingActivity: AppCompatActivity() {
         val viewBinding = ActivityLakwatsaOngoingBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
+        // NAVIGATION BUTTONS
+
+        viewBinding.inboxIcon.setOnClickListener {
+            val intent = Intent(this, ProfileInboxActivity::class.java)
+            startActivity(intent)
+        }
+        viewBinding.settingsIcon.setOnClickListener {
+            val intent = Intent(this, ProfileSettingActivity::class.java)
+            startActivity(intent)
+        }
         viewBinding.profileUser1.setOnClickListener{
             val intent = Intent(this, ProfileUserActivity::class.java)
             startActivity(intent)

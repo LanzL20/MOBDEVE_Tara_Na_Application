@@ -8,9 +8,9 @@ import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityBoardingGreeti
 class BoardingGreetingActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val viewBinding = ActivityBoardingGreetingBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
+
         viewBinding.icRightArrow.setOnClickListener {
             val intent = Intent(this, ProfileUserActivity::class.java)
             startActivity(intent)

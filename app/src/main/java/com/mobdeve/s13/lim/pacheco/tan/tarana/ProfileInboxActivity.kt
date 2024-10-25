@@ -8,28 +8,26 @@ import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityProfileInboxBi
 class ProfileInboxActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         val viewBinding = ActivityProfileInboxBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
+
         var data = ArrayList<Notification>()
         viewBinding.rvNotifications.adapter = AdapterInbox(data)
+
+        // NAVIGATION BUTTONS
 
         viewBinding.inboxIcon.setOnClickListener {
             val intent = Intent(this, ProfileInboxActivity::class.java)
             startActivity(intent)
         }
-
         viewBinding.settingsIcon.setOnClickListener {
             val intent = Intent(this, ProfileSettingActivity::class.java)
             startActivity(intent)
         }
-        //TODO: Maybe do finish() after returning to the user profile and clear screen stack
+        // TODO: Maybe do finish() after returning to the user profile and clear screen stack
         viewBinding.profileUser1.setOnClickListener{
             val intent = Intent(this, ProfileUserActivity::class.java)
             startActivity(intent)
         }
-
-
     }
 }

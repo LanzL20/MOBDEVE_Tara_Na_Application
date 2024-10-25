@@ -18,13 +18,11 @@ class FriendsViewActivity: AppCompatActivity() {
             val intent = Intent(this, FriendsAddActivity::class.java)
             startActivity(intent)
         }
-
         viewBinding.activityFriendsViewFriend1Ll.setOnClickListener {
             Log.d("FriendsViewActivity", "Details clicked")
             val intent = Intent(this, ProfileFriendActivity::class.java)
             startActivity(intent)
         }
-
         viewBinding.activityFriendsViewFriend2Ll.setOnClickListener {
             Log.d("FriendsViewActivity", "Details clicked")
             val intent = Intent(this, ProfileFriendActivity::class.java)
@@ -32,6 +30,16 @@ class FriendsViewActivity: AppCompatActivity() {
 
         }
 
+        // NAVIGATION BUTTONS
+
+        viewBinding.inboxIcon.setOnClickListener {
+            val intent = Intent(this, ProfileInboxActivity::class.java)
+            startActivity(intent)
+        }
+        viewBinding.settingsIcon.setOnClickListener {
+            val intent = Intent(this, ProfileSettingActivity::class.java)
+            startActivity(intent)
+        }
         viewBinding.profileUser1.setOnClickListener{
             val intent = Intent(this, ProfileUserActivity::class.java)
             startActivity(intent)

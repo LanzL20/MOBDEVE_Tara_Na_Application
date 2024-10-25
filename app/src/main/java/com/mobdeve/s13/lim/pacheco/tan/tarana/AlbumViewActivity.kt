@@ -10,7 +10,8 @@ class AlbumViewActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val viewBinding = ActivityAlbumViewBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
-        //TODO: add data passing from recycler view to album activity
+
+        // TODO: Add data passing from recycler view to album activity
         viewBinding.albumItem1.setOnClickListener{
             val intent = Intent(this, AlbumAlbumActivity::class.java)
             startActivity(intent)
@@ -21,6 +22,17 @@ class AlbumViewActivity: AppCompatActivity() {
         }
         viewBinding.albumItem3.setOnClickListener{
             val intent = Intent(this, AlbumAlbumActivity::class.java)
+            startActivity(intent)
+        }
+
+        // NAVIGATION BUTTONS
+
+        viewBinding.inboxIcon.setOnClickListener {
+            val intent = Intent(this, ProfileInboxActivity::class.java)
+            startActivity(intent)
+        }
+        viewBinding.settingsIcon.setOnClickListener {
+            val intent = Intent(this, ProfileSettingActivity::class.java)
             startActivity(intent)
         }
         viewBinding.profileUser1.setOnClickListener{

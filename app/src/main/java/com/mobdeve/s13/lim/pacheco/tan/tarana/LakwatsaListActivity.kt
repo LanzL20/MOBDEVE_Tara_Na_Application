@@ -10,9 +10,10 @@ class LakwatsaListActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val viewBinding = ActivityLakwatsaListBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
-        //TODO: convert hardcoded data to actual data and pass it to the adapter
-        //TODO: I have a feeling that we can create an abstract lakwatsa class/layout file thats able to become either upcoming, ongoing, or completed
-        // hard coded data for now
+
+        // TODO: Convert hardcoded data to actual data and pass it to the adapter
+        // TODO: I have a feeling that we can create an abstract lakwatsa class/layout file thats able to become either upcoming, ongoing, or completed
+        //  hard coded data for now
         viewBinding.upcomingItem1.setOnClickListener {
             val intent = Intent(this, LakwatsaUpcomingActivity::class.java)
             startActivity(intent)
@@ -29,12 +30,13 @@ class LakwatsaListActivity: AppCompatActivity() {
             val intent = Intent(this, LakwatsaCompletedActivity::class.java)
             startActivity(intent)
         }
-
-        //CLick Listener for create button
-        viewBinding.optionsIcon.setOnClickListener {
+        viewBinding.addLakwatsaIcon.setOnClickListener {
             val intent = Intent(this, LakwatsaCreateActivity::class.java)
             startActivity(intent)
         }
+
+        // NAVIGATION BUTTONS
+
         viewBinding.inboxIcon.setOnClickListener {
             val intent = Intent(this, ProfileInboxActivity::class.java)
             startActivity(intent)
@@ -43,7 +45,6 @@ class LakwatsaListActivity: AppCompatActivity() {
             val intent = Intent(this, ProfileSettingActivity::class.java)
             startActivity(intent)
         }
-
         viewBinding.profileUser1.setOnClickListener{
             val intent = Intent(this, ProfileUserActivity::class.java)
             startActivity(intent)

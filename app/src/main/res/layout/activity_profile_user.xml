@@ -122,50 +122,50 @@
                 android:textColor="#070802"
                 android:textSize="22sp" />
 
-            <LinearLayout
-                android:id="@+id/activity_profile_friends_ll"
-                android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/activity_profile_friends_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="15dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/friends_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_friends" />
+
+            <TextView
+                android:id="@+id/activity_profile_user_num_friends"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginBottom="15dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="7dp"
+                android:fontFamily="@font/jeko_demo_extrabold"
+                android:gravity="center"
+                android:text="5"
+                android:textColor="#070802"
+                android:textSize="22sp" />
 
-                <ImageButton
-                    android:id="@+id/friends_icon"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_friends"
-                    android:background="?android:attr/selectableItemBackgroundBorderless"
-                    android:scaleType="centerInside"/>
-
-                <TextView
-                    android:id="@+id/activity_profile_user_num_friends"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="7dp"
-                    android:fontFamily="@font/jeko_demo_extrabold"
-                    android:gravity="center"
-                    android:text="5"
-                    android:textColor="#070802"
-                    android:textSize="22sp" />
-
-                <TextView
-                    android:id="@+id/activity_profile_user_friends"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/jeko_demo_medium"
-                    android:gravity="center"
-                    android:text="friends"
-                    android:textColor="#070802"
-                    android:textSize="22sp" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/activity_profile_user_friends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/jeko_demo_medium"
+                android:gravity="center"
+                android:text="friends"
+                android:textColor="#070802"
+                android:textSize="22sp" />
+        </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/activity_profile_buttons_ll"
@@ -196,6 +196,7 @@
                         android:paddingBottom="25dp"
                         android:text="Lakwatsa"
                         android:textAllCaps="false"
+                        android:textColor="#070802"
                         android:textSize="30sp" />
 
                     <LinearLayout
@@ -214,6 +215,7 @@
                             android:paddingBottom="25dp"
                             android:text="Albums"
                             android:textAllCaps="false"
+                            android:textColor="#070802"
                             android:textSize="30sp" />
 
                         <Button
@@ -242,6 +244,7 @@
                     android:paddingRight="20dp"
                     android:text="Schedule"
                     android:textAllCaps="false"
+                    android:textColor="#070802"
                     android:textSize="30sp" />
             </LinearLayout>
         </LinearLayout>

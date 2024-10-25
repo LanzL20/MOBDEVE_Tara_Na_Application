@@ -91,7 +91,7 @@
             android:textSize="32sp" />
 
         <ImageButton
-            android:id="@+id/options_icon"
+            android:id="@+id/add_lakwatsa_icon"
             android:layout_width="0dp"
             android:layout_height="35dp"
             android:layout_weight="1"
