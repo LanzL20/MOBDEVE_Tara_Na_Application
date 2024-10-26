@@ -3,6 +3,7 @@ package com.mobdeve.s13.lim.pacheco.tan.tarana
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
@@ -18,6 +19,7 @@ import com.kizitonwose.calendar.core.CalendarMonth
 import com.kizitonwose.calendar.core.daysOfWeek
 import com.kizitonwose.calendar.view.MonthDayBinder
 import com.kizitonwose.calendar.view.MonthHeaderFooterBinder
+import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityFriendsViewBinding
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityScheduleMainBinding
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ModalScheduleAddEventBinding
 import java.time.LocalDate
@@ -160,6 +162,21 @@ class ScheduleMainActivity: AppCompatActivity() {
             this, LinearLayoutManager.VERTICAL
         )
         binding.activityScheduleMainRv.addItemDecoration(dividerItemDecoration)
+
+        // NAVIGATION BUTTONS
+
+        binding.activityScheduleMainIbInbox.setOnClickListener {
+            val intent = Intent(this, ProfileInboxActivity::class.java)
+            startActivity(intent)
+        }
+        binding.activityScheduleMainIbSettings.setOnClickListener {
+            val intent = Intent(this, ProfileSettingActivity::class.java)
+            startActivity(intent)
+        }
+        binding.activityScheduleMainProfileUser.setOnClickListener{
+            val intent = Intent(this, ProfileUserActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 }
