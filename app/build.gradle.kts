@@ -30,6 +30,9 @@ android {
         }
     }
     compileOptions {
+        // Enable support for the new language APIs
+        isCoreLibraryDesugaringEnabled = true
+
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -73,4 +76,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.material.v140)
 
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.2")
+    implementation("com.kizitonwose.calendar:view:2.6.0")
 }

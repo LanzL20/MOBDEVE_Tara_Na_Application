@@ -58,7 +58,4 @@ class Lakwatsa {
         this.pollingList.remove(date)
     }
 
-
-
-
 }

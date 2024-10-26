@@ -32,9 +32,8 @@ class ProfileUserActivity: AppCompatActivity() {
             startActivity(intent)
         }
         viewBinding.scheduleBtn.setOnClickListener {
-            //TODO:("Add ScheduleActivity")
-            //val intent = Intent(this, ScheduleActivity::class.java)
-            //startActivity(intent)
+            val intent = Intent(this, ScheduleMainActivity::class.java)
+            startActivity(intent)
         }
 
         // NAVIGATION BUTTONS

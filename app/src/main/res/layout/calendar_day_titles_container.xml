@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp">
+
+        <ImageButton
+            android:id="@+id/calendar_day_titles_container_ib_left"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="28dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/btn_round_gray_inf"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_left_arrow"
+            app:tint="#F6F4F4" />
+
+        <TextView
+            android:id="@+id/calendar_day_titles_container_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/jeko_demo_extrabold"
+            android:text="Test"
+            android:textColor="#000000"
+            android:textSize="28sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+
+        <ImageButton
+            android:id="@+id/calendar_day_titles_container_ib_right"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="28dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/btn_round_gray_inf"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_right_arrow"
+            app:tint="#F6F4F4" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/calendar_day_titles_container_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="7"
+        android:orientation="horizontal">
+
+        <include layout="@layout/calendar_day_title_text" />
+        <include layout="@layout/calendar_day_title_text" />
+        <include layout="@layout/calendar_day_title_text" />
+        <include layout="@layout/calendar_day_title_text" />
+        <include layout="@layout/calendar_day_title_text" />
+        <include layout="@layout/calendar_day_title_text" />
+        <include layout="@layout/calendar_day_title_text" />
+
+    </LinearLayout>
+</LinearLayout>
