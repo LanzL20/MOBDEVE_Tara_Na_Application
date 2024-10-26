@@ -113,6 +113,7 @@
             android:id="@+id/activity_lakwatsa_create_etl_friends"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
@@ -136,6 +137,7 @@
             android:id="@+id/activity_lakwatsa_create_etl_datetime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
@@ -160,6 +162,7 @@
             android:id="@+id/activity_datetime_etl_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
@@ -185,7 +188,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="75dp"
+            android:layout_marginTop="50dp"
             android:layout_marginRight="25dp"
             android:layout_marginBottom="25dp"
             android:background="@drawable/btn_round_orange_30"
