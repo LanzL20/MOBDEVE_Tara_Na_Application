@@ -104,7 +104,7 @@
         android:id="@+id/activity_lakwatsa_list_sv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
         app:layout_constraintBottom_toTopOf="@id/back_profile_line"
@@ -126,6 +126,8 @@
                     android:id="@+id/upcoming_title"
                     android:layout_width="170dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="25dp"
                     android:background="@drawable/btn_round_yellow_no_outline"
                     android:fontFamily="@font/jeko_demo_extrabold"
                     android:padding="10dp"
@@ -138,7 +140,7 @@
                     android:id="@+id/upcoming_item1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="25dp"
                     android:orientation="horizontal"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp">
@@ -250,13 +252,13 @@
                 android:id="@+id/ongoing_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="30dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/ongoing_title"
                     android:layout_width="170dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
                     android:background="@drawable/btn_round_orange_no_outline"
                     android:fontFamily="@font/jeko_demo_extrabold"
                     android:padding="10dp"
@@ -269,7 +271,7 @@
                     android:id="@+id/ongoing_item1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="25dp"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
                     android:orientation="horizontal">
@@ -357,13 +359,13 @@
                 android:id="@+id/completed_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="30dp">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/completed_title"
                     android:layout_width="170dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
                     android:background="@drawable/btn_round_green_no_outline"
                     android:fontFamily="@font/jeko_demo_extrabold"
                     android:padding="10dp"
@@ -376,7 +378,7 @@
                     android:id="@+id/completed_item1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="25dp"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
                     android:orientation="horizontal">
@@ -471,7 +473,7 @@
                     android:id="@+id/completed_item2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="25dp"
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
                     android:orientation="horizontal">

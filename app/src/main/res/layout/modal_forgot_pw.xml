@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:theme="@style/Theme.MaterialComponents.DayNight"
+    app:cardBackgroundColor="#F4F2F2"
+    app:cardCornerRadius="70dp"
+    app:strokeColor="@color/black"
+    app:strokeWidth="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <ImageButton
+            android:id="@+id/modal_forgot_pw_btn_close"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="end"
+            android:adjustViewBounds="true"
+            android:backgroundTint="#F6F4F4"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_close" />
+
+        <TextView
+            android:id="@+id/modal_forgot_pw_tv_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/jeko_demo_extrabold"
+            android:text="Forgot your password?"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/modal_forgot_pw_tv_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/jeko_demo_medium"
+            android:lineSpacingExtra="10sp"
+            android:text="Enter your phone number to reset your password"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/modal_forgot_pw_etl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge"
+            app:boxBackgroundMode="none">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/modal_forgot_pw_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_round_white_80"
+                android:fontFamily="@font/jeko_demo_medium"
+                android:hint="Phone Number"
+                android:inputType="text"
+                android:padding="15dp"
+                android:paddingStart="25dp"
+                android:paddingEnd="25dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/modal_forgot_pw_btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/btn_round_yellow_80"
+            android:fontFamily="@font/jeko_demo_extrabold"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:textColor="#070802"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

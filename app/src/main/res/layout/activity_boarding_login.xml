@@ -51,13 +51,12 @@
             android:paddingEnd="25dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/activity_boarding_login_etl_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="25dp"
         android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge"
         app:passwordToggleEnabled="true">
@@ -75,15 +74,29 @@
             android:paddingEnd="25dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/activity_boarding_login_forgot_pw_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="25dp"
+        android:fontFamily="@font/jeko_demo_extrabold"
+        android:text="Forgot password?"
+        android:textAlignment="textEnd"
+        android:textColor="#4D4D49"
+        android:textSize="16sp" />
+
     <Button
         android:id="@+id/activity_boarding_login_btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="25dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="25dp"
         android:layout_marginRight="25dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/btn_round_orange_30"
         android:fontFamily="@font/jeko_demo_extrabold"
         android:text="Log In"
@@ -105,15 +118,17 @@
             android:layout_weight="1"
             android:fontFamily="@font/jeko_demo_medium"
             android:text="Don't have an account? "
-            android:textColor="#B3070802" />
+            android:textColor="#B3070802"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/activity_boarding_login_tv_sign_up"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="19dp"
             android:layout_weight="1"
             android:fontFamily="@font/jeko_demo_extrabold"
             android:text="Sign Up"
-            android:textColor="#B3070802" />
+            android:textColor="#B3070802"
+            android:textSize="16sp" />
     </LinearLayout>
 </LinearLayout>

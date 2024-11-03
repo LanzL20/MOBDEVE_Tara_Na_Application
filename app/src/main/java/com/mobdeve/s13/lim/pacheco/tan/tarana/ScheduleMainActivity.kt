@@ -42,7 +42,9 @@ class ScheduleMainActivity: AppCompatActivity() {
         modal = Dialog(this)
         modalBinding = ModalScheduleAddEventBinding.inflate(layoutInflater)
         modal.setContentView(modalBinding.root)
-        modal.window!!.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        modal.window!!.setLayout(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+
+        modal.window!!.setBackgroundDrawableResource(android.R.color.transparent)
 
         binding.activityScheduleMainIb.setOnClickListener {
             // reset fields
