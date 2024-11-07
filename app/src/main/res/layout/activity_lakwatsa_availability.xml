@@ -65,7 +65,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
-        android:id="@+id/activity_lakwtsa_upcoming_details_ll"
+        android:id="@+id/activity_lakwtsa_expenses_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
@@ -109,7 +109,7 @@
         android:layout_marginTop="20dp"
         android:layout_weight="1"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/activity_lakwtsa_upcoming_details_ll"
+        app:layout_constraintTop_toBottomOf="@+id/activity_lakwtsa_expenses_ll"
         tools:layout_editor_absoluteX="110dp">
 
         <Space
@@ -118,6 +118,7 @@
             android:layout_weight="1" />
 
         <LinearLayout
+            android:id="@+id/monday_ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -144,6 +145,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/tuesday_ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -170,6 +172,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/wednesday_ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -196,6 +199,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/thursday_ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -222,6 +226,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/friday_ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -248,6 +253,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/saturday_ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -274,6 +280,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/sunday_ll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -308,6 +315,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
+        android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/button_layout"
         app:layout_constraintTop_toBottomOf="@+id/date_list"
         tools:layout_editor_absoluteX="363dp">

@@ -25,5 +25,13 @@ class LakwatsaOngoingActivity: AppCompatActivity() {
             val intent = Intent(this, ProfileUserActivity::class.java)
             startActivity(intent)
         }
+        viewBinding.expensesBtn.setOnClickListener{
+            val intent = Intent(this, LakwatsaExpensesActivity::class.java)
+            startActivity(intent)
+        }
+        viewBinding.activityLakwatsaOngoingMapIv.setOnClickListener{
+            val intent = Intent(this, LakwatsaLocationActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
