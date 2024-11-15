@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "30726947824",
+    "project_id": "tara-na-application",
+    "storage_bucket": "tara-na-application.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30726947824:android:1d8771f03257270c1d5335",
+        "android_client_info": {
+          "package_name": "com.mobdeve.s13.lim.pacheco.tan.tarana"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBmwtSrai4AdsVDZ6NQNjAR-5uSblWkuU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

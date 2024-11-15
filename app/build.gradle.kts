@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -78,4 +80,7 @@ dependencies {
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.2")
     implementation("com.kizitonwose.calendar:view:2.6.0")
+    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
+    implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-analytics")
 }

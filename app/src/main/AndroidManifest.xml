@@ -12,22 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="31">
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".AlbumAlbumActivity"/>
+        <activity android:name=".AlbumViewActivity"/>
+        <activity android:name=".BoardingGreetingActivity"/>
+        <activity android:name=".BoardingLoginActivity"/>
+        <activity android:name=".BoardingSignUpActivity"/>
+        <activity android:name=".BoardingWelcomeActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AlbumAlbumActivity"/>
-        <activity android:name=".AlbumViewActivity"/>
-        <activity android:name=".BoardingGreetingActivity"/>
-        <activity android:name=".BoardingLoginActivity"/>
-        <activity android:name=".BoardingSignUpActivity"/>
         <activity android:name=".FriendsAddActivity"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".FriendsViewActivity"/>
@@ -45,13 +42,7 @@
         <activity android:name=".ProfileSettingActivity"
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".ProfileUserActivity"/>
-        <activity android:name=".ScheduleMainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ScheduleMainActivity"/>
 
     </application>
 
