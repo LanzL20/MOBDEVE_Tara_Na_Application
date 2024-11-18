@@ -1,11 +1,21 @@
 package com.mobdeve.s13.lim.pacheco.tan.tarana
 
 class User {
+    companion object{
+        const val USERNAME_KEY = "username"
+        const val PASSWORD_KEY = "password"
+        const val PROFILE_PICTURE_KEY = "profilePicture"
+        const val PHONE_NUMBER_KEY = "phoneNumber"
+        const val FRIENDS_LIST_KEY = "friendsList"
+        const val LAKWATSA_LIST_KEY = "lakwatsaList"
+        const val FRIEND_REQUESTS_SENT_KEY = "friendRequestsSent"
+        const val FRIEND_REQUESTS_RECEIVED_KEY = "friendRequestsReceived"
+    }
+
+
     var username: String
         private set
     var password: String
-        private set
-    var email: String
         private set
     var profilePicture: Int
         private set
@@ -28,7 +38,6 @@ class User {
     constructor(username: String, password: String, email: String, profilePicture: Int, phoneNumber: String) {
         this.username = username
         this.password = password
-        this.email = email
         this.phoneNumber=phoneNumber
         this.profilePicture = profilePicture
         this.friendsList = ArrayList()
@@ -42,7 +51,6 @@ class User {
     constructor(username: String, password: String, email: String, profilePicture: Int, phoneNumber: String, friendsList: ArrayList<User>, lakwatsaList: ArrayList<Lakwatsa>, friendRequestsSent: ArrayList<User>, friendRequestsReceived: ArrayList<User>) {
         this.username = username
         this.password = password
-        this.email = email
         this.phoneNumber=phoneNumber
         this.profilePicture = profilePicture
         this.friendsList = friendsList

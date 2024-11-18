@@ -69,6 +69,14 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.material)
     implementation(libs.androidx.wear)
+    implementation("com.kizitonwose.calendar:view:2.6.0")
+    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
+    implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-analytics")
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.storage)
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -79,8 +87,5 @@ dependencies {
     implementation(libs.material.v140)
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.2")
-    implementation("com.kizitonwose.calendar:view:2.6.0")
-    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
-    implementation("com.google.firebase:firebase-crashlytics")
-    implementation("com.google.firebase:firebase-analytics")
+
 }
