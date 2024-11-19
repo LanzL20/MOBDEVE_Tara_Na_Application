@@ -2,9 +2,12 @@ package com.mobdeve.s13.lim.pacheco.tan.tarana
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityBoardingSignupBinding
+import kotlinx.coroutines.launch
 
 class BoardingSignUpActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,23 +16,53 @@ class BoardingSignUpActivity: AppCompatActivity() {
         setContentView(viewBinding.root)
 
         viewBinding.activityBoardingSignupBtnSignup.setOnClickListener {
-            val intent = Intent(this, BoardingGreetingActivity::class.java)
+            val intent = Intent(this, BoardingPhoneAuthActivity::class.java)
             val number= viewBinding.activitySignupLoginEtPhone.text.toString()
-            val username= viewBinding.activitySignupLoginEtName.text.toString()
+            val name= viewBinding.activitySignupLoginEtName.text.toString()
             val password= viewBinding.activitySignupLoginEtPasswordd.text.toString()
+            //username will be the name without spaces and attached with a random 4 digit number
+            val username= name.replace("\\s".toRegex(), "")+((1000..9999).random()).toString()
 
-            val firebaseauth: FirebaseAuth = FirebaseAuth.getInstance()
-            // use phone number, username, and password to create a new user
-            firebaseauth.createUserWithEmailAndPassword(number, password)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        val user = User(username, password, number, R.drawable.ic_launcher_foreground, number)
-                        DBHelper.addUser(user)
-                        startActivity(intent)
-                    }
+            intent.putExtra(User.NAME_KEY, name)
+            intent.putExtra(User.USERNAME_KEY, username)
+            intent.putExtra(User.PHONE_NUMBER_KEY, number)
+            intent.putExtra(User.PASSWORD_KEY, password)
+
+            if(number.isEmpty() || username.isEmpty() || password.isEmpty()){
+                viewBinding.activitySignupLoginEtPhone.error="Please fill up this field"
+                viewBinding.activitySignupLoginEtName.error="Please fill up this field"
+                viewBinding.activitySignupLoginEtPasswordd.error="Please fill up this field"
+                return@setOnClickListener
+            }
+            if(number.length!=11){
+                viewBinding.activitySignupLoginEtPhone.error="Invalid phone number"
+                return@setOnClickListener
+            }
+
+
+
+            //check if user is already registered
+            lifecycleScope.launch{
+                val userExists= DBHelper.checkIfUserExists(username, number)
+                Log.d("MainActivity", "User exists: $userExists")
+                if(userExists==3){
+                    viewBinding.activitySignupLoginEtName.error="User already exists"
+                    viewBinding.activitySignupLoginEtPhone.error="Phone number already exists"
+                    return@launch
                 }
-
-            startActivity(intent)
+                if(userExists==2){
+                    viewBinding.activitySignupLoginEtPhone.error="Phone number already exists"
+                    return@launch
+                }
+                if(userExists==1){
+                    viewBinding.activitySignupLoginEtName.error="User already exists"
+                    return@launch
+                }
+                if(userExists==0){
+                    startActivity(intent)
+                    return@launch
+                }
+            }
         }
         viewBinding.activityBoardingSignupTvLogin.setOnClickListener {
             val intent = Intent(this, BoardingLoginActivity::class.java)

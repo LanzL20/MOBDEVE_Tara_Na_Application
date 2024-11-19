@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/activity_boarding_signup_ll"
+        android:id="@+id/activity_boarding_phone_auth_ll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F4885A"
@@ -13,20 +13,20 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/activity_signup_login_tv_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/activity_boarding_phone_auth_login_tv_1"
+            android:layout_width="360dp"
+            android:layout_height="29dp"
             android:layout_gravity="center"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:fontFamily="@font/jeko_demo_extrabold"
             android:gravity="center"
-            android:text="Create an"
+            android:text="OTP sent to"
             android:textColor="#070802"
             android:textSize="34sp" />
 
         <TextView
-            android:id="@+id/activity_signup_account_tv_2"
+            android:id="@+id/phone_number_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -35,12 +35,12 @@
             android:layout_marginBottom="35dp"
             android:fontFamily="@font/jeko_demo_extrabold"
             android:gravity="center"
-            android:text="Account"
+            android:text="OTP"
             android:textColor="#070802"
             android:textSize="34sp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/activity_signup_login_etl_name"
+            android:id="@+id/activity_phone_auth_login_etl_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
@@ -49,65 +49,20 @@
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/activity_signup_login_et_name"
+                android:id="@+id/activity_phone_auth_otp_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_round_white_80"
                 android:fontFamily="@font/jeko_demo_medium"
-                android:hint="Full Name"
+                android:hint="Enter your OTP"
                 android:inputType="text"
-                android:padding="15dp"
-                android:paddingStart="25dp"
-                android:paddingEnd="25dp" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/activity_signup_login_etl_phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="25dp"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/activity_signup_login_et_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_round_white_80"
-                android:fontFamily="@font/jeko_demo_medium"
-                android:hint="Phone Number"
-                android:inputType="text"
-                android:padding="15dp"
-                android:paddingStart="25dp"
-                android:paddingEnd="25dp" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/activity_signup_login_et_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="25dp"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge"
-            app:passwordToggleEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/activity_signup_login_et_passwordd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_round_white_80"
-                android:fontFamily="@font/jeko_demo_medium"
-                android:hint="Password"
-                android:inputType="textPassword"
                 android:padding="15dp"
                 android:paddingStart="25dp"
                 android:paddingEnd="25dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/activity_boarding_signup_btn_signup"
+            android:id="@+id/activity_boarding_phone_auth_btn_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -122,33 +77,40 @@
             android:textColor="#070802"
             android:textSize="20sp" />
 
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <LinearLayout
-            android:id="@+id/activity_boarding_signup_ll_1"
+            android:id="@+id/activity_boarding_phone_auth_ll_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/activity_boarding_signup_tv_2"
+                android:id="@+id/activity_boarding_phone_auth_resend_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/jeko_demo_medium"
-                android:text="Already have an account? " />
+                android:text="Resend OTP in " />
 
             <TextView
-                android:id="@+id/activity_boarding_signup_tv_login"
+                android:id="@+id/activity_boarding_phone_auth_timer_countdown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/jeko_demo_extrabold"
                 android:text="Login" />
         </LinearLayout>
+
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/activity_boarding_signup_cl"
+        android:id="@+id/activity_boarding_phone_auth_cl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -158,7 +120,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/activity_boarding_signup_iv_logo"
+            android:id="@+id/activity_boarding_phone_auth_iv_logo"
             android:layout_width="40dp"
             android:layout_height="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -167,7 +129,7 @@
             android:src="@drawable/logo_chat" />
 
         <TextView
-            android:id="@+id/activity_boarding_signup_tv_app_name"
+            android:id="@+id/activity_boarding_phone_auth_tv_app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -176,7 +138,7 @@
             android:textColor="#070802"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/activity_boarding_signup_iv_logo"
+            app:layout_constraintStart_toEndOf="@+id/activity_boarding_phone_auth_iv_logo"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

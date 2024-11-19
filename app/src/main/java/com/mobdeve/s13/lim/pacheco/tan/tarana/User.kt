@@ -2,6 +2,7 @@ package com.mobdeve.s13.lim.pacheco.tan.tarana
 
 class User {
     companion object{
+        const val NAME_KEY = "name"
         const val USERNAME_KEY = "username"
         const val PASSWORD_KEY = "password"
         const val PROFILE_PICTURE_KEY = "profilePicture"
@@ -12,7 +13,8 @@ class User {
         const val FRIEND_REQUESTS_RECEIVED_KEY = "friendRequestsReceived"
     }
 
-
+    var name: String
+        private set
     var username: String
         private set
     var password: String
@@ -35,7 +37,8 @@ class User {
     /*
     * Constructor for a new User
      */
-    constructor(username: String, password: String, email: String, profilePicture: Int, phoneNumber: String) {
+    constructor(name:String, username: String, password: String, profilePicture: Int, phoneNumber: String) {
+        this.name = name
         this.username = username
         this.password = password
         this.phoneNumber=phoneNumber
@@ -48,7 +51,8 @@ class User {
     /*
     * Constructor for a user from the database
      */
-    constructor(username: String, password: String, email: String, profilePicture: Int, phoneNumber: String, friendsList: ArrayList<User>, lakwatsaList: ArrayList<Lakwatsa>, friendRequestsSent: ArrayList<User>, friendRequestsReceived: ArrayList<User>) {
+    constructor(name:String, username: String, password: String, phoneNumber: String, profilePicture: Int, friendsList: ArrayList<User>, lakwatsaList: ArrayList<Lakwatsa>, friendRequestsSent: ArrayList<User>, friendRequestsReceived: ArrayList<User>) {
+        this.name = name
         this.username = username
         this.password = password
         this.phoneNumber=phoneNumber
