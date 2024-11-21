@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
+    id("kotlin-kapt")
 }
 
 android {
@@ -46,7 +47,7 @@ android {
         viewBinding = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.7"
     }
     packaging {
         resources {
@@ -56,6 +57,9 @@ android {
 }
 
 dependencies {
+
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.21")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.21")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -73,6 +77,8 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
     implementation("com.google.firebase:firebase-crashlytics")
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.firebaseui:firebase-ui-storage:7.2.0")
+
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.storage)
     implementation(libs.firebase.auth.ktx)
@@ -85,7 +91,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.material.v140)
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.2")
 
+    kapt("com.github.bumptech.glide:compiler:4.14.2")
 }

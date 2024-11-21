@@ -110,88 +110,24 @@
             android:id="@+id/button_grid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:useDefaultMargins="true"
+            android:layout_gravity="center_horizontal"
+            android:alignmentMode="alignMargins"
             android:columnCount="2"
+            android:foregroundGravity="center_horizontal"
             android:orientation="horizontal"
             android:paddingLeft="25dp"
-            android:paddingRight="25dp"
             android:paddingTop="15dp"
+            android:paddingRight="25dp"
             android:paddingBottom="15dp"
-            android:alignmentMode="alignMargins"
-            android:rowOrderPreserved="false">
+            android:rowOrderPreserved="false"
+            android:useDefaultMargins="true">
 
-            <FrameLayout
-                android:id="@+id/album_item1"
-                android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:layout_columnWeight="1"
-                android:layout_margin="10dp"
-                android:background="@drawable/btn_round_orange_30">
-
-                <TextView
-                    android:id="@+id/album_text1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/jeko_demo_extrabold"
-                    android:gravity="bottom|start"
-                    android:lineSpacingExtra="4dp"
-                    android:maxLines="3"
-                    android:padding="15dp"
-                    android:text="animusika ‘23\n108 photos"
-                    android:textAlignment="viewStart"
-                    android:textColor="#070802"
-                    android:textSize="16sp" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/album_item2"
-                android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:layout_columnWeight="1"
-                android:layout_margin="10dp"
-                android:background="@drawable/btn_round_blue_30">
-
-                <TextView
-                    android:id="@+id/album_text2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/jeko_demo_extrabold"
-                    android:gravity="bottom|start"
-                    android:lineSpacingExtra="4dp"
-                    android:maxLines="3"
-                    android:padding="15dp"
-                    android:text="clowns go bowling\n121 photos"
-                    android:textAlignment="viewStart"
-                    android:textColor="#070802"
-                    android:textSize="16sp" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/album_item3"
-                android:layout_width="0dp"
-                android:layout_height="160dp"
-                android:layout_columnWeight="1"
-                android:layout_margin="10dp"
-                android:background="@drawable/btn_round_green_30">
-
-                <TextView
-                    android:id="@+id/album_text3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/jeko_demo_extrabold"
-                    android:gravity="bottom|start"
-                    android:lineSpacingExtra="4dp"
-                    android:maxLines="3"
-                    android:padding="15dp"
-                    android:text="makati adventure\n89 photos"
-                    android:textAlignment="viewStart"
-                    android:textColor="#070802"
-                    android:textSize="16sp" />
-            </FrameLayout>
-
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/albumRv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:foregroundGravity="center_horizontal" />
 
 
         </GridLayout>

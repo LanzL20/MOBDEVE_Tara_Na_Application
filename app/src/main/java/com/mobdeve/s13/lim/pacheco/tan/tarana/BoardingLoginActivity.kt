@@ -50,6 +50,8 @@ class BoardingLoginActivity : AppCompatActivity() {
 
         binding.activityBoardingLoginBtnLogin.setOnClickListener {
             val intent = Intent(this, ProfileUserActivity::class.java)
+            // TODO: Temp for testing
+            intent.putExtra(User.USERNAME_KEY, "Tytan6249")
             startActivity(intent)
         }
 

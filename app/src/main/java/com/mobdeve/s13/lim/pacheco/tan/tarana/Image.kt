@@ -4,11 +4,13 @@ class Image {
 
     var imageId: Int
         private set
-    var imageDescription: String
-        private set
-    var imageDate: String
-        private set
-    var user: User
+    //var imageDescription: String
+       // private set
+    //var imageDate: String
+       // private set
+   //var user: User
+        //private set
+    var imageUri: String = ""
         private set
 
     /**
@@ -18,11 +20,10 @@ class Image {
      * @param imageDate the date the image was uploaded
      * @param user the user who uploaded the image
      */
-    constructor(imageId: Int, imageDescription: String, imageDate: String, user: User) {
+    //constructor(imageId: Int, imageDescription: String, imageDate: String, user: User, imageUri: String) {
+    constructor(imageId: Int, imageUri: String) {
         this.imageId = imageId
-        this.imageDescription = imageDescription
-        this.imageDate = imageDate
-        this.user = user
+        this.imageUri = imageUri
     }
 
 }

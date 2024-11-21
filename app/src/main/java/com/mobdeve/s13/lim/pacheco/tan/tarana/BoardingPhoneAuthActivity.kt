@@ -152,6 +152,7 @@ class BoardingPhoneAuthActivity:AppCompatActivity() {
                 if(task.isSuccessful){
                     val intent= Intent(this, BoardingGreetingActivity::class.java)
                     intent.putExtra(User.USERNAME_KEY, username)
+                    Log.d("BoardingPhoneAuthActivityDebugging", Firebase.auth.currentUser?.uid.toString())
                     DBHelper.addUser(User(name, username, password, R.drawable.asset_profile1, phoneNumber))
                     startActivity(intent)
                 }

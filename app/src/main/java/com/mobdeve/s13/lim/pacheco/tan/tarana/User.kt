@@ -1,7 +1,10 @@
 package com.mobdeve.s13.lim.pacheco.tan.tarana
 
+import com.google.type.DateTime
+import com.mobdeve.s13.lim.pacheco.tan.tarana.ui.theme.Unavailable
+
 class User {
-    companion object{
+    companion object {
         const val NAME_KEY = "name"
         const val USERNAME_KEY = "username"
         const val PASSWORD_KEY = "password"
@@ -11,6 +14,7 @@ class User {
         const val LAKWATSA_LIST_KEY = "lakwatsaList"
         const val FRIEND_REQUESTS_SENT_KEY = "friendRequestsSent"
         const val FRIEND_REQUESTS_RECEIVED_KEY = "friendRequestsReceived"
+        const val UNAVAILABLE_LIST_KEY = "unavailableList"
     }
 
     var name: String
@@ -31,6 +35,8 @@ class User {
         private set
     var friendRequestsReceived: ArrayList<User>
         private set
+    var unavailableList: ArrayList<Unavailable>
+        private set
     //var notificationList: ArrayList<Notification>
     //    private set
 
@@ -47,11 +53,12 @@ class User {
         this.lakwatsaList = ArrayList()
         this.friendRequestsSent = ArrayList()
         this.friendRequestsReceived = ArrayList()
+        this.unavailableList = ArrayList()
     }
     /*
     * Constructor for a user from the database
      */
-    constructor(name:String, username: String, password: String, phoneNumber: String, profilePicture: Int, friendsList: ArrayList<User>, lakwatsaList: ArrayList<Lakwatsa>, friendRequestsSent: ArrayList<User>, friendRequestsReceived: ArrayList<User>) {
+    constructor(name:String, username: String, password: String, phoneNumber: String, profilePicture: Int, friendsList: ArrayList<User>, lakwatsaList: ArrayList<Lakwatsa>, friendRequestsSent: ArrayList<User>, friendRequestsReceived: ArrayList<User>, unavailableList: ArrayList<Unavailable>) {
         this.name = name
         this.username = username
         this.password = password
@@ -61,6 +68,7 @@ class User {
         this.lakwatsaList = lakwatsaList
         this.friendRequestsSent = friendRequestsSent
         this.friendRequestsReceived = friendRequestsReceived
+        this.unavailableList = unavailableList
     }
 
     fun addFriend(user: User) {
@@ -105,6 +113,16 @@ class User {
         return this.friendsList.contains(user)
     }
 
+    fun addUnavailable(unavailable: Unavailable) {
+        this.unavailableList.add(unavailable)
+    }
 
+    fun removeUnavailable(unavailable: Unavailable) {
+        this.unavailableList.remove(unavailable)
+    }
+
+    fun updateUnavailableListAtIndex(index: Int, unavailable: Unavailable) {
+        this.unavailableList[index] = unavailable
+    }
 
 }

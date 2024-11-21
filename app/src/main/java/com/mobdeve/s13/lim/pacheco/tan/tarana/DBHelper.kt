@@ -3,9 +3,14 @@ import android.app.ProgressDialog
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.Firebase
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.FieldPath
 import com.google.firebase.firestore.firestore
 import com.google.firebase.storage.storage
+import com.google.type.DateTime
+import com.mobdeve.s13.lim.pacheco.tan.tarana.ui.theme.Unavailable
 import kotlinx.coroutines.tasks.await
+import java.util.Date
 
 object DBHelper {
 
@@ -20,7 +25,8 @@ object DBHelper {
             User.FRIENDS_LIST_KEY to user.friendsList,
             User.LAKWATSA_LIST_KEY to user.lakwatsaList,
             User.FRIEND_REQUESTS_SENT_KEY to user.friendRequestsSent,
-            User.FRIEND_REQUESTS_RECEIVED_KEY to user.friendRequestsReceived
+            User.FRIEND_REQUESTS_RECEIVED_KEY to user.friendRequestsReceived,
+            User.UNAVAILABLE_LIST_KEY to user.unavailableList
         )
         val db = Firebase.firestore
         // add the user to the database
@@ -52,7 +58,8 @@ object DBHelper {
             result.documents[0].get(User.FRIENDS_LIST_KEY) as ArrayList<User>,
             result.documents[0].get(User.LAKWATSA_LIST_KEY) as ArrayList<Lakwatsa>,
             result.documents[0].get(User.FRIEND_REQUESTS_SENT_KEY) as ArrayList<User>,
-            result.documents[0].get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<User>
+            result.documents[0].get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<User>,
+            result.documents[0].get(User.UNAVAILABLE_LIST_KEY) as ArrayList<Unavailable>
         )
     }
 
@@ -67,7 +74,8 @@ object DBHelper {
             User.FRIENDS_LIST_KEY to user.friendsList,
             User.LAKWATSA_LIST_KEY to user.lakwatsaList,
             User.FRIEND_REQUESTS_SENT_KEY to user.friendRequestsSent,
-            User.FRIEND_REQUESTS_RECEIVED_KEY to user.friendRequestsReceived
+            User.FRIEND_REQUESTS_RECEIVED_KEY to user.friendRequestsReceived,
+            User.UNAVAILABLE_LIST_KEY to user.unavailableList
         )
         val db = Firebase.firestore
         // update the user in the database
@@ -129,5 +137,82 @@ object DBHelper {
     }
 
     //upload image to firebase storage
+
+    fun addLakwatsa(lakwatsa: Lakwatsa) {
+        val dblakwatsa = hashMapOf(
+            Lakwatsa.USERS_KEY to lakwatsa.lakwatsaUsers,
+            Lakwatsa.LOCATION_KEY to lakwatsa.location,
+            Lakwatsa.TITLE_KEY to lakwatsa.lakwatsaTitle,
+            Lakwatsa.DATE_KEY to lakwatsa.date,
+            Lakwatsa.POLLING_LIST_KEY to lakwatsa.pollingList,
+            Lakwatsa.ALBUM_KEY to lakwatsa.album,
+            Lakwatsa.STATUS_KEY to lakwatsa.status
+        )
+        val db = Firebase.firestore
+
+        db.collection("lakwatsas")
+            .add(dblakwatsa)
+            .addOnSuccessListener { documentReference ->
+                Log.d("MainActivity", "DocumentSnapshot added with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+                Log.w("MainActivity", "Error adding document", e)
+            }
+    }
+
+    suspend fun getAllLakwatsa(): ArrayList<Lakwatsa>{
+        val db = Firebase.firestore
+        val result = db.collection("lakwatsas")
+            .get()
+            .await()
+        val lakwatsaList = ArrayList<Lakwatsa>()
+        for (document in result){
+            lakwatsaList.add(Lakwatsa(
+                document.id,
+                document.get(Lakwatsa.USERS_KEY) as ArrayList<User>,
+                document.get(Lakwatsa.LOCATION_KEY).toString(),
+                document.get(Lakwatsa.TITLE_KEY).toString(),
+                (document.get(Lakwatsa.DATE_KEY) as Timestamp).toDate(),
+                document.get(Lakwatsa.POLLING_LIST_KEY) as HashMap<Date, Int>,
+                document.get(Lakwatsa.ALBUM_KEY) as ArrayList<String>
+            ))
+        }
+        return lakwatsaList
+    }
+
+    suspend fun getLakwatsa(lakwatsaId: String): Lakwatsa{
+        val db = Firebase.firestore
+        val result = db.collection("lakwatsas")
+            .whereEqualTo(FieldPath.documentId(), lakwatsaId)
+            .get()
+            .await()
+        return Lakwatsa(
+            result.documents[0].id,
+            result.documents[0].get(Lakwatsa.USERS_KEY) as ArrayList<User>,
+            result.documents[0].get(Lakwatsa.LOCATION_KEY).toString(),
+            result.documents[0].get(Lakwatsa.TITLE_KEY).toString(),
+            (result.documents[0].get(Lakwatsa.DATE_KEY) as Timestamp).toDate(),
+            result.documents[0].get(Lakwatsa.POLLING_LIST_KEY) as HashMap<Date, Int>,
+            result.documents[0].get(Lakwatsa.ALBUM_KEY) as ArrayList<String>
+        )
+    }
+
+    fun updateLakwatsa(lakwatsa: Lakwatsa) {
+        val dblakwatsa = hashMapOf(
+            Lakwatsa.USERS_KEY to lakwatsa.lakwatsaUsers,
+            Lakwatsa.LOCATION_KEY to lakwatsa.location,
+            Lakwatsa.TITLE_KEY to lakwatsa.lakwatsaTitle,
+            Lakwatsa.DATE_KEY to lakwatsa.date,
+            Lakwatsa.POLLING_LIST_KEY to lakwatsa.pollingList,
+            Lakwatsa.ALBUM_KEY to lakwatsa.album,
+            Lakwatsa.STATUS_KEY to lakwatsa.status
+        )
+        val db = Firebase.firestore
+        db.collection("lakwatsas")
+            .document(lakwatsa.lakwatsaId)
+            .set(dblakwatsa)
+            .addOnSuccessListener { Log.d("MainActivity", "DocumentSnapshot successfully updated!") }
+            .addOnFailureListener { e -> Log.w("MainActivity", "Error updating document", e) }
+    }
 
 }

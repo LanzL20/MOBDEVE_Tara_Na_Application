@@ -19,9 +19,6 @@ class ProfileUserActivity: AppCompatActivity() {
         }
         setContentView(viewBinding.root)
 
-
-
-
         viewBinding.lakwatsaBtn.setOnClickListener {
             val intent = Intent(this, LakwatsaListActivity::class.java)
             startActivity(intent)

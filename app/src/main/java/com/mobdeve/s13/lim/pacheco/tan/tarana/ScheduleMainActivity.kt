@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.LinearLayout
@@ -14,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.CalendarMonth
 import com.kizitonwose.calendar.core.daysOfWeek
@@ -35,6 +38,27 @@ class ScheduleMainActivity: AppCompatActivity() {
     private lateinit var modal: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val user = Firebase.auth.currentUser
+        user?.let {
+            // Name, email address, and profile photo Url
+            val name = it.displayName
+            val email = it.email
+            val photoUrl = it.photoUrl
+
+            // Check if user's email is verified
+            val emailVerified = it.isEmailVerified
+
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getIdToken() instead.
+            val uid = it.uid
+
+            Log.d("MainActivity", "User: $name, $email, $photoUrl, $emailVerified, $uid")
+        }
+        Log.d("Here", Firebase.auth.currentUser?.uid.toString())
+        Log.d("Here Twice?", Firebase.auth.currentUser?.getIdToken(false).toString())
+
         super.onCreate(savedInstanceState)
         binding = ActivityScheduleMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityLakwatsaCreateBinding
+import java.util.Date
 
 class LakwatsaCreateActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +24,16 @@ class LakwatsaCreateActivity: AppCompatActivity() {
         }
         viewBinding.profileUser1.setOnClickListener{
             val intent = Intent(this, ProfileUserActivity::class.java)
+            startActivity(intent)
+        }
+        viewBinding.activityLakwatsaCreateBtn.setOnClickListener{
+            val intent = Intent(this, LakwatsaListActivity::class.java)
+            // TODO: Very temp code for testing
+            val lakwatsa = Lakwatsa(ArrayList<User>(), viewBinding.activityDatetimeEtLocation.text.toString(),
+                viewBinding.activityLakwatsaCreateEtTitle.text.toString(),
+                Date(),
+                HashMap<Date, Int>(), ArrayList<String>())
+            DBHelper.addLakwatsa(lakwatsa)
             startActivity(intent)
         }
     }
