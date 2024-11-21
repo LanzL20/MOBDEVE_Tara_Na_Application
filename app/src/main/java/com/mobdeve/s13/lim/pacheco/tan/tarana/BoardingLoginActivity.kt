@@ -14,6 +14,8 @@ class BoardingLoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBoardingLoginBinding
     private lateinit var forgotPwModalBinding: ModalForgotPwBinding
     private lateinit var forgotPwModal: Dialog
+    private lateinit var phoneNumber: String
+    private lateinit var password: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +51,14 @@ class BoardingLoginActivity : AppCompatActivity() {
         }
 
         binding.activityBoardingLoginBtnLogin.setOnClickListener {
-            val intent = Intent(this, ProfileUserActivity::class.java)
-            // TODO: Temp for testing
-            intent.putExtra(User.USERNAME_KEY, "Tytan6249")
+            val intent = Intent(this, BoardingPhoneAuthActivity::class.java)
+            phoneNumber = binding.activityBoardingLoginEtPhone.text.toString()
+            phoneNumber= "+63${phoneNumber.substring(1)}"
+            //TODO:ADD ENCRYPTION FOR PASSWORD
+            password = binding.activityBoardingLoginEtPassword.text.toString()
+            //TODO: IMPLEMENT PASSWORD CHECKING
+            intent.putExtra(User.PHONE_NUMBER_KEY, phoneNumber)
+            intent.putExtra("from", "login")
             startActivity(intent)
         }
 

@@ -1,8 +1,5 @@
 package com.mobdeve.s13.lim.pacheco.tan.tarana
 
-import com.google.type.DateTime
-import com.mobdeve.s13.lim.pacheco.tan.tarana.ui.theme.Unavailable
-
 class User {
     companion object {
         const val NAME_KEY = "name"

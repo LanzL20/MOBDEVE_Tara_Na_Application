@@ -1,14 +1,9 @@
 package com.mobdeve.s13.lim.pacheco.tan.tarana
-import android.app.ProgressDialog
 import android.util.Log
-import android.widget.Toast
 import com.google.firebase.Firebase
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FieldPath
 import com.google.firebase.firestore.firestore
-import com.google.firebase.storage.storage
-import com.google.type.DateTime
-import com.mobdeve.s13.lim.pacheco.tan.tarana.ui.theme.Unavailable
 import kotlinx.coroutines.tasks.await
 import java.util.Date
 
@@ -46,6 +41,28 @@ object DBHelper {
         // get the user from the database
         val result = db.collection("users")
             .whereEqualTo(User.USERNAME_KEY, username)
+            .get()
+            .await()
+        // return the user
+        return User(
+            result.documents[0].get(User.NAME_KEY).toString(),
+            result.documents[0].get(User.USERNAME_KEY).toString(),
+            result.documents[0].get(User.PASSWORD_KEY).toString(),
+            result.documents[0].get(User.PHONE_NUMBER_KEY).toString(),
+            result.documents[0].get(User.PROFILE_PICTURE_KEY).toString().toInt(),
+            result.documents[0].get(User.FRIENDS_LIST_KEY) as ArrayList<User>,
+            result.documents[0].get(User.LAKWATSA_LIST_KEY) as ArrayList<Lakwatsa>,
+            result.documents[0].get(User.FRIEND_REQUESTS_SENT_KEY) as ArrayList<User>,
+            result.documents[0].get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<User>,
+            result.documents[0].get(User.UNAVAILABLE_LIST_KEY) as ArrayList<Unavailable>
+        )
+    }
+
+    suspend fun getUserFromNumber(number: String): User {
+        val db = Firebase.firestore
+        // get the user from the database
+        val result = db.collection("users")
+            .whereEqualTo(User.PHONE_NUMBER_KEY, number)
             .get()
             .await()
         // return the user

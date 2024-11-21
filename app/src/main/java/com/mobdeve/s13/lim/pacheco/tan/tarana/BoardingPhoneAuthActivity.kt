@@ -10,6 +10,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.google.firebase.Firebase
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
@@ -18,6 +19,7 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.auth
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityBoardingPhoneAuthBinding
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 class BoardingPhoneAuthActivity:AppCompatActivity() {
@@ -27,6 +29,7 @@ class BoardingPhoneAuthActivity:AppCompatActivity() {
     lateinit var name: String
     val timeoutSeconds= 60L
     val mAuth: FirebaseAuth= FirebaseAuth.getInstance()
+    lateinit var from:String
 
     lateinit var verificationCode: String
     lateinit var mResendToken: PhoneAuthProvider.ForceResendingToken
@@ -42,14 +45,19 @@ class BoardingPhoneAuthActivity:AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val viewBinding= ActivityBoardingPhoneAuthBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
-        name= intent.getStringExtra(User.NAME_KEY)!!
-        phoneNumber= intent.getStringExtra(User.PHONE_NUMBER_KEY)!!
-        username= intent.getStringExtra(User.USERNAME_KEY)!!
-        password= intent.getStringExtra(User.PASSWORD_KEY)!!
-        phoneNumber= "+63${phoneNumber.substring(1)}"
+        Log.d("BoardingPhoneAuthActivityDebugging", "Phone Auth Activity Created")
+        from= intent.getStringExtra("from")!!
+        if(from=="login"){
+            phoneNumber= intent.getStringExtra(User.PHONE_NUMBER_KEY)!!
+        }
+        else if(from=="signup"){
+            phoneNumber= intent.getStringExtra(User.PHONE_NUMBER_KEY)!!
+            name= intent.getStringExtra(User.NAME_KEY)!!
+            username= intent.getStringExtra(User.USERNAME_KEY)!!
+            password= intent.getStringExtra(User.PASSWORD_KEY)!!
+        }
+
         viewBinding.phoneNumberTv.text= phoneNumber
-
-
 
         otpInput= viewBinding.activityPhoneAuthOtpEt
         signInButton= viewBinding.activityBoardingPhoneAuthBtnSignup
@@ -151,16 +159,22 @@ class BoardingPhoneAuthActivity:AppCompatActivity() {
                 setInProgress(false)
                 if(task.isSuccessful){
                     val intent= Intent(this, BoardingGreetingActivity::class.java)
-                    intent.putExtra(User.USERNAME_KEY, username)
-                    Log.d("BoardingPhoneAuthActivityDebugging", Firebase.auth.currentUser?.uid.toString())
-                    DBHelper.addUser(User(name, username, password, R.drawable.asset_profile1, phoneNumber))
-                    startActivity(intent)
+                    Log.d("BoardingPhoneAuthActivityDebugging", "Sign in successful")
+                    if(from=="signup"){
+                        //TODO:ADD ENCRYPTION FOR PASSWORD
+                        DBHelper.addUser(User(name, username, password, R.drawable.asset_profile1, phoneNumber))
+                    }
+                    lifecycleScope.launch {
+                        val user= DBHelper.getUserFromNumber(phoneNumber)
+                        UserSession.setUser(user)
+                        startActivity(intent)
+                        finish()
+                    }
                 }
                 else{
                     Toast.makeText(this, "Sign in failed", Toast.LENGTH_SHORT).show()
                 }
             }
-        startActivity(intent)
     }
 
     fun setInProgress(inProgress: Boolean){

@@ -10,10 +10,8 @@ class BoardingGreetingActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val viewBinding = ActivityBoardingGreetingBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
-        val username= intent.getStringExtra(User.USERNAME_KEY)
         viewBinding.activityBoardingGreetingMainCl.setOnClickListener {
             val intent = Intent(this, ProfileUserActivity::class.java)
-            intent.putExtra(User.USERNAME_KEY, username)
             startActivity(intent)
         }
     }

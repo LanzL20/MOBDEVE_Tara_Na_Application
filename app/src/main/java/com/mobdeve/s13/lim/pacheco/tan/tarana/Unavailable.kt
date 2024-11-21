@@ -1,4 +1,4 @@
-package com.mobdeve.s13.lim.pacheco.tan.tarana.ui.theme
+package com.mobdeve.s13.lim.pacheco.tan.tarana
 
 import com.google.type.DateTime
 

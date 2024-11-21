@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.google.firebase.auth.FirebaseAuth
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityBoardingSignupBinding
 import kotlinx.coroutines.launch
 
@@ -17,25 +16,26 @@ class BoardingSignUpActivity: AppCompatActivity() {
 
         viewBinding.activityBoardingSignupBtnSignup.setOnClickListener {
             val intent = Intent(this, BoardingPhoneAuthActivity::class.java)
-            val number= viewBinding.activitySignupLoginEtPhone.text.toString()
+            var phoneNumber= viewBinding.activitySignupLoginEtPhone.text.toString()
             val name= viewBinding.activitySignupLoginEtName.text.toString()
             val password= viewBinding.activitySignupLoginEtPasswordd.text.toString()
             //username will be the name without spaces and attached with a random 4 digit number
             val username= name.replace("\\s".toRegex(), "")+((1000..9999).random()).toString()
-
+            phoneNumber= "+63${phoneNumber.substring(1)}"
             intent.putExtra(User.NAME_KEY, name)
             intent.putExtra(User.USERNAME_KEY, username)
-            intent.putExtra(User.PHONE_NUMBER_KEY, number)
+            intent.putExtra(User.PHONE_NUMBER_KEY, phoneNumber)
             intent.putExtra(User.PASSWORD_KEY, password)
+            intent.putExtra("from", "signup")
 
-            if(number.isEmpty() || username.isEmpty() || password.isEmpty()){
+            if(phoneNumber.isEmpty() || username.isEmpty() || password.isEmpty()){
                 viewBinding.activitySignupLoginEtPhone.error="Please fill up this field"
                 viewBinding.activitySignupLoginEtName.error="Please fill up this field"
                 viewBinding.activitySignupLoginEtPasswordd.error="Please fill up this field"
                 return@setOnClickListener
             }
-            if(number.length!=11){
-                viewBinding.activitySignupLoginEtPhone.error="Invalid phone number"
+            if(phoneNumber.length!=13){
+                viewBinding.activitySignupLoginEtPhone.error="Invalid phone number length"
                 return@setOnClickListener
             }
 
@@ -43,7 +43,7 @@ class BoardingSignUpActivity: AppCompatActivity() {
 
             //check if user is already registered
             lifecycleScope.launch{
-                val userExists= DBHelper.checkIfUserExists(username, number)
+                val userExists= DBHelper.checkIfUserExists(username, phoneNumber)
                 Log.d("MainActivity", "User exists: $userExists")
                 if(userExists==3){
                     viewBinding.activitySignupLoginEtName.error="User already exists"
