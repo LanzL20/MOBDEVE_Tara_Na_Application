@@ -1,5 +1,6 @@
 package com.mobdeve.s13.lim.pacheco.tan.tarana
 
+import java.time.LocalDateTime
 import java.util.Date
 
 class Lakwatsa {
@@ -18,15 +19,16 @@ class Lakwatsa {
     }
 
     var lakwatsaId: String
+    // TODO: SHUD ONLY BE USERID
     var lakwatsaUsers: ArrayList<User>
         private set
     var location: String
         private set
     var lakwatsaTitle: String
         private set
-    var date: Date
+    var date: LocalDateTime
         private set
-    var pollingList: HashMap<Date, Int>
+    var pollingList: HashMap<LocalDateTime, Int>
         private set
     var album: ArrayList<String>
         private set
@@ -37,8 +39,8 @@ class Lakwatsa {
         lakwatsaUsers: ArrayList<User>,
         location: String,
         lakwatsaTitle: String,
-        date: Date,
-        pollingList: HashMap<Date, Int>,
+        date: LocalDateTime,
+        pollingList: HashMap<LocalDateTime, Int>,
         album: ArrayList<String>
     ) {
         this.lakwatsaId = "-1"
@@ -56,8 +58,8 @@ class Lakwatsa {
         lakwatsaUsers: ArrayList<User>,
         location: String,
         lakwatsaTitle: String,
-        date: Date,
-        pollingList: HashMap<Date, Int>,
+        date: LocalDateTime,
+        pollingList: HashMap<LocalDateTime, Int>,
         album: ArrayList<String>
     ) {
         this.lakwatsaId = lakwatsaId
@@ -78,11 +80,11 @@ class Lakwatsa {
         this.album.remove(image)
     }
 
-    fun addPolling(date: Date, rating: Int) {
+    fun addPolling(date: LocalDateTime, rating: Int) {
         this.pollingList[date] = rating
     }
 
-    fun removePolling(date: Date) {
+    fun removePolling(date: LocalDateTime) {
         this.pollingList.remove(date)
     }
 

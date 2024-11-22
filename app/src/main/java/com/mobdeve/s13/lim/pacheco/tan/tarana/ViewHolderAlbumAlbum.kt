@@ -34,6 +34,7 @@ class ViewHolderAlbumAlbum(var view: View, viewType: Int) : RecyclerView.ViewHol
         // (See MyAppGlideModule for Loader registration)
         Glide.with(view.context)
             .load(storageReference)
+            .thumbnail(Glide.with(view.context).load(R.drawable.asset_loading))
             .into(imageView)
     }
 

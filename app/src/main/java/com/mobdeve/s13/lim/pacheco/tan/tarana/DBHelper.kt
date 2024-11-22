@@ -5,6 +5,7 @@ import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FieldPath
 import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.tasks.await
+import java.time.LocalDateTime
 import java.util.Date
 
 object DBHelper {
@@ -50,10 +51,10 @@ object DBHelper {
             result.documents[0].get(User.PASSWORD_KEY).toString(),
             result.documents[0].get(User.PHONE_NUMBER_KEY).toString(),
             result.documents[0].get(User.PROFILE_PICTURE_KEY).toString().toInt(),
-            result.documents[0].get(User.FRIENDS_LIST_KEY) as ArrayList<User>,
-            result.documents[0].get(User.LAKWATSA_LIST_KEY) as ArrayList<Lakwatsa>,
-            result.documents[0].get(User.FRIEND_REQUESTS_SENT_KEY) as ArrayList<User>,
-            result.documents[0].get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<User>,
+            result.documents[0].get(User.FRIENDS_LIST_KEY) as ArrayList<String>,
+            result.documents[0].get(User.LAKWATSA_LIST_KEY) as ArrayList<String>,
+            result.documents[0].get(User.FRIEND_REQUESTS_SENT_KEY) as ArrayList<String>,
+            result.documents[0].get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
             result.documents[0].get(User.UNAVAILABLE_LIST_KEY) as ArrayList<Unavailable>
         )
     }
@@ -66,17 +67,26 @@ object DBHelper {
             .get()
             .await()
         // return the user
+        val tempUnavailable = ArrayList<Unavailable>()
+        for(unavailable in result.documents[0].get(User.UNAVAILABLE_LIST_KEY) as ArrayList<HashMap<String, Any>>){
+            tempUnavailable.add(Unavailable(
+                unavailable["name"] as String,
+                unavailable["startDate"] as String,
+                unavailable["endDate"] as String
+            ))
+        }
+
         return User(
             result.documents[0].get(User.NAME_KEY).toString(),
             result.documents[0].get(User.USERNAME_KEY).toString(),
             result.documents[0].get(User.PASSWORD_KEY).toString(),
             result.documents[0].get(User.PHONE_NUMBER_KEY).toString(),
             result.documents[0].get(User.PROFILE_PICTURE_KEY).toString().toInt(),
-            result.documents[0].get(User.FRIENDS_LIST_KEY) as ArrayList<User>,
-            result.documents[0].get(User.LAKWATSA_LIST_KEY) as ArrayList<Lakwatsa>,
-            result.documents[0].get(User.FRIEND_REQUESTS_SENT_KEY) as ArrayList<User>,
-            result.documents[0].get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<User>,
-            result.documents[0].get(User.UNAVAILABLE_LIST_KEY) as ArrayList<Unavailable>
+            result.documents[0].get(User.FRIENDS_LIST_KEY) as ArrayList<String>,
+            result.documents[0].get(User.LAKWATSA_LIST_KEY) as ArrayList<String>,
+            result.documents[0].get(User.FRIEND_REQUESTS_SENT_KEY) as ArrayList<String>,
+            result.documents[0].get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
+            tempUnavailable
         )
     }
 
@@ -155,46 +165,43 @@ object DBHelper {
 
     //upload image to firebase storage
 
-    fun addLakwatsa(lakwatsa: Lakwatsa) {
+    suspend fun addLakwatsa(lakwatsa: Lakwatsa): String {
         val dblakwatsa = hashMapOf(
             Lakwatsa.USERS_KEY to lakwatsa.lakwatsaUsers,
             Lakwatsa.LOCATION_KEY to lakwatsa.location,
             Lakwatsa.TITLE_KEY to lakwatsa.lakwatsaTitle,
-            Lakwatsa.DATE_KEY to lakwatsa.date,
+            Lakwatsa.DATE_KEY to lakwatsa.date.toString(),
             Lakwatsa.POLLING_LIST_KEY to lakwatsa.pollingList,
             Lakwatsa.ALBUM_KEY to lakwatsa.album,
             Lakwatsa.STATUS_KEY to lakwatsa.status
         )
         val db = Firebase.firestore
 
-        db.collection("lakwatsas")
-            .add(dblakwatsa)
-            .addOnSuccessListener { documentReference ->
-                Log.d("MainActivity", "DocumentSnapshot added with ID: ${documentReference.id}")
-            }
-            .addOnFailureListener { e ->
-                Log.w("MainActivity", "Error adding document", e)
-            }
+        val result = db.collection("lakwatsas")
+            .add(dblakwatsa).await()
+
+        return result.id
     }
 
-    suspend fun getAllLakwatsa(): ArrayList<Lakwatsa>{
+    suspend fun getAllLakwatsaFromList(lakwatsaIds: ArrayList<String>): ArrayList<Lakwatsa>{
         val db = Firebase.firestore
-        val result = db.collection("lakwatsas")
-            .get()
-            .await()
-        val lakwatsaList = ArrayList<Lakwatsa>()
-        for (document in result){
-            lakwatsaList.add(Lakwatsa(
-                document.id,
-                document.get(Lakwatsa.USERS_KEY) as ArrayList<User>,
-                document.get(Lakwatsa.LOCATION_KEY).toString(),
-                document.get(Lakwatsa.TITLE_KEY).toString(),
-                (document.get(Lakwatsa.DATE_KEY) as Timestamp).toDate(),
-                document.get(Lakwatsa.POLLING_LIST_KEY) as HashMap<Date, Int>,
-                document.get(Lakwatsa.ALBUM_KEY) as ArrayList<String>
+        val lakwatsas = ArrayList<Lakwatsa>()
+        for(lakwatsaId in lakwatsaIds){
+            val result = db.collection("lakwatsas")
+                .whereEqualTo(FieldPath.documentId(), lakwatsaId)
+                .get()
+                .await()
+            lakwatsas.add(Lakwatsa(
+                result.documents[0].id,
+                result.documents[0].get(Lakwatsa.USERS_KEY) as ArrayList<User>,
+                result.documents[0].get(Lakwatsa.LOCATION_KEY).toString(),
+                result.documents[0].get(Lakwatsa.TITLE_KEY).toString(),
+                LocalDateTime.parse(result.documents[0].get(Lakwatsa.DATE_KEY) as String),
+                result.documents[0].get(Lakwatsa.POLLING_LIST_KEY) as HashMap<LocalDateTime, Int>,
+                result.documents[0].get(Lakwatsa.ALBUM_KEY) as ArrayList<String>
             ))
         }
-        return lakwatsaList
+        return lakwatsas
     }
 
     suspend fun getLakwatsa(lakwatsaId: String): Lakwatsa{
@@ -208,8 +215,8 @@ object DBHelper {
             result.documents[0].get(Lakwatsa.USERS_KEY) as ArrayList<User>,
             result.documents[0].get(Lakwatsa.LOCATION_KEY).toString(),
             result.documents[0].get(Lakwatsa.TITLE_KEY).toString(),
-            (result.documents[0].get(Lakwatsa.DATE_KEY) as Timestamp).toDate(),
-            result.documents[0].get(Lakwatsa.POLLING_LIST_KEY) as HashMap<Date, Int>,
+            LocalDateTime.parse(result.documents[0].get(Lakwatsa.DATE_KEY) as String),
+            result.documents[0].get(Lakwatsa.POLLING_LIST_KEY) as HashMap<LocalDateTime, Int>,
             result.documents[0].get(Lakwatsa.ALBUM_KEY) as ArrayList<String>
         )
     }
@@ -219,7 +226,7 @@ object DBHelper {
             Lakwatsa.USERS_KEY to lakwatsa.lakwatsaUsers,
             Lakwatsa.LOCATION_KEY to lakwatsa.location,
             Lakwatsa.TITLE_KEY to lakwatsa.lakwatsaTitle,
-            Lakwatsa.DATE_KEY to lakwatsa.date,
+            Lakwatsa.DATE_KEY to lakwatsa.date.toString(),
             Lakwatsa.POLLING_LIST_KEY to lakwatsa.pollingList,
             Lakwatsa.ALBUM_KEY to lakwatsa.album,
             Lakwatsa.STATUS_KEY to lakwatsa.status

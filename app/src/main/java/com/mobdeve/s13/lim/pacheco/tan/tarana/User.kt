@@ -24,13 +24,13 @@ class User {
         private set
     var phoneNumber: String
         private set
-    var friendsList: ArrayList<User>
+    var friendsList: ArrayList<String>
         private set
-    var lakwatsaList: ArrayList<Lakwatsa>
+    var lakwatsaList: ArrayList<String>
         private set
-    var friendRequestsSent: ArrayList<User>
+    var friendRequestsSent: ArrayList<String>
         private set
-    var friendRequestsReceived: ArrayList<User>
+    var friendRequestsReceived: ArrayList<String>
         private set
     var unavailableList: ArrayList<Unavailable>
         private set
@@ -40,11 +40,17 @@ class User {
     /*
     * Constructor for a new User
      */
-    constructor(name:String, username: String, password: String, profilePicture: Int, phoneNumber: String) {
+    constructor(
+        name: String,
+        username: String,
+        password: String,
+        profilePicture: Int,
+        phoneNumber: String
+    ) {
         this.name = name
         this.username = username
         this.password = password
-        this.phoneNumber=phoneNumber
+        this.phoneNumber = phoneNumber
         this.profilePicture = profilePicture
         this.friendsList = ArrayList()
         this.lakwatsaList = ArrayList()
@@ -52,14 +58,26 @@ class User {
         this.friendRequestsReceived = ArrayList()
         this.unavailableList = ArrayList()
     }
+
     /*
     * Constructor for a user from the database
      */
-    constructor(name:String, username: String, password: String, phoneNumber: String, profilePicture: Int, friendsList: ArrayList<User>, lakwatsaList: ArrayList<Lakwatsa>, friendRequestsSent: ArrayList<User>, friendRequestsReceived: ArrayList<User>, unavailableList: ArrayList<Unavailable>) {
+    constructor(
+        name: String,
+        username: String,
+        password: String,
+        phoneNumber: String,
+        profilePicture: Int,
+        friendsList: ArrayList<String>,
+        lakwatsaList: ArrayList<String>,
+        friendRequestsSent: ArrayList<String>,
+        friendRequestsReceived: ArrayList<String>,
+        unavailableList: ArrayList<Unavailable>
+    ) {
         this.name = name
         this.username = username
         this.password = password
-        this.phoneNumber=phoneNumber
+        this.phoneNumber = phoneNumber
         this.profilePicture = profilePicture
         this.friendsList = friendsList
         this.lakwatsaList = lakwatsaList
@@ -68,46 +86,58 @@ class User {
         this.unavailableList = unavailableList
     }
 
-    fun addFriend(user: User) {
-        this.friendsList.add(user)
+    fun addFriend(userId: String) {
+        this.friendsList.add(userId)
     }
 
-    fun removeFriend(user: User) {
-        this.friendsList.remove(user)
+    fun removeFriend(userId: String) {
+        this.friendsList.remove(userId)
     }
 
-    fun addLakwatsa(lakwatsa: Lakwatsa) {
-        this.lakwatsaList.add(lakwatsa)
+    fun addLakwatsa(lakwatsaId: String) {
+        this.lakwatsaList.add(lakwatsaId)
     }
 
-    fun removeLakwatsa(lakwatsa: Lakwatsa) {
-        this.lakwatsaList.remove(lakwatsa)
+    fun removeLakwatsa(lakwatsaId: String) {
+        this.lakwatsaList.remove(lakwatsaId)
     }
 
-    fun sendFriendRequest(user: User) {
-        this.friendRequestsSent.add(user)
-        user.friendRequestsReceived.add(this)
+    fun sendFriendRequest(userId: String) {
+        this.friendRequestsSent.add(userId)
     }
 
-    fun acceptFriendRequest(user: User) {
-        this.friendRequestsReceived.remove(user)
-        user.friendRequestsSent.remove(this)
-        this.friendsList.add(user)
-        user.friendsList.add(this)
+    fun receiveFriendRequest(userId: String) {
+        this.friendRequestsReceived.add(userId)
     }
 
-    fun rejectFriendRequest(user: User) {
-        this.friendRequestsReceived.remove(user)
-        user.friendRequestsSent.remove(this)
+    fun acceptFriendRequest(userId: String) {
+        this.friendRequestsReceived.remove(userId)
+        this.friendsList.add(userId)
     }
 
-    fun cancelFriendRequest(user: User) {
-        this.friendRequestsSent.remove(user)
-        user.friendRequestsReceived.remove(this)
+    fun friendRequestAccepted(userId: String) {
+        this.friendRequestsSent.remove(userId)
+        this.friendsList.add(userId)
     }
 
-    fun isFriend(user: User): Boolean {
-        return this.friendsList.contains(user)
+    fun rejectFriendRequest(userId: String) {
+        this.friendRequestsReceived.remove(userId)
+    }
+
+    fun friendRequestRejected(userId: String) {
+        this.friendRequestsSent.remove(userId)
+    }
+
+    fun cancelFriendRequest(userId: String) {
+        this.friendRequestsSent.remove(userId)
+    }
+
+    fun friendRequestCancelled(userId: String) {
+        this.friendRequestsReceived.remove(userId)
+    }
+
+    fun isFriend(userId: String): Boolean {
+        return this.friendsList.contains(userId)
     }
 
     fun addUnavailable(unavailable: Unavailable) {

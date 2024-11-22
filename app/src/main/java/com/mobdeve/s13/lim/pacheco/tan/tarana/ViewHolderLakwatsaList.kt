@@ -7,7 +7,7 @@ class ViewHolderLakwatsaList(private val viewBinding: ActivityLakwatsaListBindin
     fun bindData(lakwatsa: Lakwatsa) {
         //TODO: Change the naming scheme of items in the layout file
         viewBinding.upcomingTitle.text = lakwatsa.lakwatsaTitle
-        viewBinding.upcomingDay1.text = lakwatsa.date.day.toString()
+        viewBinding.upcomingDay1.text = lakwatsa.date.dayOfMonth.toString()
         viewBinding.upcomingMonth1.text = lakwatsa.date.month.toString()
     }
 }

@@ -63,12 +63,11 @@ class AlbumAlbumActivity: AppCompatActivity() {
                     }
                 }
                 for(file in files){
-                    val fileRef = FirebaseStorage.getInstance().getReference().child("gallery").child("insertLakwatsaIdHere").child(System.currentTimeMillis().toString() + "_" + getFileName(file));
+                    val lakwatsaId = intent.getStringExtra(Lakwatsa.ID_KEY)
+                    val fileRef = FirebaseStorage.getInstance().getReference().child("album").child(lakwatsaId.toString()).child(System.currentTimeMillis().toString() + "_" + getFileName(file));
                     fileRef.putFile(file).addOnSuccessListener {
                         Log.d("MainActivity", "Successfully uploaded image: ${it.metadata?.path}")
                         lifecycleScope.launch {
-                            val lakwatsaId = intent.getStringExtra(Lakwatsa.ID_KEY)
-                            Log.d("AlbumAlbumActivity", "Lakwatsa ID: $lakwatsaId")
                             val lakwatsa = DBHelper.getLakwatsa(lakwatsaId!!)
                             lakwatsa.album.add(it.metadata?.path.toString())
                             DBHelper.updateLakwatsa(lakwatsa)
@@ -105,6 +104,8 @@ class AlbumAlbumActivity: AppCompatActivity() {
             viewBinding.albumAlbumRv.adapter = AdapterAlbumAlbum(lakwatsa.album, imagesActivityResultLauncher)
             viewBinding.albumAlbumRv.layoutManager = GridLayoutManager(viewBinding.albumAlbumRv.context, 4)
             viewBinding.albumAlbumRv.addItemDecoration(MarginItemDecoration(10))
+            viewBinding.activityAlbumAlbumTitle.text = lakwatsa.lakwatsaTitle
+            viewBinding.activityAlbumAlbumDate.text = lakwatsa.date.toString()
         }
     }
 }

@@ -3,7 +3,10 @@ package com.mobdeve.s13.lim.pacheco.tan.tarana
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityLakwatsaCreateBinding
+import kotlinx.coroutines.launch
+import java.time.LocalDateTime
 import java.util.Date
 
 class LakwatsaCreateActivity: AppCompatActivity() {
@@ -29,12 +32,22 @@ class LakwatsaCreateActivity: AppCompatActivity() {
         viewBinding.activityLakwatsaCreateBtn.setOnClickListener{
             val intent = Intent(this, LakwatsaListActivity::class.java)
             // TODO: Very temp code for testing
-            val lakwatsa = Lakwatsa(ArrayList<User>(), viewBinding.activityDatetimeEtLocation.text.toString(),
+            val users = ArrayList<User>()
+            users.add(UserSession.getUser())
+            // TODO: ADD ALL ADDED FRIENDS TO THE LIST
+            val lakwatsa = Lakwatsa(users, viewBinding.activityDatetimeEtLocation.text.toString(),
                 viewBinding.activityLakwatsaCreateEtTitle.text.toString(),
-                Date(),
-                HashMap<Date, Int>(), ArrayList<String>())
-            DBHelper.addLakwatsa(lakwatsa)
-            startActivity(intent)
+                LocalDateTime.now(),
+                HashMap<LocalDateTime, Int>(), ArrayList<String>())
+            lifecycleScope.launch {
+                val lakwatsaId = DBHelper.addLakwatsa(lakwatsa)
+                for(user in users){
+                    user.addLakwatsa(lakwatsaId)
+                    DBHelper.updateUser(user)
+                }
+                startActivity(intent)
+            }
+
         }
     }
 }
