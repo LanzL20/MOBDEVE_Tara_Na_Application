@@ -10,19 +10,17 @@ abstract class Notification{
         private set
     var isRead: Boolean
         private set
-    var user: User
+    /// var user: User
+        // private set
+    var isFriendRequest: Boolean
         private set
 
     // constructor
-    constructor(message: String, date: Date, isRead: Boolean, user: User){
+    constructor(message: String, date: Date, isRead: Boolean, isFriendRequest: Boolean){
         this.message = message
         this.date = date
         this.isRead = isRead
-        this.user = user
+        // this.user = user
+        this.isFriendRequest = isFriendRequest
     }
-
-
-
-
-
 }

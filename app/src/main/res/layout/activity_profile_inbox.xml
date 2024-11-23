@@ -67,17 +67,18 @@
         android:id="@+id/activity_friends_view_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="44dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/activity_profile_inbox_logo">
+        app:layout_constraintTop_toBottomOf="@id/activity_profile_inbox_logo"
+        tools:layout_editor_absoluteX="0dp">
 
         <TextView
             android:id="@+id/activity_profile_inbox_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
+            android:layout_marginBottom="50dp"
             android:fontFamily="@font/jeko_demo_extrabold"
             android:text="Notifications"
             android:textAlignment="center"
@@ -85,148 +86,16 @@
             android:textColor="#070802"
             android:textSize="32sp" />
 
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvNotifications"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:clipToPadding="false"
             app:layout_constraintTop_toBottomOf="@id/activity_profile_inbox_tv"
-            app:layout_constraintBottom_toTopOf="@id/back_profile_line">
+            app:layout_constraintBottom_toTopOf="@id/back_profile_line" />
 
-            <LinearLayout
-                android:id="@+id/activity_profile_inbox_notifs_ll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="?android:attr/dividerHorizontal"
-                android:orientation="vertical"
-                android:showDividers="beginning|middle|end">
-
-                <LinearLayout
-                    android:id="@+id/activity_profile_inbox_notif_ll"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="horizontal"
-                    android:paddingLeft="25dp"
-                    android:paddingRight="25dp">
-
-                    <ImageView
-                        android:id="@+id/activity_profile_inbox_user1_iv"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="20dp"
-                        android:src="@drawable/asset_profile3" />
-
-                    <TextView
-                        android:id="@+id/activity_profile_inbox_message_tv"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/jeko_demo_medium"
-                        android:maxLines="2"
-                        android:text="Tyler Tan accepted your friend request!"
-                        android:textColor="#070802" />
-
-                    <ImageButton
-                        android:id="@+id/options_icon"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="20dp"
-                        android:src="@drawable/ic_options"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
-                        android:scaleType="centerInside"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/activity_profile_inbox_notif2_ll"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:orientation="horizontal"
-                    android:paddingLeft="25dp"
-                    android:paddingRight="25dp">
-
-                    <ImageView
-                        android:id="@+id/activity_profile_inbox_user2_iv"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="20dp"
-                        android:src="@drawable/asset_profile2" />
-
-                    <LinearLayout
-                        android:id="@+id/activity_profile_inbox_friend_req_ll"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/activity_profile_inbox_message2_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:ellipsize="end"
-                            android:fontFamily="@font/jeko_demo_medium"
-                            android:maxLines="2"
-                            android:text="Marissa Villaceran sent you a friend request!"
-                            android:textColor="#070802" />
-
-                        <LinearLayout
-                            android:id="@+id/activity_profile_inbox_friend_req_btn_ll"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_marginTop="15dp">
-
-                            <Button
-                                android:id="@+id/accept_btn"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/btn_round_green_30"
-                                android:fontFamily="@font/jeko_demo_extrabold"
-                                android:gravity="center"
-                                android:text="Accept"
-                                android:textAllCaps="false"
-                                android:textColor="#070802"
-                                android:padding="3dp" />
-
-                            <Button
-                                android:id="@+id/decline_btn"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:background="@drawable/btn_round_grey_30"
-                                android:fontFamily="@font/jeko_demo_extrabold"
-                                android:gravity="center"
-                                android:text="Decline"
-                                android:textAllCaps="false"
-                                android:textColor="#070802"
-                                android:padding="3dp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <ImageButton
-                        android:id="@+id/options2_icon"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="20dp"
-                        android:src="@drawable/ic_options"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
-                        android:scaleType="centerInside"/>
-
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvNotifications"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </LinearLayout>
-        </ScrollView>
     </LinearLayout>
 
     <View
