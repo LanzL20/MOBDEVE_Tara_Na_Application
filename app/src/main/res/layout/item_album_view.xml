@@ -6,8 +6,8 @@
 
     <FrameLayout
         android:id="@+id/album_item1"
-        android:layout_width="140dp"
-        android:layout_height="160dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_columnWeight="1"
         android:layout_margin="20dp"
         android:background="@drawable/btn_round_orange_30"
@@ -27,6 +27,6 @@
             android:text="animusika ‘23\n108 photos"
             android:textAlignment="viewStart"
             android:textColor="#070802"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

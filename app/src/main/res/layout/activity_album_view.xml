@@ -73,11 +73,6 @@
         app:layout_constraintTop_toBottomOf="@id/activity_album_view_logo"
         tools:layout_editor_absoluteX="0dp">
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
         <TextView
             android:id="@+id/activity_album_view_tv"
             android:layout_width="0dp"
@@ -90,14 +85,6 @@
             android:textColor="#070802"
             android:textSize="32sp" />
 
-        <ImageButton
-            android:id="@+id/options_icon"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_options_black"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:scaleType="centerInside"/>
     </LinearLayout>
 
     <ScrollView
@@ -115,9 +102,9 @@
             android:columnCount="2"
             android:foregroundGravity="center_horizontal"
             android:orientation="horizontal"
-            android:paddingLeft="25dp"
+            android:paddingLeft="20dp"
             android:paddingTop="15dp"
-            android:paddingRight="25dp"
+            android:paddingRight="20dp"
             android:paddingBottom="15dp"
             android:rowOrderPreserved="false"
             android:useDefaultMargins="true">

@@ -54,9 +54,9 @@ class BoardingLoginActivity : AppCompatActivity() {
             val intent = Intent(this, BoardingPhoneAuthActivity::class.java)
             phoneNumber = binding.activityBoardingLoginEtPhone.text.toString()
             phoneNumber= "+63${phoneNumber.substring(1)}"
-            //TODO:ADD ENCRYPTION FOR PASSWORD
+            // TODO: ADD ENCRYPTION FOR PASSWORD
             password = binding.activityBoardingLoginEtPassword.text.toString()
-            //TODO: IMPLEMENT PASSWORD CHECKING
+            // TODO: IMPLEMENT PASSWORD CHECKING
             intent.putExtra(User.PHONE_NUMBER_KEY, phoneNumber)
             intent.putExtra("from", "login")
             startActivity(intent)

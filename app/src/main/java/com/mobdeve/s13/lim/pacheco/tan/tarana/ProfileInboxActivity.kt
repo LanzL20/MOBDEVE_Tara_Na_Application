@@ -2,7 +2,10 @@ package com.mobdeve.s13.lim.pacheco.tan.tarana
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.ContextThemeWrapper
+import androidx.appcompat.widget.PopupMenu
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityProfileInboxBinding
 
 class ProfileInboxActivity: AppCompatActivity() {
@@ -13,8 +16,6 @@ class ProfileInboxActivity: AppCompatActivity() {
 
         var data = ArrayList<Notification>()
         viewBinding.rvNotifications.adapter = AdapterInbox(data)
-
-        // NAVIGATION BUTTONS
 
         viewBinding.inboxIcon.setOnClickListener {
             val intent = Intent(this, ProfileInboxActivity::class.java)
@@ -28,6 +29,16 @@ class ProfileInboxActivity: AppCompatActivity() {
         viewBinding.profileUser1.setOnClickListener{
             val intent = Intent(this, ProfileUserActivity::class.java)
             startActivity(intent)
+        }
+
+        viewBinding.optionsIcon.setOnClickListener { view ->
+            val contextWrapper = ContextThemeWrapper(this, R.style.CustomPopupMenu)
+            val popupMenu = PopupMenu(contextWrapper, view)
+
+            popupMenu.menu.add(0, 1, 0, "Delete notification")
+            popupMenu.menu.add(0, 2, 1, "Mark as read")
+
+            popupMenu.show()
         }
     }
 }

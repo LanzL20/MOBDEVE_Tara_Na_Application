@@ -15,15 +15,30 @@
         <TextView
             android:id="@+id/activity_boarding_phone_auth_login_tv_1"
             android:layout_width="360dp"
-            android:layout_height="29dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
+            android:layout_marginBottom="25dp"
             android:fontFamily="@font/jeko_demo_extrabold"
             android:gravity="center"
-            android:text="OTP sent to"
+            android:text="Verify Account"
             android:textColor="#070802"
             android:textSize="34sp" />
+
+        <TextView
+            android:id="@+id/phone_number_msg_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/jeko_demo_medium"
+            android:gravity="center"
+            android:text="We have sent the OTP to"
+            android:textColor="#070802"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/phone_number_tv"
@@ -32,12 +47,12 @@
             android:layout_gravity="center"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
-            android:layout_marginBottom="35dp"
-            android:fontFamily="@font/jeko_demo_extrabold"
+            android:layout_marginBottom="25dp"
+            android:fontFamily="@font/jeko_demo_medium"
             android:gravity="center"
             android:text="OTP"
             android:textColor="#070802"
-            android:textSize="34sp" />
+            android:textSize="20sp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/activity_phone_auth_login_etl_name"
@@ -55,7 +70,7 @@
                 android:background="@drawable/btn_round_white_80"
                 android:fontFamily="@font/jeko_demo_medium"
                 android:hint="Enter your OTP"
-                android:inputType="text"
+                android:inputType="number"
                 android:padding="15dp"
                 android:paddingStart="25dp"
                 android:paddingEnd="25dp"
@@ -73,7 +88,7 @@
             android:layout_marginBottom="15dp"
             android:background="@drawable/btn_round_yellow_80"
             android:fontFamily="@font/jeko_demo_extrabold"
-            android:text="Next"
+            android:text="Verify"
             android:textAllCaps="false"
             android:textColor="#070802"
             android:textSize="20sp" />
@@ -105,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/jeko_demo_extrabold"
-                android:text="Login" />
+                android:text="x" />
         </LinearLayout>
 
     </LinearLayout>

@@ -102,7 +102,8 @@
                 <LinearLayout
                     android:id="@+id/activity_profile_inbox_notif_ll"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="90dp"
+                    android:layout_marginBottom="10dp"
                     android:orientation="horizontal"
                     android:paddingLeft="25dp"
                     android:paddingRight="25dp">
@@ -142,7 +143,7 @@
                 <LinearLayout
                     android:id="@+id/activity_profile_inbox_notif2_ll"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="90dp"
                     android:orientation="horizontal"
                     android:paddingLeft="25dp"
                     android:paddingRight="25dp">
@@ -155,17 +156,57 @@
                         android:layout_marginRight="20dp"
                         android:src="@drawable/asset_profile2" />
 
-                    <TextView
-                        android:id="@+id/activity_profile_inbox_message2_tv"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                    <LinearLayout
+                        android:id="@+id/activity_profile_inbox_friend_req_ll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/jeko_demo_medium"
-                        android:maxLines="2"
-                        android:text="Marissa Villaceran accepted your friend request!"
-                        android:textColor="#070802" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/activity_profile_inbox_message2_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/jeko_demo_medium"
+                            android:maxLines="2"
+                            android:text="Marissa Villaceran sent you a friend request!"
+                            android:textColor="#070802" />
+
+                        <LinearLayout
+                            android:id="@+id/activity_profile_inbox_friend_req_btn_ll"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="15dp">
+
+                            <Button
+                                android:id="@+id/accept_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/btn_round_green_30"
+                                android:fontFamily="@font/jeko_demo_extrabold"
+                                android:gravity="center"
+                                android:text="Accept"
+                                android:textAllCaps="false"
+                                android:textColor="#070802"
+                                android:padding="3dp" />
+
+                            <Button
+                                android:id="@+id/decline_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:background="@drawable/btn_round_grey_30"
+                                android:fontFamily="@font/jeko_demo_extrabold"
+                                android:gravity="center"
+                                android:text="Decline"
+                                android:textAllCaps="false"
+                                android:textColor="#070802"
+                                android:padding="3dp" />
+                        </LinearLayout>
+                    </LinearLayout>
 
                     <ImageButton
                         android:id="@+id/options2_icon"

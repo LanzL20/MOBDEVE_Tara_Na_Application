@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:theme="@style/Theme.MaterialComponents.DayNight"
     app:cardBackgroundColor="#F4F2F2"
-    app:cardCornerRadius="70dp"
+    app:cardCornerRadius="40dp"
     app:strokeColor="@color/black"
     app:strokeWidth="5dp">
 

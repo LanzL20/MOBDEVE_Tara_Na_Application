@@ -45,7 +45,7 @@
             android:background="@drawable/btn_round_white_80"
             android:fontFamily="@font/jeko_demo_medium"
             android:hint="Phone Number"
-            android:inputType="text"
+            android:inputType="number"
             android:padding="15dp"
             android:paddingStart="25dp"
             android:paddingEnd="25dp"

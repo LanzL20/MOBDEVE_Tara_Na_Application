@@ -215,22 +215,22 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/btn_round_white_80"
                     android:fontFamily="@font/jeko_demo_medium"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:padding="15dp"
                     android:paddingStart="25dp"
                     android:paddingEnd="25dp"
-                    android:text="+65 905 467 2750" />
+                    android:text="0905 467 2750" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/delete_btn"
+                android:id="@+id/save_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/btn_round_orange_30"
                 android:fontFamily="@font/jeko_demo_extrabold"
-                android:text="Delete Account"
+                android:text="Save"
                 android:textAllCaps="false"
                 android:textColor="#F8F6F6"
                 android:textSize="20sp" />
@@ -241,10 +241,23 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="40dp"
                 android:background="@drawable/btn_round_white_80"
                 android:fontFamily="@font/jeko_demo_extrabold"
                 android:text="Log Out"
+                android:textAllCaps="false"
+                android:textColor="#070802"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/delete_acc_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/btn_round_grey_30"
+                android:fontFamily="@font/jeko_demo_extrabold"
+                android:text="Delete Account"
                 android:textAllCaps="false"
                 android:textColor="#070802"
                 android:textSize="20sp" />

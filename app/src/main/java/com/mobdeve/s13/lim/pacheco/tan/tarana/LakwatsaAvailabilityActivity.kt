@@ -20,5 +20,9 @@ class LakwatsaAvailabilityActivity: AppCompatActivity() {
             val intent = Intent(this, ProfileInboxActivity::class.java)
             startActivity(intent)
         }
+        viewBinding.editBtn.setOnClickListener {
+            val intent = Intent(this, ScheduleMainActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

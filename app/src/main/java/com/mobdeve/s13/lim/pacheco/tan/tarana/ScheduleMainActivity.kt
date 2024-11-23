@@ -6,12 +6,15 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.ContextThemeWrapper
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.children
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -61,6 +64,7 @@ class ScheduleMainActivity : AppCompatActivity() {
             modalBinding.modalScheduleAddEventEt3.setText("")
             modal.show()
         }
+
         modalBinding.modalScheduleAddEventBtn.setOnClickListener {
             if (modalBinding.modalScheduleAddEventEt1.text.toString()
                     .isEmpty() || modalBinding.modalScheduleAddEventEt2.text.toString()

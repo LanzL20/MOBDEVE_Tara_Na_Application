@@ -213,11 +213,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:orientation="horizontal"
             android:layout_marginTop="10dp">
 
             <TextView
-                android:id="@+id/upcoming_title"
+                android:id="@+id/ongoing_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -234,85 +235,66 @@
                 android:layout_height="match_parent" />
 
             <LinearLayout
+                android:id="@+id/album_btn"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:background="@drawable/btn_round_yellow_no_outline"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
 
-                <LinearLayout
-                    android:id="@+id/expenses_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/btn_round_green_no_outline"
+                <ImageView
+                    android:id="@+id/album_icon"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_image" />
+
+                <TextView
+                    android:id="@+id/schedule_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/jeko_demo_extrabold"
                     android:gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp">
-
-                    <ImageView
-                        android:id="@+id/expenses_icon"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginEnd="10dp"
-                        android:src="@drawable/ic_wallet" />
-
-                    <TextView
-                        android:id="@+id/expenses_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:fontFamily="@font/jeko_demo_extrabold"
-                        android:gravity="center"
-                        android:text="Expenses"
-                        android:textAllCaps="false"
-                        android:textColor="#070802"
-                        android:textSize="18sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/album_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="@drawable/btn_round_yellow_no_outline"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp">
-
-                    <ImageView
-                        android:id="@+id/album_icon"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_marginEnd="10dp"
-                        android:src="@drawable/ic_image" />
-
-                    <TextView
-                        android:id="@+id/album_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:fontFamily="@font/jeko_demo_extrabold"
-                        android:gravity="center"
-                        android:text="Album"
-                        android:textAllCaps="false"
-                        android:textColor="#070802"
-                        android:textSize="18sp" />
-
-                </LinearLayout>
-
+                    android:text="Album"
+                    android:textAllCaps="false"
+                    android:textColor="#070802"
+                    android:textSize="18sp" />
 
             </LinearLayout>
-
         </LinearLayout>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/viewSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share Location"
+            android:fontFamily="@font/jeko_demo_medium"
+            android:textColor="#070802"
+            android:checked="true"
+            android:textSize="18sp" />
 
         <ImageView
             android:id="@+id/activity_lakwatsa_ongoing_map_iv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             app:srcCompat="@drawable/temp_map" />
+
+        <Button
+            android:id="@+id/end_btn"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/btn_round_orange_30"
+            android:fontFamily="@font/jeko_demo_extrabold"
+            android:text="End"
+            android:textAllCaps="false"
+            android:textSize="18sp" />
 
     </LinearLayout>
 

@@ -17,7 +17,7 @@
         android:padding="30dp">
 
         <ImageButton
-            android:id="@+id/modal_delete_item_btn_close"
+            android:id="@+id/modal_end_lakwatsa_btn_close"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="end"
@@ -27,37 +27,37 @@
             app:srcCompat="@drawable/ic_close" />
 
         <TextView
-            android:id="@+id/modal_delete_item_tv_1"
+            android:id="@+id/modal_end_lakwatsa_tv_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/jeko_demo_extrabold"
-            android:text="Confirm delete?"
+            android:text="Done with your lakwatsa?"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="30sp" />
 
         <TextView
-            android:id="@+id/modal_delete_item_tv_2"
+            android:id="@+id/modal_end_lakwatsa_tv_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:fontFamily="@font/jeko_demo_medium"
             android:lineSpacingExtra="10sp"
-            android:text="Are you sure you want to delete this? This action cannot be undone."
+            android:text="Confirm that you are about to end this lakwatsa. This action cannot be undone."
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="18sp" />
 
         <Button
-            android:id="@+id/modal_delete_item_btn_delete"
+            android:id="@+id/modal_end_lakwatsa_btn_end"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/btn_round_yellow_80"
             android:fontFamily="@font/jeko_demo_extrabold"
-            android:text="Delete"
+            android:text="End"
             android:textAllCaps="false"
             android:textColor="#070802"
             android:textSize="20sp" />

@@ -39,7 +39,7 @@
         <activity android:name=".LakwatsaAvailabilityActivity"/>
         <activity android:name=".LakwatsaExpensesActivity"/>
         <activity android:name=".ProfileFriendActivity"/>
-        <activity android:name=".ProfileInboxActivity"/>
+        <activity android:name=".ProfileInboxActivity" />
         <activity android:name=".ProfileSettingActivity"
             android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".ProfileUserActivity"/>
