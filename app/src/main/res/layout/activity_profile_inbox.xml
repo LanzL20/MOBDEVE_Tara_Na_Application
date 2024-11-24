@@ -69,8 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/activity_profile_inbox_logo"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintTop_toBottomOf="@id/activity_profile_inbox_logo">
 
         <TextView
             android:id="@+id/activity_profile_inbox_tv"
@@ -78,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="40dp"
             android:fontFamily="@font/jeko_demo_extrabold"
             android:text="Notifications"
             android:textAlignment="center"
@@ -86,17 +85,15 @@
             android:textColor="#070802"
             android:textSize="32sp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvNotifications"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:clipToPadding="false"
-            app:layout_constraintTop_toBottomOf="@id/activity_profile_inbox_tv"
-            app:layout_constraintBottom_toTopOf="@id/back_profile_line" />
-
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvNotifications"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/activity_friends_view_ll"
+        app:layout_constraintBottom_toTopOf="@id/back_profile_line" />
 
     <View
         android:id="@+id/back_profile_line"

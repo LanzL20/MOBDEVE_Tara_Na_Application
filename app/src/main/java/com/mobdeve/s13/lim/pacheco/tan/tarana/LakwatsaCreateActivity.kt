@@ -35,10 +35,13 @@ class LakwatsaCreateActivity: AppCompatActivity() {
             val users = ArrayList<User>()
             users.add(UserSession.getUser())
             // TODO: ADD ALL ADDED FRIENDS TO THE LIST
-            val lakwatsa = Lakwatsa(users, viewBinding.activityDatetimeEtLocation.text.toString(),
+            val lakwatsa = Lakwatsa(
+                users,
+                viewBinding.activityDatetimeEtLocation.text.toString(),
                 viewBinding.activityLakwatsaCreateEtTitle.text.toString(),
                 LocalDateTime.now(),
-                HashMap<LocalDateTime, Int>(), ArrayList<String>())
+                HashMap<LocalDateTime, Int>(),
+                ArrayList<String>())
             lifecycleScope.launch {
                 val lakwatsaId = DBHelper.addLakwatsa(lakwatsa)
                 for(user in users){

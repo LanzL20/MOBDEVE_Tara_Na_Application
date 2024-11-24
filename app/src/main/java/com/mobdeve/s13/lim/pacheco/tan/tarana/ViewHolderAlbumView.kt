@@ -10,6 +10,6 @@ import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ItemLayoutNotification
 class ViewHolderAlbumView(private var viewBinding: ItemAlbumViewBinding) : RecyclerView.ViewHolder(viewBinding.root) {
 
     fun bindData(lakwatsa: Lakwatsa) {
-        viewBinding.albumText1.text = lakwatsa.lakwatsaTitle + "\n" + lakwatsa.album.size + " photos"
+        viewBinding.albumText.text = lakwatsa.lakwatsaTitle + "\n" + lakwatsa.album.size + " photos"
     }
 }

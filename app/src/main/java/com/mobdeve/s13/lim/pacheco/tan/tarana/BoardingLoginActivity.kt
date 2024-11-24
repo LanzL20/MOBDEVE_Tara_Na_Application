@@ -25,12 +25,19 @@ class BoardingLoginActivity : AppCompatActivity() {
         forgotPwModal = Dialog(this)
         forgotPwModalBinding = ModalForgotPwBinding.inflate(layoutInflater)
         forgotPwModal.setContentView(forgotPwModalBinding.root)
-        forgotPwModal.window!!.setLayout(
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        )
 
         forgotPwModal.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+
+        forgotPwModal.setOnShowListener {
+            val displayMetrics = resources.displayMetrics
+            val screenWidth = displayMetrics.widthPixels
+            val margin = (30 * displayMetrics.density).toInt()
+
+            forgotPwModal.window?.setLayout(
+                screenWidth - 2 * margin,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+        }
 
         binding.activityBoardingLoginForgotPwBtn.setOnClickListener {
             forgotPwModal.show()

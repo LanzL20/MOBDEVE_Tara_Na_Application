@@ -15,6 +15,7 @@ class Lakwatsa {
         const val DATE_KEY = "date"
         const val POLLING_LIST_KEY = "pollingList"
         const val ALBUM_KEY = "album"
+        const val ALBUM_COLOR_KEY = "albumColor"
         const val STATUS_KEY = "status"
     }
 
@@ -70,6 +71,10 @@ class Lakwatsa {
         this.pollingList = pollingList
         this.album = album
         this.status = LAKWATSA_UPCOMING
+    }
+
+    fun setLakwatsaTitle(newTitle: String) {
+        lakwatsaTitle = newTitle
     }
 
     fun addImage(image: String) {

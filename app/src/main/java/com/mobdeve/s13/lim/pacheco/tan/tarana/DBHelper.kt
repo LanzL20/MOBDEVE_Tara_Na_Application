@@ -238,5 +238,4 @@ object DBHelper {
             .addOnSuccessListener { Log.d("MainActivity", "DocumentSnapshot successfully updated!") }
             .addOnFailureListener { e -> Log.w("MainActivity", "Error updating document", e) }
     }
-
 }

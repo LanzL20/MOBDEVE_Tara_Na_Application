@@ -12,11 +12,8 @@ class ViewHolderInbox(private var viewBinding: ItemLayoutNotificationBinding) : 
         // viewBinding.activityProfileInboxUserIv.setImageResource(notification.user.profilePicture)
         viewBinding.activityProfileInboxMessageTv.text = notification.message
 
-        if (notification.isFriendRequest) {
-            viewBinding.activityProfileInboxFriendReqBtnLl.visibility = View.VISIBLE
-        } else {
-            viewBinding.activityProfileInboxFriendReqBtnLl.visibility = View.GONE
-        }
+        viewBinding.activityProfileInboxFriendReqBtnLl.visibility =
+            if (notification.isFriendRequest) View.VISIBLE else View.GONE
 
         viewBinding.optionsIcon.setOnClickListener { view ->
             val contextWrapper = ContextThemeWrapper(itemView.context, R.style.CustomPopupMenu)

@@ -23,7 +23,7 @@ class ViewHolderSchedule(private val viewBinding: ItemLayoutScheduleBinding) : R
             val popupMenu = PopupMenu(contextWrapper, view)
 
             popupMenu.menu.add(0, 1, 0, "Delete event")
-            popupMenu.menu.add(0, 2, 1, "Edit event name")
+            popupMenu.menu.add(0, 2, 1, "Edit details")
 
             popupMenu.show()
 
@@ -50,6 +50,18 @@ class ViewHolderSchedule(private val viewBinding: ItemLayoutScheduleBinding) : R
         val dialog = AlertDialog.Builder(context)
             .setView(dialogView)
             .create()
+
+        dialog.setOnShowListener {
+            val displayMetrics = context.resources.displayMetrics
+            val screenWidth = displayMetrics.widthPixels
+            val margin = (24 * displayMetrics.density).toInt()
+
+            dialog.window?.setLayout(
+                screenWidth - 2 * margin,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        }
 
         val btnCancel = dialogView.findViewById<ImageButton>(R.id.modal_delete_item_btn_close)
         val btnConfirm = dialogView.findViewById<Button>(R.id.modal_delete_item_btn_delete)
