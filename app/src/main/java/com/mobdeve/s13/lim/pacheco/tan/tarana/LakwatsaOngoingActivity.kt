@@ -117,7 +117,7 @@ class LakwatsaOngoingActivity: AppCompatActivity() {
         }
 
         btnSave.setOnClickListener {
-            // TODO: EDIT DETAILS
+            // TODO: EDIT ONGOING LAKWATSA
             dialog.dismiss()
         }
 

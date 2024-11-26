@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/Theme.MaterialComponents.DayNight"
+    app:cardBackgroundColor="#F4F2F2"
+    app:cardCornerRadius="50dp"
+    app:strokeColor="@color/black"
+    app:strokeWidth="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <ImageButton
+            android:id="@+id/modal_schedule_edit_event_btn_close"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="end"
+            android:adjustViewBounds="true"
+            android:backgroundTint="#F6F4F4"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_close" />
+
+        <TextView
+            android:id="@+id/modal_schedule_edit_event_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="35dp"
+            android:fontFamily="@font/jeko_demo_extrabold"
+            android:text="Edit Event"
+            android:textColor="#070802"
+            android:textSize="30sp" />
+
+        <LinearLayout
+            android:id="@+id/modal_schedule_edit_name_cl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/modal_schedule_edit_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="15dp"
+                android:fontFamily="@font/jeko_demo_medium"
+                android:text="Name: "
+                android:textColor="#070802"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/modal_schedule_edit_name_et"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/et_round_gray_no_outline"
+                android:ems="10"
+                android:fontFamily="@font/jeko_demo_medium"
+                android:hint="Input event name"
+                android:inputType="text"
+                android:paddingStart="15dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="10dp"
+                android:textColor="#070802"
+                android:textColorHint="#4E4E4E"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/modal_schedule_edit_start_cl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/modal_schedule_edit_start_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/jeko_demo_medium"
+                android:text="Starts: "
+                android:textColor="#070802"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/modal_schedule_edit_start_et"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/et_round_gray_no_outline"
+                android:ems="10"
+                android:clickable="true"
+                android:focusable="false"
+                android:fontFamily="@font/jeko_demo_medium"
+                android:inputType="none"
+                android:paddingStart="15dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="10dp"
+                android:hint="2024/10/14"
+                android:textColor="#070802"
+                android:textColorHint="#4E4E4E"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/modal_schedule_edit_end_cl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/modal_schedule_edit_end_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="28dp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/jeko_demo_medium"
+                android:text="Ends: "
+                android:textColor="#070802"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/modal_schedule_edit_end_et"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/et_round_gray_no_outline"
+                android:ems="10"
+                android:clickable="true"
+                android:focusable="false"
+                android:hint="2024/10/18"
+                android:fontFamily="@font/jeko_demo_medium"
+                android:inputType="none"
+                android:paddingStart="15dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="10dp"
+                android:textColor="#070802"
+                android:textColorHint="#4E4E4E"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/modal_schedule_edit_event_btn_save"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/btn_round_yellow_80"
+            android:fontFamily="@font/jeko_demo_extrabold"
+            android:text="Save"
+            android:textAllCaps="false"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

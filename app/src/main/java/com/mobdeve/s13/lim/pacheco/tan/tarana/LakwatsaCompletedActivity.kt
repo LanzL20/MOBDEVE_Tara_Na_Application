@@ -87,7 +87,7 @@ class LakwatsaCompletedActivity: AppCompatActivity() {
         }
 
         btnSave.setOnClickListener {
-            // TODO: EDIT DETAILS
+            // TODO: EDIT COMPLETED LAKWATSA
             dialog.dismiss()
         }
 

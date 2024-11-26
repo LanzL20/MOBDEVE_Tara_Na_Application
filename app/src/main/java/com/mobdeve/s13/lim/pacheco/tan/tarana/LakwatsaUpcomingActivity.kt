@@ -1,10 +1,13 @@
 package com.mobdeve.s13.lim.pacheco.tan.tarana
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +15,9 @@ import androidx.appcompat.view.ContextThemeWrapper
 import androidx.appcompat.widget.PopupMenu
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityLakwatsaUpcomingBinding
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ModalDeleteItemBinding
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class LakwatsaUpcomingActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +59,10 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
                         showDeleteConfirmationDialog()
                         true
                     }
+                    2 -> {
+                        showEditDetailsDateDialog()
+                        true
+                    }
                     else -> false
                 }
             }
@@ -75,6 +85,62 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
 
         btnConfirm.setOnClickListener {
             // TODO: DELETE LAKWATSA LOGIC
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun showEditDetailsDateDialog() {
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.modal_edit_details_date, null)
+
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogView)
+            .create()
+
+        val btnCancel = dialogView.findViewById<ImageButton>(R.id.modal_edit_details_date_btn_close)
+        val btnConfirm = dialogView.findViewById<Button>(R.id.modal_edit_details_date_btn_save)
+        val editDate = dialogView.findViewById<EditText>(R.id.modal_lakwatsa_edit_date_et)
+        val editTime = dialogView.findViewById<EditText>(R.id.modal_lakwatsa_edit_time_et)
+
+        editDate.setOnClickListener {
+            var cal = Calendar.getInstance()
+            var year = cal.get(Calendar.YEAR)
+            var month = cal.get(Calendar.MONTH)
+            var day = cal.get(Calendar.DAY_OF_MONTH)
+
+            var datePickerDialog = DatePickerDialog(this, { view, year, month, dayOfMonth ->
+                var month = month + 1
+                var date = "$year/$month/$dayOfMonth"
+                editDate.setText(date)
+            }, year, month, day)
+            datePickerDialog.show()
+        }
+
+        editTime.setOnClickListener {
+            val cal = Calendar.getInstance()
+            val hour = cal.get(Calendar.HOUR_OF_DAY)
+            val minute = cal.get(Calendar.MINUTE)
+
+            val timePickerDialog = TimePickerDialog(this, { _, hourOfDay, minuteOfHour ->
+                val format = SimpleDateFormat("h:mm a", Locale.getDefault())
+                val time = Calendar.getInstance().apply {
+                    set(Calendar.HOUR_OF_DAY, hourOfDay)
+                    set(Calendar.MINUTE, minuteOfHour)
+                }.time
+                val formattedTime = format.format(time)
+
+                editTime.setText(formattedTime)
+            }, hour, minute, false)
+            timePickerDialog.show()
+        }
+
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        btnConfirm.setOnClickListener {
+            // TODO: EDIT UPCOMING LAKWATSA LOGIC
             dialog.dismiss()
         }
 
