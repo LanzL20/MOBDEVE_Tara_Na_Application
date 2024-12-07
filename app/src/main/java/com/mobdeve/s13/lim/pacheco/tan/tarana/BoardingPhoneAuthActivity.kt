@@ -158,6 +158,7 @@ class BoardingPhoneAuthActivity:AppCompatActivity() {
                         if(from=="signup"){
                             //TODO:ADD ENCRYPTION FOR PASSWORD
                             DBHelper.addUser(User(name, username, password, 1, phoneNumber, salt))
+                            Log.d("BoardingPhoneAuthActivityDebugging", User(name, username, password, 1, phoneNumber, salt).toString())
                         }
                         val user= DBHelper.getUserFromNumber(phoneNumber)
                         UserSession.setUser(user!!)

@@ -262,7 +262,8 @@ object DBHelper {
             User.FRIEND_REQUESTS_RECEIVED_KEY to user.friendRequestsReceived,
             User.UNAVAILABLE_LIST_KEY to user.unavailableList,
             User.UID_KEY to user.uid,
-            //User.LOCATION_KEY to user.location,
+            User.LATITUDE_KEY to user.latitude,
+            User.LONGITUDE_KEY to user.longitude,
             User.SALT_KEY to user.salt
 
         )
@@ -399,5 +400,15 @@ object DBHelper {
             .set(dblakwatsa)
             .addOnSuccessListener { Log.d("MainActivity", "DocumentSnapshot successfully updated!") }
             .addOnFailureListener { e -> Log.w("MainActivity", "Error updating document", e) }
+    }
+
+
+
+    fun saveLocation(latitude: Double, longitude: Double){
+        val db = Firebase.firestore
+        val user = UserSession.getUser()
+        user.latitude = latitude
+        user.longitude = longitude
+        updateUser(user)
     }
 }

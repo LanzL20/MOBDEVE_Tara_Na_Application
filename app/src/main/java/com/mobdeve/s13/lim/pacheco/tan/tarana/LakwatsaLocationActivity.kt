@@ -2,9 +2,12 @@ package com.mobdeve.s13.lim.pacheco.tan.tarana
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -17,6 +20,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.Task
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityLakwatsaLocationBinding
+import java.util.Locale
 
 class LakwatsaLocationActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -36,9 +40,9 @@ class LakwatsaLocationActivity : AppCompatActivity(), OnMapReadyCallback {
         fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this)
         getLastLocation()
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        //val mapFragment = supportFragmentManager
-        //    .findFragmentById(R.id.map) as SupportMapFragment
-        //mapFragment.getMapAsync(this)
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.map_fragment) as SupportMapFragment
+        mapFragment.getMapAsync(this)
     }
 
     private fun getLastLocation(){
@@ -50,13 +54,6 @@ class LakwatsaLocationActivity : AppCompatActivity(), OnMapReadyCallback {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
@@ -68,7 +65,7 @@ class LakwatsaLocationActivity : AppCompatActivity(), OnMapReadyCallback {
                 if (task.isSuccessful && task.result != null) {
                     currentLocation = task.result
                     if (currentLocation != null) {
-                        val supportMapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+                        val supportMapFragment = supportFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
                         supportMapFragment.getMapAsync { googleMap ->
                             val latLng = LatLng(currentLocation!!.latitude, currentLocation!!.longitude)
                             val markerOptions = MarkerOptions().position(latLng).title("I am here!")
@@ -85,7 +82,7 @@ class LakwatsaLocationActivity : AppCompatActivity(), OnMapReadyCallback {
             if (task.isSuccessful && task.result != null) {
                 currentLocation = task.result
                 if (currentLocation != null) {
-                    val supportMapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+                    val supportMapFragment = supportFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
                     supportMapFragment.getMapAsync { googleMap ->
                         val latLng = LatLng(currentLocation!!.latitude, currentLocation!!.longitude)
                         val markerOptions = MarkerOptions().position(latLng).title(UserSession.getUser().name)
@@ -93,6 +90,7 @@ class LakwatsaLocationActivity : AppCompatActivity(), OnMapReadyCallback {
                         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5f))
                         googleMap.addMarker(markerOptions)
                     }
+                    DBHelper.saveLocation(currentLocation!!.latitude, currentLocation!!.longitude)
                 }
             }
         }
@@ -114,5 +112,23 @@ class LakwatsaLocationActivity : AppCompatActivity(), OnMapReadyCallback {
         val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        googleMap.setOnMapClickListener { latLng ->
+            Log.d("LakwatsaLocationActivityDebugging", "Latitude: ${latLng.latitude}, Longitude: ${latLng.longitude}")
+            mMap.clear()
+            val name= getPlaceName(latLng)
+            mMap.addMarker(MarkerOptions().position(latLng))
+            Log.d("LakwatsaLocationActivity", "Latitude: ${latLng.latitude}, Longitude: ${latLng.longitude}")
+
+        }
+    }
+
+    private fun getPlaceName(latLng: LatLng):String {
+        val geocoder = Geocoder(this, Locale.getDefault())
+        val addresses: List<Address> = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)!!
+        val address: String = addresses[0].getAddressLine(0)
+        Log.d("LakwatsaLocationActivityDebugging", addresses[0].getAddressLine(0))
+        Log.d("LakwatsaLocationActivityDebugging", "Address: $address")
+        return address
     }
 }

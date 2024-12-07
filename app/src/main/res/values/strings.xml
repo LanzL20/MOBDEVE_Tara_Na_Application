@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">tara.na</string>
     <string name="title_activity_maps">MapsActivity</string>
-    <string name="my_map_api_key">AIzaSyCbrlXdouc606RQ-jhSra_pUXNIuEj0GDc</string>
 </resources>

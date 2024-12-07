@@ -51,9 +51,9 @@ class User {
     var uid: String
         private set
     var latitude: Double
-        private set
+        public set
     var longitude: Double
-        private set
+        public set
     var salt: String
         private set
     //var notificationList: ArrayList<Notification>
@@ -116,8 +116,8 @@ class User {
         this.friendRequestsReceived = friendRequestsReceived
         this.unavailableList = unavailableList
         this.uid = uid
-        this.latitude = 0.0
-        this.longitude = 0.0
+        this.latitude = latitude
+        this.longitude = longitude
         this.salt = salt
     }
 
