@@ -126,12 +126,13 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/btn_round_white_80"
                     android:fontFamily="@font/jeko_demo_medium"
+                    android:hint="Add Full Name"
                     android:inputType="text"
                     android:padding="15dp"
                     android:paddingStart="25dp"
                     android:paddingEnd="25dp"
                     android:text="Tyler Tan"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -158,12 +159,12 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/btn_round_white_80"
                     android:fontFamily="@font/jeko_demo_medium"
-                    android:hint="Add username"
+                    android:hint="Add Username"
                     android:inputType="text"
                     android:padding="15dp"
                     android:paddingStart="25dp"
                     android:paddingEnd="25dp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -190,12 +191,12 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/btn_round_white_80"
                     android:fontFamily="@font/jeko_demo_medium"
+                    android:hint="Password Hidden"
                     android:inputType="text"
                     android:padding="15dp"
                     android:paddingStart="25dp"
                     android:paddingEnd="25dp"
-                    android:text="*************"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView

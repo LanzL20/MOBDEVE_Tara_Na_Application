@@ -9,11 +9,12 @@ import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityProfileUserBin
 import kotlinx.coroutines.launch
 
 class ProfileUserActivity: AppCompatActivity() {
+    private lateinit var viewBinding: ActivityProfileUserBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewBinding = ActivityProfileUserBinding.inflate(layoutInflater)
+        viewBinding = ActivityProfileUserBinding.inflate(layoutInflater)
         Log.d("MainActivity", "Welcome Activity Created")
-        var user = UserSession.getUser()!!
+        var user = UserSession.getUser()
         DBHelper.activateUserListener()
         Log.d("MainActivity", "Welcome Activity Created123")
         viewBinding.activityProfileUserName.text= user.name
@@ -57,5 +58,11 @@ class ProfileUserActivity: AppCompatActivity() {
             val intent = Intent(this, ProfileSettingActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onResume(){
+        super.onResume()
+        viewBinding.activityProfileUserName.text= UserSession.getUser().name
+        viewBinding.activityProfileUserUsername.text= "@"+UserSession.getUser().username
     }
 }

@@ -4,11 +4,14 @@ import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityProfileSettingsBinding
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ModalDeleteAccBinding
+import kotlinx.coroutines.launch
 
 class ProfileSettingActivity:AppCompatActivity() {
 
@@ -20,6 +23,10 @@ class ProfileSettingActivity:AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileSettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.activityProfileSettingsEtName.setText(UserSession.getUser().name)
+        binding.activityProfileSettingsEtUsername.setText(UserSession.getUser().username)
+        binding.activityProfileSettingsEtPhone.setText(UserSession.getUser().phoneNumber)
 
         deleteAccModal = Dialog(this)
         deleteAccModalBinding = ModalDeleteAccBinding.inflate(layoutInflater)
@@ -33,6 +40,38 @@ class ProfileSettingActivity:AppCompatActivity() {
 
         binding.deleteAccBtn.setOnClickListener {
             deleteAccModal.show()
+        }
+
+        binding.saveBtn.setOnClickListener{
+            lifecycleScope.launch {
+                if(DBHelper.checkIfUserExists(binding.activityProfileSettingsEtUsername.text.toString(), UserSession.getUser().phoneNumber) != 2){
+                    Toast.makeText(binding.root.context, "Username already exists.", Toast.LENGTH_SHORT).show()
+                } else if(binding.activityProfileSettingsEtName.text.toString().isNotEmpty() && binding.activityProfileSettingsEtUsername.text.toString().isNotEmpty()){
+                    var newPassword = UserSession.getUser().password
+                    if(binding.activityProfileSettingsEtPassword.text.toString().isNotEmpty()){
+                        newPassword = binding.activityProfileSettingsEtPassword.text.toString()
+                    }
+
+                    var newUser = User(
+                        binding.activityProfileSettingsEtName.text.toString(),
+                        binding.activityProfileSettingsEtUsername.text.toString(),
+                        newPassword,
+                        UserSession.getUser().phoneNumber,
+                        UserSession.getUser().profilePicture,
+                        UserSession.getUser().friendsList,
+                        UserSession.getUser().lakwatsaList,
+                        UserSession.getUser().friendRequestsSent,
+                        UserSession.getUser().friendRequestsReceived,
+                        UserSession.getUser().unavailableList,
+                        UserSession.getUser().uid
+                    )
+                    DBHelper.updateUser(newUser)
+                    Toast.makeText(binding.root.context, "Profile updated.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(binding.root.context, "Name and Username cannot be empty.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
         }
 
         // TODO: DELETE ACCOUNT

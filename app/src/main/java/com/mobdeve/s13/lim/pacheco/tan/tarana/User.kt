@@ -42,6 +42,8 @@ class User {
         private set
     var unavailableList: ArrayList<Unavailable>
         private set
+    var uid: String
+        private set
     //var notificationList: ArrayList<Notification>
     //    private set
 
@@ -65,6 +67,7 @@ class User {
         this.friendRequestsSent = ArrayList()
         this.friendRequestsReceived = ArrayList()
         this.unavailableList = ArrayList()
+        this.uid = username
     }
 
     /*
@@ -80,7 +83,8 @@ class User {
         lakwatsaList: ArrayList<String>,
         friendRequestsSent: ArrayList<String>,
         friendRequestsReceived: ArrayList<String>,
-        unavailableList: ArrayList<Unavailable>
+        unavailableList: ArrayList<Unavailable>,
+        uid: String
     ) {
         this.name = name
         this.username = username
@@ -92,6 +96,7 @@ class User {
         this.friendRequestsSent = friendRequestsSent
         this.friendRequestsReceived = friendRequestsReceived
         this.unavailableList = unavailableList
+        this.uid = uid
     }
 
     fun addFriend(userId: String) {

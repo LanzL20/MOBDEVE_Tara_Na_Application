@@ -18,7 +18,7 @@ object DBHelper {
             userListenerActive = true
             val db = Firebase.firestore
             db.collection("users")
-                .document(UserSession.getUser().username)
+                .document(UserSession.getUser().uid)
                 .addSnapshotListener { value, e ->
                     if (e != null) {
                         Log.w("MainActivity", "Listen failed.", e)
@@ -44,7 +44,8 @@ object DBHelper {
                                 value.get(User.LAKWATSA_LIST_KEY) as ArrayList<String>,
                                 value.get(User.FRIEND_REQUESTS_SENT_KEY) as ArrayList<String>,
                                 value.get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
-                                tempUnavailable
+                                tempUnavailable,
+                                value.id
                             )
                         )
                     }
@@ -105,7 +106,8 @@ object DBHelper {
             result.documents[0].get(User.LAKWATSA_LIST_KEY) as ArrayList<String>,
             result.documents[0].get(User.FRIEND_REQUESTS_SENT_KEY) as ArrayList<String>,
             result.documents[0].get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
-            tempUnavailable
+            tempUnavailable,
+            result.documents[0].id
         )
     }
 
@@ -147,7 +149,8 @@ object DBHelper {
                 document.get(User.LAKWATSA_LIST_KEY) as ArrayList<String>,
                 document.get(User.FRIEND_REQUESTS_SENT_KEY) as ArrayList<String>,
                 document.get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
-                tempUnavailable
+                tempUnavailable,
+                document.id
             ))
         }
         return users
@@ -180,7 +183,8 @@ object DBHelper {
             result.documents[0].get(User.LAKWATSA_LIST_KEY) as ArrayList<String>,
             result.documents[0].get(User.FRIEND_REQUESTS_SENT_KEY) as ArrayList<String>,
             result.documents[0].get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
-            tempUnavailable
+            tempUnavailable,
+            result.documents[0].id
         )
     }
 
@@ -212,7 +216,8 @@ object DBHelper {
                 document.get(User.LAKWATSA_LIST_KEY) as ArrayList<String>,
                 document.get(User.FRIEND_REQUESTS_SENT_KEY) as ArrayList<String>,
                 document.get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
-                tempUnavailable
+                tempUnavailable,
+                document.id
             ))
         }
         return users
@@ -235,7 +240,7 @@ object DBHelper {
         val db = Firebase.firestore
         // update the user in the database
         db.collection("users")
-            .document(user.username)
+            .document(user.uid)
             .set(dbuser)
             .addOnSuccessListener { Log.d("MainActivity", "DocumentSnapshot successfully updated!") }
             .addOnFailureListener { e -> Log.w("MainActivity", "Error updating document", e) }
