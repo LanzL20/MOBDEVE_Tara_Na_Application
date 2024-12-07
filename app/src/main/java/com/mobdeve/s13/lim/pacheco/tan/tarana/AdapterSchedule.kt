@@ -10,6 +10,13 @@ class AdapterSchedule(private var dataUnavailable: ArrayList<Unavailable>, priva
 
     private var data: ArrayList<Event> = ArrayList()
 
+    fun getYear(date: String): String{
+        // Assuming format is YYYY/MM/DD
+        val year = date.split("/")[0]
+        return year
+    }
+
+
     fun getMonth(date: String): String{
         // Assuming format is YYYY/MM/DD (delimited by /)
         val month = date.split("/")[1]
@@ -60,27 +67,10 @@ class AdapterSchedule(private var dataUnavailable: ArrayList<Unavailable>, priva
 
         // translate dataLakwatsa to Event
         for (lak in dataLakwatsa) {
-            var startMonth = lak.date.monthValue.toString()
+            var startMonth = getMonth(lak.date)
+            var startDay = getDay(lak.date)
 
-            when(startMonth){
-                "1" -> startMonth = "JAN"
-                "2" -> startMonth = "FEB"
-                "3" -> startMonth = "MAR"
-                "4" -> startMonth = "APR"
-                "5" -> startMonth = "MAY"
-                "6" -> startMonth = "JUN"
-                "7" -> startMonth = "JUL"
-                "8" -> startMonth = "AUG"
-                "9" -> startMonth = "SEP"
-                "10" -> startMonth = "OCT"
-                "11" -> startMonth = "NOV"
-                "12" -> startMonth = "DEC"
-            }
-
-            var startDay = lak.date.dayOfMonth.toString()
-
-            var startDateFormatted = lak.date.year.toString() + "/" + lak.date.monthValue.toString().padStart(2, '0') + "/" + lak.date.dayOfMonth.toString().padStart(2, '0')
-            data.add(Event(lak.lakwatsaId, lak.lakwatsaTitle, startMonth, startDay, Event.EVENT_TYPE_LAKWATSA, startDateFormatted, startDateFormatted))
+            data.add(Event(lak.lakwatsaId, lak.lakwatsaTitle, startMonth, startDay, Event.EVENT_TYPE_LAKWATSA, lak.date, lak.date))
         }
 
         // sort data by date

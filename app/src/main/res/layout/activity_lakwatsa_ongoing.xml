@@ -80,7 +80,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/activity_expenses_to_pay_tv"
+                android:id="@+id/activity_title_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -143,21 +143,21 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/activity_lakwatsa_upcoming_friends"
+                android:id="@+id/activity_lakwatsa_ongoing_friends"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/activity_album_album_friend_1_iv"
+                    android:id="@+id/activity_lakwatsa_ongoing_friend_1_iv"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginRight="5dp"
                     android:src="@drawable/asset_profile1" />
 
                 <ImageView
-                    android:id="@+id/activity_album_album_friend_2_iv"
+                    android:id="@+id/activity_lakwatsa_ongoing_friend_2_iv"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginRight="5dp"
@@ -166,23 +166,26 @@
                 <FrameLayout
                     android:id="@+id/more_friends"
                     android:layout_width="30dp"
+                    android:layout_marginRight="5dp"
                     android:layout_height="30dp"
                     android:background="@drawable/btn_circle_grey"
                     android:layout_gravity="center">
 
                     <TextView
+                        android:id="@+id/more_friends_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="+"
-                        android:textSize="20sp"
+                        android:text="+5"
+                        android:textSize="16sp"
                         android:textColor="#F8F6F6"
                         android:layout_gravity="center" />
 
                 </FrameLayout>
+
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/activity_lakwatsa_upcoming_loc"
+                android:id="@+id/activity_lakwatsa_ongoing_loc"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
@@ -190,14 +193,14 @@
                 android:gravity="center|end">
 
                 <ImageView
-                    android:id="@+id/activity_lakwatsa_upcoming_loc_icon"
+                    android:id="@+id/activity_lakwatsa_ongoing_loc_icon"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_marginRight="5dp"
                     android:src="@drawable/ic_location" />
 
                 <TextView
-                    android:id="@+id/activity_lakwtsa_upcoming_loc"
+                    android:id="@+id/activity_lakwtsa_ongoing_loc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/jeko_demo_medium"
@@ -279,8 +282,8 @@
 
         <ImageView
             android:id="@+id/activity_lakwatsa_ongoing_map_iv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
             android:layout_marginTop="15dp"
             app:srcCompat="@drawable/temp_map" />
 

@@ -172,27 +172,16 @@
                     android:layout_gravity="center">
 
                     <TextView
+                        android:id="@+id/more_friends_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="+"
-                        android:textSize="20sp"
+                        android:text="5+"
+                        android:textSize="16sp"
                         android:textColor="#F8F6F6"
                         android:layout_gravity="center" />
 
                 </FrameLayout>
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/activity_lakwatsa_completed_end_time"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:fontFamily="@font/jeko_demo_medium"
-                android:text="20:24 PM"
-                android:gravity="center|end"
-                android:textAllCaps="false"
-                android:textColor="#070802"
-                android:textSize="18sp" />
 
         </LinearLayout>
 

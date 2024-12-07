@@ -33,15 +33,16 @@ class LakwatsaCreateActivity: AppCompatActivity() {
             val intent = Intent(this, LakwatsaListActivity::class.java)
             // TODO: Very temp code for testing
             val users = ArrayList<User>()
+            val usernames = ArrayList<String>()
             users.add(UserSession.getUser())
+            usernames.add(UserSession.getUser().username)
             // TODO: ADD ALL ADDED FRIENDS TO THE LIST
+            // TODO: Date be a proper date modal
             val lakwatsa = Lakwatsa(
-                users,
-                viewBinding.activityDatetimeEtLocation.text.toString(),
+                usernames,
                 viewBinding.activityLakwatsaCreateEtTitle.text.toString(),
-                LocalDateTime.now(),
-                HashMap<LocalDateTime, Int>(),
-                ArrayList<String>())
+                viewBinding.activityLakwatsaCreateEtDatetime.text.toString(),
+                UserSession.getUser().username)
             lifecycleScope.launch {
                 val lakwatsaId = DBHelper.addLakwatsa(lakwatsa)
                 for(user in users){

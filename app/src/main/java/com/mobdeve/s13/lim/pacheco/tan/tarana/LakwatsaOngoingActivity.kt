@@ -3,17 +3,22 @@ package com.mobdeve.s13.lim.pacheco.tan.tarana
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.appcompat.widget.PopupMenu
+import androidx.lifecycle.lifecycleScope
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityLakwatsaOngoingBinding
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ModalEndLakwatsaBinding
+import kotlinx.coroutines.launch
 
 class LakwatsaOngoingActivity: AppCompatActivity() {
 
@@ -24,7 +29,65 @@ class LakwatsaOngoingActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLakwatsaOngoingBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
+
+        binding.optionsIcon.visibility = View.GONE
+        lifecycleScope.launch {
+            val lakwatsa = DBHelper.getLakwatsa(intent.getStringExtra(Lakwatsa.ID_KEY)!!)
+            if(lakwatsa.lakwatsaAdmin == UserSession.getUser().username){
+                binding.optionsIcon.visibility = View.VISIBLE
+            }
+            binding.activityTitleTv.text = lakwatsa.lakwatsaTitle
+            binding.activityLakwtsaUpcomingDate.text = lakwatsa.date
+            if(lakwatsa.time.isNullOrBlank()){
+                binding.activityLakwtsaUpcomingTime.text = ""
+            } else{
+                binding.activityLakwtsaUpcomingTime.text = lakwatsa.time
+            }
+
+            binding.activityLakwatsaOngoingFriend1Iv.visibility = View.GONE
+            binding.activityLakwatsaOngoingFriend2Iv.visibility = View.GONE
+            binding.moreFriends.visibility = View.GONE
+            if(lakwatsa.lakwatsaUsers.size == 1){
+                binding.activityLakwatsaOngoingFriend1Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[0]).profilePicture, "drawable", packageName))
+                binding.activityLakwatsaOngoingFriend1Iv.visibility = View.VISIBLE
+            }
+            else if (lakwatsa.lakwatsaUsers.size == 2){
+                binding.activityLakwatsaOngoingFriend1Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[0]).profilePicture, "drawable", packageName))
+                binding.activityLakwatsaOngoingFriend2Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[1]).profilePicture, "drawable", packageName))
+                binding.activityLakwatsaOngoingFriend1Iv.visibility = View.VISIBLE
+                binding.activityLakwatsaOngoingFriend2Iv.visibility = View.VISIBLE
+            } else {
+                binding.activityLakwatsaOngoingFriend1Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[0]).profilePicture, "drawable", packageName))
+                binding.activityLakwatsaOngoingFriend2Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[1]).profilePicture, "drawable", packageName))
+                binding.activityLakwatsaOngoingFriend1Iv.visibility = View.VISIBLE
+                binding.activityLakwatsaOngoingFriend2Iv.visibility = View.VISIBLE
+                binding.moreFriendsTv.text = "+${lakwatsa.lakwatsaUsers.size - 2}"
+                binding.moreFriends.visibility = View.VISIBLE
+
+            }
+            binding.endBtn.setOnClickListener{
+                val newLakwatsa = Lakwatsa(
+                    lakwatsa.lakwatsaId,
+                    lakwatsa.lakwatsaUsers,
+                    lakwatsa.locationLatitude,
+                    lakwatsa.locationLongitude,
+                    binding.activityTitleTv.text.toString(),
+                    lakwatsa.date,
+                    lakwatsa.time,
+                    lakwatsa.pollingList,
+                    lakwatsa.album,
+                    Lakwatsa.LAKWATSA_COMPLETED,
+                    lakwatsa.lakwatsaAdmin
+                )
+                DBHelper.updateLakwatsa(newLakwatsa)
+                val intent2 = Intent(this@LakwatsaOngoingActivity, LakwatsaCompletedActivity::class.java)
+                intent2.putExtra(Lakwatsa.ID_KEY, intent.getStringExtra(Lakwatsa.ID_KEY))
+                startActivity(intent2)
+                finish()
+            }
+        }
 
         endLakwatsaModal = Dialog(this)
         endLakwatsaModalBinding = ModalEndLakwatsaBinding.inflate(layoutInflater)
@@ -49,8 +112,9 @@ class LakwatsaOngoingActivity: AppCompatActivity() {
         // NAVIGATION BUTTONS
 
         binding.albumBtn.setOnClickListener{
-            val intent = Intent(this, AlbumViewActivity::class.java)
-            startActivity(intent)
+            val intent2 = Intent(this, AlbumAlbumActivity::class.java)
+            intent2.putExtra(Lakwatsa.ID_KEY, intent.getStringExtra(Lakwatsa.ID_KEY))
+            startActivity(intent2)
         }
 
         binding.inboxIcon.setOnClickListener {
@@ -111,14 +175,33 @@ class LakwatsaOngoingActivity: AppCompatActivity() {
 
         val btnCancel = dialogView.findViewById<ImageButton>(R.id.modal_edit_details_btn_close)
         val btnSave = dialogView.findViewById<Button>(R.id.modal_edit_details_btn_save)
+        val editName = dialogView.findViewById<EditText>(R.id.modal_schedule_edit_name_et)
+        editName.setText(binding.activityTitleTv.text)
 
         btnCancel.setOnClickListener {
             dialog.dismiss()
         }
 
         btnSave.setOnClickListener {
-            // TODO: EDIT ONGOING LAKWATSA
+            lifecycleScope.launch {
+                val lakwatsa = DBHelper.getLakwatsa(intent.getStringExtra(Lakwatsa.ID_KEY)!!)
+
+                val newLakwatsa = Lakwatsa(lakwatsa.lakwatsaId,
+                    lakwatsa.lakwatsaUsers,
+                    lakwatsa.locationLatitude,
+                    lakwatsa.locationLongitude,
+                    editName.text.toString(),
+                    lakwatsa.date,
+                    lakwatsa.time,
+                    lakwatsa.pollingList,
+                    lakwatsa.album,
+                    lakwatsa.status,
+                    lakwatsa.lakwatsaAdmin)
+                DBHelper.updateLakwatsa(newLakwatsa)
+            }
+
             dialog.dismiss()
+            binding.activityTitleTv.text = editName.text.toString()
         }
 
         dialog.show()

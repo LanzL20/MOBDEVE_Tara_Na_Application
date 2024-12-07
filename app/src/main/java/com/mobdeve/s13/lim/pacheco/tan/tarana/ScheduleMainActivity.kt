@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils.split
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -164,7 +165,7 @@ class ScheduleMainActivity : AppCompatActivity() {
                         container.textView.setTextColor(0xFF000000.toInt())
 
                         for (lakwatsa in lakwatsaList) {
-                            if (data.date.dayOfMonth == lakwatsa.date.dayOfMonth && data.date.month == lakwatsa.date.month && data.date.year == lakwatsa.date.year) {
+                            if (data.date.dayOfMonth == lakwatsa.date.split("/")[2].toInt() && data.date.monthValue == lakwatsa.date.split("/")[1].toInt() && data.date.year == lakwatsa.date.split("/")[0].toInt()) {
                                 container.constraintLayout.setBackgroundResource(R.drawable.date_round_light_yellow_10_no_outline)
                                 container.textView.setTextColor(0xFFF7CE21.toInt())
                             }

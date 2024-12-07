@@ -301,12 +301,15 @@ object DBHelper {
     suspend fun addLakwatsa(lakwatsa: Lakwatsa): String {
         val dblakwatsa = hashMapOf(
             Lakwatsa.USERS_KEY to lakwatsa.lakwatsaUsers,
-            Lakwatsa.LOCATION_KEY to lakwatsa.location,
+            Lakwatsa.LATITUDE_KEY to lakwatsa.locationLatitude,
+            Lakwatsa.LONGITUDE_KEY to lakwatsa.locationLongitude,
             Lakwatsa.TITLE_KEY to lakwatsa.lakwatsaTitle,
-            Lakwatsa.DATE_KEY to lakwatsa.date.toString(),
+            Lakwatsa.DATE_KEY to lakwatsa.date,
             Lakwatsa.POLLING_LIST_KEY to lakwatsa.pollingList,
             Lakwatsa.ALBUM_KEY to lakwatsa.album,
-            Lakwatsa.STATUS_KEY to lakwatsa.status
+            Lakwatsa.STATUS_KEY to lakwatsa.status,
+            Lakwatsa.TIME_KEY to lakwatsa.time,
+            Lakwatsa.ADMIN_KEY to lakwatsa.lakwatsaAdmin
         )
         val db = Firebase.firestore
 
@@ -326,12 +329,16 @@ object DBHelper {
                 .await()
             lakwatsas.add(Lakwatsa(
                 result.documents[0].id,
-                result.documents[0].get(Lakwatsa.USERS_KEY) as ArrayList<User>,
-                result.documents[0].get(Lakwatsa.LOCATION_KEY).toString(),
+                result.documents[0].get(Lakwatsa.USERS_KEY) as ArrayList<String>,
+                result.documents[0].get(Lakwatsa.LATITUDE_KEY).toString().toDouble(),
+                result.documents[0].get(Lakwatsa.LONGITUDE_KEY).toString().toDouble(),
                 result.documents[0].get(Lakwatsa.TITLE_KEY).toString(),
-                LocalDateTime.parse(result.documents[0].get(Lakwatsa.DATE_KEY) as String),
-                result.documents[0].get(Lakwatsa.POLLING_LIST_KEY) as HashMap<LocalDateTime, Int>,
-                result.documents[0].get(Lakwatsa.ALBUM_KEY) as ArrayList<String>
+                result.documents[0].get(Lakwatsa.DATE_KEY).toString(),
+                result.documents[0].get(Lakwatsa.TIME_KEY).toString(),
+                result.documents[0].get(Lakwatsa.POLLING_LIST_KEY) as HashMap<String, ArrayList<String>>,
+                result.documents[0].get(Lakwatsa.ALBUM_KEY) as ArrayList<String>,
+                result.documents[0].get(Lakwatsa.STATUS_KEY).toString().toInt(),
+                result.documents[0].get(Lakwatsa.ADMIN_KEY).toString()
             ))
         }
         return lakwatsas
@@ -345,24 +352,31 @@ object DBHelper {
             .await()
         return Lakwatsa(
             result.documents[0].id,
-            result.documents[0].get(Lakwatsa.USERS_KEY) as ArrayList<User>,
-            result.documents[0].get(Lakwatsa.LOCATION_KEY).toString(),
+            result.documents[0].get(Lakwatsa.USERS_KEY) as ArrayList<String>,
+            result.documents[0].get(Lakwatsa.LATITUDE_KEY).toString().toDouble(),
+            result.documents[0].get(Lakwatsa.LONGITUDE_KEY).toString().toDouble(),
             result.documents[0].get(Lakwatsa.TITLE_KEY).toString(),
-            LocalDateTime.parse(result.documents[0].get(Lakwatsa.DATE_KEY) as String),
-            result.documents[0].get(Lakwatsa.POLLING_LIST_KEY) as HashMap<LocalDateTime, Int>,
-            result.documents[0].get(Lakwatsa.ALBUM_KEY) as ArrayList<String>
+            result.documents[0].get(Lakwatsa.DATE_KEY).toString(),
+            result.documents[0].get(Lakwatsa.TIME_KEY).toString(),
+            result.documents[0].get(Lakwatsa.POLLING_LIST_KEY) as HashMap<String, ArrayList<String>>,
+            result.documents[0].get(Lakwatsa.ALBUM_KEY) as ArrayList<String>,
+            result.documents[0].get(Lakwatsa.STATUS_KEY).toString().toInt(),
+            result.documents[0].get(Lakwatsa.ADMIN_KEY).toString()
         )
     }
 
     fun updateLakwatsa(lakwatsa: Lakwatsa) {
         val dblakwatsa = hashMapOf(
             Lakwatsa.USERS_KEY to lakwatsa.lakwatsaUsers,
-            Lakwatsa.LOCATION_KEY to lakwatsa.location,
+            Lakwatsa.LATITUDE_KEY to lakwatsa.locationLatitude,
+            Lakwatsa.LONGITUDE_KEY to lakwatsa.locationLongitude,
             Lakwatsa.TITLE_KEY to lakwatsa.lakwatsaTitle,
-            Lakwatsa.DATE_KEY to lakwatsa.date.toString(),
+            Lakwatsa.DATE_KEY to lakwatsa.date,
             Lakwatsa.POLLING_LIST_KEY to lakwatsa.pollingList,
             Lakwatsa.ALBUM_KEY to lakwatsa.album,
-            Lakwatsa.STATUS_KEY to lakwatsa.status
+            Lakwatsa.STATUS_KEY to lakwatsa.status,
+            Lakwatsa.TIME_KEY to lakwatsa.time,
+            Lakwatsa.ADMIN_KEY to lakwatsa.lakwatsaAdmin
         )
         val db = Firebase.firestore
         db.collection("lakwatsas")

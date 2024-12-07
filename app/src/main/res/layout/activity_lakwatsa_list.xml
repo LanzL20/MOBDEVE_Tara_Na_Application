@@ -136,115 +136,10 @@
                     android:textColor="#070802"
                     android:textSize="18sp" />
 
-                <LinearLayout
-                    android:id="@+id/upcoming_item1"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/activity_lakwatsa_list_rv_1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:orientation="horizontal"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp">
-
-                    <LinearLayout
-                        android:id="@+id/upcoming_date1"
-                        android:layout_width="45dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="30dp"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/upcoming_month1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="5dp"
-                            android:fontFamily="@font/jeko_demo_extrabold"
-                            android:text="OCT"
-                            android:textAlignment="center"
-                            android:textColor="#070802"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:id="@+id/upcoming_day1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/jeko_demo_extrabold"
-                            android:text="29"
-                            android:textAlignment="center"
-                            android:textColor="#070802"
-                            android:textSize="22sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/upcoming_details1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/upcoming_lakwatsa_title1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="5dp"
-                            android:fontFamily="@font/jeko_demo_extrabold"
-                            android:text="halloween party at pobla"
-                            android:textColor="#070802"
-                            android:textSize="22sp"
-                            android:ellipsize="end"
-                            android:maxLines="1"/>
-
-                        <LinearLayout
-                            android:id="@+id/upcoming_lakwatsa_friends1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:id="@+id/upcoming_lakwatsa_friend1_iv"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_marginRight="5dp"
-                                android:src="@drawable/asset_profile1" />
-
-                            <ImageView
-                                android:id="@+id/upcoming_lakwatsa_friend2_iv"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_marginRight="5dp"
-                                android:src="@drawable/asset_profile2" />
-
-                            <ImageView
-                                android:id="@+id/upcoming_lakwatsa_friend3_iv"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_marginRight="5dp"
-                                android:src="@drawable/asset_profile3" />
-
-                            <FrameLayout
-                                android:id="@+id/more_friends"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_gravity="center"
-                                android:background="@drawable/btn_circle_grey">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:text="+5"
-                                    android:textColor="#F8F6F6"
-                                    android:textSize="15sp" />
-
-                            </FrameLayout>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
 
@@ -258,6 +153,7 @@
                     android:id="@+id/ongoing_title"
                     android:layout_width="170dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
                     android:layout_marginBottom="25dp"
                     android:background="@drawable/btn_round_orange_no_outline"
                     android:fontFamily="@font/jeko_demo_extrabold"
@@ -267,91 +163,10 @@
                     android:textColor="#070802"
                     android:textSize="18sp" />
 
-                <LinearLayout
-                    android:id="@+id/ongoing_item1"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/activity_lakwatsa_list_rv_2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:id="@+id/ongoing_date1"
-                        android:layout_width="45dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="30dp"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/ongoing_month1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="5dp"
-                            android:fontFamily="@font/jeko_demo_extrabold"
-                            android:text="OCT"
-                            android:textAlignment="center"
-                            android:textColor="#070802"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:id="@+id/ongoing_day1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/jeko_demo_extrabold"
-                            android:text="26"
-                            android:textAlignment="center"
-                            android:textColor="#070802"
-                            android:textSize="22sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/ongoing_details1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/ongoing_lakwatsa_title1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="5dp"
-                            android:fontFamily="@font/jeko_demo_extrabold"
-                            android:text="cubao expo trip"
-                            android:textColor="#070802"
-                            android:textSize="22sp"
-                            android:ellipsize="end"
-                            android:maxLines="1"/>
-
-                        <LinearLayout
-                            android:id="@+id/ongoing_lakwatsa_friends1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:id="@+id/ongoing_lakwatsa_friend1_iv"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_marginRight="5dp"
-                                android:src="@drawable/asset_profile1" />
-
-                            <ImageView
-                                android:id="@+id/ongoing_lakwatsa_friend2_iv"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_marginRight="5dp"
-                                android:src="@drawable/asset_profile2" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
 
@@ -365,6 +180,7 @@
                     android:id="@+id/completed_title"
                     android:layout_width="170dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
                     android:layout_marginBottom="25dp"
                     android:background="@drawable/btn_round_green_no_outline"
                     android:fontFamily="@font/jeko_demo_extrabold"
@@ -374,196 +190,10 @@
                     android:textColor="#070802"
                     android:textSize="18sp" />
 
-                <LinearLayout
-                    android:id="@+id/completed_item1"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/activity_lakwatsa_list_rv_3"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:id="@+id/completed_date1"
-                        android:layout_width="45dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="30dp"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/completed_month1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="5dp"
-                            android:fontFamily="@font/jeko_demo_extrabold"
-                            android:text="OCT"
-                            android:textAlignment="center"
-                            android:textColor="#070802"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:id="@+id/completed_day1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/jeko_demo_extrabold"
-                            android:text="21"
-                            android:textAlignment="center"
-                            android:textColor="#070802"
-                            android:textSize="22sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/completed_details1"
-                        android:layout_width="195dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/completed_lakwatsa_title1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="5dp"
-                            android:fontFamily="@font/jeko_demo_extrabold"
-                            android:text="kodawari lunch"
-                            android:textColor="#070802"
-                            android:textSize="22sp"
-                            android:ellipsize="end"
-                            android:maxLines="1"/>
-
-                        <LinearLayout
-                            android:id="@+id/completed_lakwatsa_friends1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:id="@+id/completed_lakwatsa_friend1_iv"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_marginRight="5dp"
-                                android:src="@drawable/asset_profile1" />
-
-                            <ImageView
-                                android:id="@+id/completed_lakwatsa_friend2_iv"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_marginRight="5dp"
-                                android:src="@drawable/asset_profile2" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <ImageButton
-                        android:id="@+id/trash_icon"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_trash"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
-                        android:scaleType="centerInside"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/completed_item2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:id="@+id/completed_date2"
-                        android:layout_width="45dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="30dp"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/completed_month2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="5dp"
-                            android:fontFamily="@font/jeko_demo_extrabold"
-                            android:text="SEP"
-                            android:textAlignment="center"
-                            android:textColor="#070802"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:id="@+id/completed_day2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/jeko_demo_extrabold"
-                            android:text="20"
-                            android:textAlignment="center"
-                            android:textColor="#070802"
-                            android:textSize="22sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/completed_details2"
-                        android:layout_width="195dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/completed_lakwatsa_title2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginBottom="5dp"
-                            android:fontFamily="@font/jeko_demo_extrabold"
-                            android:text="tagaytay trip"
-                            android:textColor="#070802"
-                            android:textSize="22sp"
-                            android:ellipsize="end"
-                            android:maxLines="1"/>
-
-                        <LinearLayout
-                            android:id="@+id/completed_lakwatsa_friends2"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:id="@+id/completed_lakwatsa_friend1_2_iv"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_marginRight="5dp"
-                                android:src="@drawable/asset_profile1" />
-
-                            <ImageView
-                                android:id="@+id/completed_lakwatsa_friend2_2_iv"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_marginRight="5dp"
-                                android:src="@drawable/asset_profile2" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <ImageButton
-                        android:id="@+id/trash_icon2"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_gravity="center"
-                        android:background="?android:attr/selectableItemBackgroundBorderless"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/ic_trash" />
-                </LinearLayout>
-
+                    android:layout_height="match_parent" />
 
 
             </LinearLayout>

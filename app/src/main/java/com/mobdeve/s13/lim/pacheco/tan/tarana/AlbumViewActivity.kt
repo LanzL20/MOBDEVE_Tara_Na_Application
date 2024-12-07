@@ -43,7 +43,14 @@ class AlbumViewActivity: AppCompatActivity() {
         lifecycleScope.launch {
             val data = UserSession.getUser().lakwatsaList
             if(viewBinding.albumRv.adapter == null) {
-                val adapter = AdapterAlbumView(DBHelper.getAllLakwatsaFromList(data))
+                val lakwatsaList = DBHelper.getAllLakwatsaFromList(data)
+                // remove all upcoming lakwatsas
+                for (lakwatsa in lakwatsaList){
+                    if(lakwatsa.status == Lakwatsa.LAKWATSA_UPCOMING){
+                        lakwatsaList.remove(lakwatsa)
+                    }
+                }
+                val adapter = AdapterAlbumView(lakwatsaList)
                 viewBinding.albumRv.adapter = adapter
                 val layoutManager = GridLayoutManager(viewBinding.albumRv.context, 2)
                 viewBinding.albumRv.layoutManager = layoutManager

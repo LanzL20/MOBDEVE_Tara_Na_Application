@@ -179,33 +179,6 @@
                 android:textColor="@color/black"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/activity_datetime_etl_location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge"
-            android:textColorHint="#808080">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/activity_datetime_et_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_round_white_80"
-                android:fontFamily="@font/jeko_demo_medium"
-                android:inputType="text"
-                android:padding="10dp"
-                android:paddingStart="25dp"
-                android:paddingEnd="25dp"
-                android:hint="Add location (Optional)"
-                android:drawableStart="@drawable/ic_location"
-                android:drawablePadding="10dp"
-                android:textColor="@color/black"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-
 
     </LinearLayout>
     </ScrollView>

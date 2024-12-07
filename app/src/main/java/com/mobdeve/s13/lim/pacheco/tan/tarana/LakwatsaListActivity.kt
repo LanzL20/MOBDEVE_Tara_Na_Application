@@ -3,10 +3,15 @@ package com.mobdeve.s13.lim.pacheco.tan.tarana
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.api.Distribution.BucketOptions.Linear
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityLakwatsaListBinding
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ModalDeleteItemBinding
+import kotlinx.coroutines.launch
 
 class LakwatsaListActivity: AppCompatActivity() {
 
@@ -14,10 +19,57 @@ class LakwatsaListActivity: AppCompatActivity() {
     private lateinit var deleteItemModalBinding: ModalDeleteItemBinding
     private lateinit var deleteItemModal: Dialog
 
+    suspend fun refreshData(){
+        binding.upcomingLl.visibility = View.GONE
+        binding.ongoingLl.visibility = View.GONE
+        binding.completedLl.visibility = View.GONE
+
+        val lakwatsaList = DBHelper.getAllLakwatsaFromList(UserSession.getUser().lakwatsaList)
+        var lakwatsaListUpcoming = ArrayList<Lakwatsa>()
+        var lakwatsaListOngoing = ArrayList<Lakwatsa>()
+        var lakwatsaListCompleted = ArrayList<Lakwatsa>()
+
+        for(lakwatsa in lakwatsaList){
+            if(lakwatsa.status == Lakwatsa.LAKWATSA_UPCOMING){
+                lakwatsaListUpcoming.add(lakwatsa)
+            } else if (lakwatsa.status == Lakwatsa.LAKWATSA_ONGOING){
+                lakwatsaListOngoing.add(lakwatsa)
+            } else if (lakwatsa.status == Lakwatsa.LAKWATSA_COMPLETED){
+                lakwatsaListCompleted.add(lakwatsa)
+            }
+        }
+
+        if(lakwatsaListUpcoming.size > 0){
+            binding.upcomingLl.visibility = View.VISIBLE
+        }
+        if(lakwatsaListOngoing.size > 0){
+            binding.ongoingLl.visibility = View.VISIBLE
+        }
+        if(lakwatsaListCompleted.size > 0){
+            binding.completedLl.visibility = View.VISIBLE
+        }
+
+        binding.activityLakwatsaListRv1.adapter = AdapterLakwatsaList(lakwatsaListUpcoming)
+        binding.activityLakwatsaListRv1.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.activityLakwatsaListRv2.adapter = AdapterLakwatsaList(lakwatsaListOngoing)
+        binding.activityLakwatsaListRv2.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.activityLakwatsaListRv3.adapter = AdapterLakwatsaList(lakwatsaListCompleted)
+        binding.activityLakwatsaListRv3.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLakwatsaListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.upcomingLl.visibility = View.GONE
+        binding.ongoingLl.visibility = View.GONE
+        binding.completedLl.visibility = View.GONE
+
+        lifecycleScope.launch {
+            refreshData()
+        }
 
         deleteItemModal = Dialog(this)
         deleteItemModalBinding = ModalDeleteItemBinding.inflate(layoutInflater)
@@ -29,35 +81,11 @@ class LakwatsaListActivity: AppCompatActivity() {
 
         deleteItemModal.window!!.setBackgroundDrawableResource(android.R.color.transparent)
 
-        binding.trashIcon.setOnClickListener {
-            deleteItemModal.show()
-        }
-
         // TODO: Click listener for the delete button
-
         deleteItemModalBinding.modalDeleteItemBtnClose.setOnClickListener {
             deleteItemModal.dismiss()
         }
 
-        // TODO: Convert hardcoded data to actual data and pass it to the adapter
-        // TODO: I have a feeling that we can create an abstract lakwatsa class/layout file thats able to become either upcoming, ongoing, or completed
-        //  hard coded data for now
-        binding.upcomingItem1.setOnClickListener {
-            val intent = Intent(this, LakwatsaUpcomingActivity::class.java)
-            startActivity(intent)
-        }
-        binding.ongoingItem1.setOnClickListener {
-            val intent = Intent(this, LakwatsaOngoingActivity::class.java)
-            startActivity(intent)
-        }
-        binding.completedItem1.setOnClickListener {
-            val intent = Intent(this, LakwatsaCompletedActivity::class.java)
-            startActivity(intent)
-        }
-        binding.completedItem2.setOnClickListener {
-            val intent = Intent(this, LakwatsaCompletedActivity::class.java)
-            startActivity(intent)
-        }
         binding.addLakwatsaIcon.setOnClickListener {
             val intent = Intent(this, LakwatsaCreateActivity::class.java)
             startActivity(intent)
@@ -76,6 +104,13 @@ class LakwatsaListActivity: AppCompatActivity() {
         binding.profileUser1.setOnClickListener{
             val intent = Intent(this, ProfileUserActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        lifecycleScope.launch {
+            refreshData()
         }
     }
 }
