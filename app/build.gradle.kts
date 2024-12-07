@@ -4,6 +4,7 @@ plugins {
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("kotlin-kapt")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -55,6 +56,16 @@ android {
         }
     }
 }
+secrets {
+
+    propertiesFileName = "secrets.properties"
+
+    defaultPropertiesFileName = "local.defaults.properties"
+
+    ignoreList.add("keyToIgnore")
+    ignoreList.add("sdk.*")
+}
+
 
 dependencies {
 
@@ -83,6 +94,7 @@ dependencies {
     implementation(libs.firebase.storage)
     implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.auth)
+    implementation(libs.androidx.appcompat)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -92,7 +104,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.material.v140)
     implementation("com.github.bumptech.glide:glide:4.16.0")
-
+    implementation("com.google.android.gms:play-services-maps:19.0.0")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.2")
 
     kapt("com.github.bumptech.glide:compiler:4.14.2")
