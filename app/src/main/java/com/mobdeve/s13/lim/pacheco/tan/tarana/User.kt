@@ -1,5 +1,7 @@
 package com.mobdeve.s13.lim.pacheco.tan.tarana
 
+import com.google.type.LatLng
+
 class User {
     companion object {
         const val NAME_KEY = "name"
@@ -12,6 +14,10 @@ class User {
         const val FRIEND_REQUESTS_SENT_KEY = "friendRequestsSent"
         const val FRIEND_REQUESTS_RECEIVED_KEY = "friendRequestsReceived"
         const val UNAVAILABLE_LIST_KEY = "unavailableList"
+        const val UID_KEY = "uid"
+        const val LATITUDE_KEY = "latitude"
+        const val LONGITUDE_KEY = "longitude"
+        const val SALT_KEY = "salt"
     }
 
     override fun toString(): String {
@@ -44,6 +50,12 @@ class User {
         private set
     var uid: String
         private set
+    var latitude: Double
+        public set
+    var longitude: Double
+        public set
+    var salt: String
+        private set
     //var notificationList: ArrayList<Notification>
     //    private set
 
@@ -55,7 +67,8 @@ class User {
         username: String,
         password: String,
         profilePicture: Int,
-        phoneNumber: String
+        phoneNumber: String,
+        salt: String
     ) {
         this.name = name
         this.username = username
@@ -68,6 +81,9 @@ class User {
         this.friendRequestsReceived = ArrayList()
         this.unavailableList = ArrayList()
         this.uid = username
+        this.latitude = 0.0
+        this.longitude = 0.0
+        this.salt = salt
     }
 
     /*
@@ -84,7 +100,10 @@ class User {
         friendRequestsSent: ArrayList<String>,
         friendRequestsReceived: ArrayList<String>,
         unavailableList: ArrayList<Unavailable>,
-        uid: String
+        uid: String,
+        latitude: Double,
+        longitude: Double,
+        salt: String
     ) {
         this.name = name
         this.username = username
@@ -97,6 +116,9 @@ class User {
         this.friendRequestsReceived = friendRequestsReceived
         this.unavailableList = unavailableList
         this.uid = uid
+        this.latitude = latitude
+        this.longitude = longitude
+        this.salt = salt
     }
 
     fun addFriend(userId: String) {
@@ -168,5 +190,6 @@ class User {
     fun updateUnavailableListAtIndex(index: Int, unavailable: Unavailable) {
         this.unavailableList[index] = unavailable
     }
+
 
 }

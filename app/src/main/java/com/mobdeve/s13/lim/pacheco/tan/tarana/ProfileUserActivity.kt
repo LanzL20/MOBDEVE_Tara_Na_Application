@@ -1,6 +1,7 @@
 package com.mobdeve.s13.lim.pacheco.tan.tarana
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,17 @@ class ProfileUserActivity: AppCompatActivity() {
         viewBinding.activityProfileUserName.text= user.name
         viewBinding.activityProfileUserUsername.text= "@"+user.username
         viewBinding.activityProfileUserNumFriends.text= user.friendsList.size.toString()
+
+        val LocationIntent= Intent(this, LocationService::class.java)
+        if(!LocationService.isRunning){
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                startForegroundService(LocationIntent)
+            }
+            else{
+                startService(LocationIntent)
+            }
+        }
+
 
         setContentView(viewBinding.root)
 

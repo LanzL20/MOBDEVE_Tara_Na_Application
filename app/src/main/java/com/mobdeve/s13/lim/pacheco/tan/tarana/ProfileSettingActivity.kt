@@ -48,9 +48,10 @@ class ProfileSettingActivity:AppCompatActivity() {
                     Toast.makeText(binding.root.context, "Username already exists.", Toast.LENGTH_SHORT).show()
                 } else if(binding.activityProfileSettingsEtName.text.toString().isNotEmpty() && binding.activityProfileSettingsEtUsername.text.toString().isNotEmpty()){
                     var newPassword = UserSession.getUser().password
+                    var newSalt = UserSession.getUser().salt
                     if(binding.activityProfileSettingsEtPassword.text.toString().isNotEmpty()){
-                        newPassword = binding.activityProfileSettingsEtPassword.text.toString()
-                    }
+                        newSalt = PasswordHashing.byteArrayToHexString(PasswordHashing.generateSalt())
+                        newPassword = PasswordHashing.byteArrayToHexString(PasswordHashing.hashPassword(binding.activityProfileSettingsEtPassword.text.toString(), PasswordHashing.hexStringToByteArray(newSalt)))}
 
                     var newUser = User(
                         binding.activityProfileSettingsEtName.text.toString(),
@@ -63,7 +64,10 @@ class ProfileSettingActivity:AppCompatActivity() {
                         UserSession.getUser().friendRequestsSent,
                         UserSession.getUser().friendRequestsReceived,
                         UserSession.getUser().unavailableList,
-                        UserSession.getUser().uid
+                        UserSession.getUser().uid,
+                        UserSession.getUser().latitude,
+                        UserSession.getUser().longitude,
+                        UserSession.getUser().salt
                     )
                     DBHelper.updateUser(newUser)
                     Toast.makeText(binding.root.context, "Profile updated.", Toast.LENGTH_SHORT).show()
