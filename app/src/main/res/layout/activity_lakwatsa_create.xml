@@ -108,7 +108,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge"
+            android:textColorHint="#808080">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/activity_lakwatsa_create_et_title"
@@ -122,7 +123,8 @@
                 android:paddingEnd="25dp"
                 android:hint="Add lakwatsa title"
                 android:drawableStart="@drawable/ic_pencil"
-                android:drawablePadding="10dp"/>
+                android:drawablePadding="10dp"
+                android:textColor="@color/black"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -132,7 +134,8 @@
             android:layout_marginTop="15dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge"
+            android:textColorHint="#808080">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/activity_lakwatsa_create_et_friends"
@@ -146,7 +149,8 @@
                 android:paddingStart="25dp"
                 android:paddingEnd="25dp"
                 android:drawableStart="@drawable/ic_add_user_small"
-                android:drawablePadding="10dp"/>
+                android:drawablePadding="10dp"
+                android:textColor="@color/black"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -156,7 +160,8 @@
             android:layout_marginTop="15dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge"
+            android:textColorHint="#808080">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/activity_lakwatsa_create_et_datetime"
@@ -170,7 +175,8 @@
                 android:paddingEnd="25dp"
                 android:hint="Tentative date and time"
                 android:drawableStart="@drawable/ic_calendar_small"
-                android:drawablePadding="10dp"/>
+                android:drawablePadding="10dp"
+                android:textColor="@color/black"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -180,7 +186,8 @@
             android:layout_marginTop="15dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge"
+            android:textColorHint="#808080">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/activity_datetime_et_location"
@@ -194,7 +201,8 @@
                 android:paddingEnd="25dp"
                 android:hint="Add location (Optional)"
                 android:drawableStart="@drawable/ic_location"
-                android:drawablePadding="10dp"/>
+                android:drawablePadding="10dp"
+                android:textColor="@color/black"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 

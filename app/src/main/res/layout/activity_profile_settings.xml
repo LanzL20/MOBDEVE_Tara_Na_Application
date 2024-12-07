@@ -117,7 +117,8 @@
                 android:id="@+id/activity_profile_settings_etl_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+                android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge"
+                android:textColorHint="#808080">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/activity_profile_settings_et_name"
@@ -129,7 +130,8 @@
                     android:padding="15dp"
                     android:paddingStart="25dp"
                     android:paddingEnd="25dp"
-                    android:text="Tyler Tan" />
+                    android:text="Tyler Tan"
+                    android:textColor="@color/black"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -147,7 +149,8 @@
                 android:id="@+id/activity_profile_settings_etl_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+                android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge"
+                android:textColorHint="#808080">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/activity_profile_settings_et_username"
@@ -159,7 +162,8 @@
                     android:inputType="text"
                     android:padding="15dp"
                     android:paddingStart="25dp"
-                    android:paddingEnd="25dp" />
+                    android:paddingEnd="25dp"
+                    android:textColor="@color/black"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -177,7 +181,8 @@
                 android:id="@+id/activity_profile_settings_etl_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+                android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge"
+                android:textColorHint="#808080">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/activity_profile_settings_et_password"
@@ -189,7 +194,8 @@
                     android:padding="15dp"
                     android:paddingStart="25dp"
                     android:paddingEnd="25dp"
-                    android:text="*************" />
+                    android:text="*************"
+                    android:textColor="@color/black"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -207,9 +213,10 @@
                 android:id="@+id/activity_profile_settings_etl_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+                android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge"
+                android:textColorHint="#808080">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <TextView
                     android:id="@+id/activity_profile_settings_et_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -219,7 +226,8 @@
                     android:padding="15dp"
                     android:paddingStart="25dp"
                     android:paddingEnd="25dp"
-                    android:text="0905 467 2750" />
+                    android:text="0905 467 2750"
+                    android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button

@@ -36,7 +36,8 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="25dp"
-        android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+        android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge"
+        android:textColorHint="#808080">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/activity_boarding_login_et_phone"
@@ -49,7 +50,7 @@
             android:padding="15dp"
             android:paddingStart="25dp"
             android:paddingEnd="25dp"
-            android:textColor="#000000" />
+            android:textColor="#000000"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -60,7 +61,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="25dp"
         android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        android:textColorHint="#808080">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/activity_boarding_login_et_password"
@@ -73,7 +75,8 @@
             android:padding="15dp"
             android:paddingStart="25dp"
             android:paddingEnd="25dp"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView

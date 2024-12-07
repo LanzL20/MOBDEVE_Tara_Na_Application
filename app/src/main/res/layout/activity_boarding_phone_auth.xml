@@ -61,7 +61,8 @@
             android:layout_marginLeft="25dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="25dp"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge"
+            android:textColorHint="#808080">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/activity_phone_auth_otp_et"
