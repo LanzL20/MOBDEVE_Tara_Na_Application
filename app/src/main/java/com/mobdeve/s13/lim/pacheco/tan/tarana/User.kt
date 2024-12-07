@@ -15,7 +15,8 @@ class User {
         const val FRIEND_REQUESTS_RECEIVED_KEY = "friendRequestsReceived"
         const val UNAVAILABLE_LIST_KEY = "unavailableList"
         const val UID_KEY = "uid"
-        const val LOCATION_KEY = "location"
+        const val LATITUDE_KEY = "latitude"
+        const val LONGITUDE_KEY = "longitude"
         const val SALT_KEY = "salt"
     }
 
@@ -49,7 +50,9 @@ class User {
         private set
     var uid: String
         private set
-    var location: LatLng
+    var latitude: Double
+        private set
+    var longitude: Double
         private set
     var salt: String
         private set
@@ -78,7 +81,8 @@ class User {
         this.friendRequestsReceived = ArrayList()
         this.unavailableList = ArrayList()
         this.uid = username
-        this.location = LatLng.newBuilder().setLatitude(0.0).setLongitude(0.0).build()
+        this.latitude = 0.0
+        this.longitude = 0.0
         this.salt = salt
     }
 
@@ -97,7 +101,8 @@ class User {
         friendRequestsReceived: ArrayList<String>,
         unavailableList: ArrayList<Unavailable>,
         uid: String,
-        location: LatLng,
+        latitude: Double,
+        longitude: Double,
         salt: String
     ) {
         this.name = name
@@ -111,7 +116,8 @@ class User {
         this.friendRequestsReceived = friendRequestsReceived
         this.unavailableList = unavailableList
         this.uid = uid
-        this.location = location
+        this.latitude = 0.0
+        this.longitude = 0.0
         this.salt = salt
     }
 
@@ -185,20 +191,5 @@ class User {
         this.unavailableList[index] = unavailable
     }
 
-    fun setSalt(salt: String) {
-        this.salt = salt
-    }
-
-    fun getSalt(): String {
-        return this.salt
-    }
-
-    fun setLocation(location: LatLng) {
-        this.location = location
-    }
-
-    fun getLocation(): LatLng {
-        return this.location
-    }
 
 }

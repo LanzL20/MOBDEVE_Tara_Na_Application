@@ -17,6 +17,7 @@ class BoardingWelcomeActivity:AppCompatActivity() {
         val viewBinding= ActivityBoardingWelcomeBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
         Log.d("MainActivity", "Welcome Activity Created")
+        Firebase.auth.signOut()
         val currentuser= Firebase.auth.currentUser
         if(currentuser!=null){
             val intent = Intent(this, ProfileUserActivity::class.java)

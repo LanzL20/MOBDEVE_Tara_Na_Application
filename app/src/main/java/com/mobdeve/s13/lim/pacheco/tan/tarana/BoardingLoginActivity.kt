@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityBoardingLoginBinding
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ModalForgotPwBinding
+import kotlinx.coroutines.launch
 
 class BoardingLoginActivity : AppCompatActivity() {
 
@@ -61,12 +63,24 @@ class BoardingLoginActivity : AppCompatActivity() {
             val intent = Intent(this, BoardingPhoneAuthActivity::class.java)
             phoneNumber = binding.activityBoardingLoginEtPhone.text.toString()
             phoneNumber= "+63${phoneNumber.substring(1)}"
-            // TODO: ADD ENCRYPTION FOR PASSWORD
             password = binding.activityBoardingLoginEtPassword.text.toString()
-            // TODO: IMPLEMENT PASSWORD CHECKING
             intent.putExtra(User.PHONE_NUMBER_KEY, phoneNumber)
             intent.putExtra("from", "login")
-            startActivity(intent)
+            lifecycleScope.launch{
+                val tempUser=DBHelper.getUserFromNumber(phoneNumber)
+                if(tempUser==null){
+                    binding.activityBoardingLoginEtPhone.error="User does not exist"
+                    return@launch
+                }
+                if(PasswordHashing.verifyPassword(password, PasswordHashing.hexStringToByteArray(tempUser.salt), PasswordHashing.hexStringToByteArray(tempUser.password))){
+                    UserSession.setUser(tempUser)
+                    startActivity(intent)
+                    finish()
+                }
+                else{
+                    binding.activityBoardingLoginEtPassword.error="Incorrect password"
+                }
+            }
         }
 
         binding.activityBoardingLoginTvSignUp.setOnClickListener {

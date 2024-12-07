@@ -47,7 +47,8 @@ object DBHelper {
                                 value.get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
                                 tempUnavailable,
                                 value.id,
-                                value.get(User.LOCATION_KEY) as LatLng,
+                                value.get(User.LATITUDE_KEY).toString().toDouble(),
+                                value.get(User.LONGITUDE_KEY).toString().toDouble(),
                                 value.get(User.SALT_KEY).toString()
                             )
                         )
@@ -70,15 +71,17 @@ object DBHelper {
             User.FRIEND_REQUESTS_RECEIVED_KEY to user.friendRequestsReceived,
             User.UNAVAILABLE_LIST_KEY to user.unavailableList,
             User.UID_KEY to user.uid,
-            User.LOCATION_KEY to user.location,
+            User.LATITUDE_KEY to user.latitude,
+            User.LONGITUDE_KEY to user.longitude,
             User.SALT_KEY to user.salt
         )
         val db = Firebase.firestore
         // add the user to the database
         db.collection("users")
-            .add(dbuser)
+            .document(user.username)
+            .set(dbuser)
             .addOnSuccessListener { documentReference ->
-                Log.d("MainActivity", "DocumentSnapshot added with ID: ${documentReference.id}")
+                Log.d("MainActivity", "DocumentSnapshot added with ID: ${documentReference}")
             }
             .addOnFailureListener { e ->
                 Log.w("MainActivity", "Error adding document", e)
@@ -114,7 +117,8 @@ object DBHelper {
             result.documents[0].get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
             tempUnavailable,
             result.documents[0].id,
-            result.documents[0].get(User.LOCATION_KEY) as LatLng,
+            result.documents[0].get(User.LATITUDE_KEY).toString().toDouble(),
+            result.documents[0].get(User.LONGITUDE_KEY).toString().toDouble(),
             result.documents[0].get(User.SALT_KEY).toString()
         )
     }
@@ -159,20 +163,25 @@ object DBHelper {
                 document.get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
                 tempUnavailable,
                 document.id,
-                document.get(User.LOCATION_KEY) as LatLng,
+                document.get(User.LATITUDE_KEY).toString().toDouble(),
+                document.get(User.LONGITUDE_KEY).toString().toDouble(),
                 document.get(User.SALT_KEY).toString()
             ))
         }
         return users
     }
 
-    suspend fun getUserFromNumber(number: String): User {
+    suspend fun getUserFromNumber(number: String): User? {
         val db = Firebase.firestore
         // get the user from the database
         val result = db.collection("users")
             .whereEqualTo(User.PHONE_NUMBER_KEY, number)
             .get()
             .await()
+
+        if(result.isEmpty()){
+            return null
+        }
         // return the user
         val tempUnavailable = ArrayList<Unavailable>()
         for(unavailable in result.documents[0].get(User.UNAVAILABLE_LIST_KEY) as ArrayList<HashMap<String, Any>>){
@@ -195,7 +204,8 @@ object DBHelper {
             result.documents[0].get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
             tempUnavailable,
             result.documents[0].id,
-            result.documents[0].get(User.LOCATION_KEY) as LatLng,
+            result.documents[0].get(User.LATITUDE_KEY).toString().toDouble(),
+            result.documents[0].get(User.LONGITUDE_KEY).toString().toDouble(),
             result.documents[0].get(User.SALT_KEY).toString()
         )
     }
@@ -230,7 +240,8 @@ object DBHelper {
                 document.get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
                 tempUnavailable,
                 document.id,
-                document.get(User.LOCATION_KEY) as LatLng,
+                document.get(User.LATITUDE_KEY).toString().toDouble(),
+                document.get(User.LONGITUDE_KEY).toString().toDouble(),
                 document.get(User.SALT_KEY).toString()
             ))
         }
@@ -251,7 +262,7 @@ object DBHelper {
             User.FRIEND_REQUESTS_RECEIVED_KEY to user.friendRequestsReceived,
             User.UNAVAILABLE_LIST_KEY to user.unavailableList,
             User.UID_KEY to user.uid,
-            User.LOCATION_KEY to user.location,
+            //User.LOCATION_KEY to user.location,
             User.SALT_KEY to user.salt
 
         )

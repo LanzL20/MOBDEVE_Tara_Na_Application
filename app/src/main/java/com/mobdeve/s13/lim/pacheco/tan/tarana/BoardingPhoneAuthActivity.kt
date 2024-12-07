@@ -27,6 +27,7 @@ class BoardingPhoneAuthActivity:AppCompatActivity() {
     lateinit var username: String
     lateinit var password: String
     lateinit var name: String
+    lateinit var salt: String
     val timeoutSeconds= 60L
     val mAuth: FirebaseAuth= FirebaseAuth.getInstance()
     lateinit var from:String
@@ -55,6 +56,7 @@ class BoardingPhoneAuthActivity:AppCompatActivity() {
             name= intent.getStringExtra(User.NAME_KEY)!!
             username= intent.getStringExtra(User.USERNAME_KEY)!!
             password= intent.getStringExtra(User.PASSWORD_KEY)!!
+            salt= intent.getStringExtra(User.SALT_KEY)!!
         }
 
         viewBinding.phoneNumberTv.text= phoneNumber
@@ -65,7 +67,6 @@ class BoardingPhoneAuthActivity:AppCompatActivity() {
         timerTv= viewBinding.activityBoardingPhoneAuthTimerCountdown
         progressbar= viewBinding.progressBar2
 
-        Log.d("BoardingPhoneAuthActivityDebugging", phoneNumber)
         sendVerificationCode(phoneNumber!!, false)
 
         signInButton.setOnClickListener {
@@ -152,13 +153,14 @@ class BoardingPhoneAuthActivity:AppCompatActivity() {
                 if(task.isSuccessful){
                     val intent= Intent(this, BoardingGreetingActivity::class.java)
                     Log.d("BoardingPhoneAuthActivityDebugging", "Sign in successful")
-                    if(from=="signup"){
-                        //TODO:ADD ENCRYPTION FOR PASSWORD
-                        DBHelper.addUser(User(name, username, password, 1, phoneNumber))
-                    }
+
                     lifecycleScope.launch {
+                        if(from=="signup"){
+                            //TODO:ADD ENCRYPTION FOR PASSWORD
+                            DBHelper.addUser(User(name, username, password, 1, phoneNumber, salt))
+                        }
                         val user= DBHelper.getUserFromNumber(phoneNumber)
-                        UserSession.setUser(user)
+                        UserSession.setUser(user!!)
                         startActivity(intent)
                         finish()
                     }
