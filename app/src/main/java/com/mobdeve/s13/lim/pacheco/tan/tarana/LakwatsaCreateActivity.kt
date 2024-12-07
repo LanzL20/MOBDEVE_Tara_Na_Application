@@ -30,7 +30,6 @@ class LakwatsaCreateActivity: AppCompatActivity() {
             startActivity(intent)
         }
         viewBinding.activityLakwatsaCreateBtn.setOnClickListener{
-            val intent = Intent(this, LakwatsaListActivity::class.java)
             // TODO: Very temp code for testing
             val users = ArrayList<User>()
             val usernames = ArrayList<String>()
@@ -49,7 +48,7 @@ class LakwatsaCreateActivity: AppCompatActivity() {
                     user.addLakwatsa(lakwatsaId)
                     DBHelper.updateUser(user)
                 }
-                startActivity(intent)
+                finish()
             }
 
         }
