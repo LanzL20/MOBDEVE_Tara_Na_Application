@@ -19,6 +19,7 @@ class ProfileUserActivity: AppCompatActivity() {
         Log.d("MainActivity", "Welcome Activity Created123")
         viewBinding.activityProfileUserName.text= user.name
         viewBinding.activityProfileUserUsername.text= "@"+user.username
+        viewBinding.activityProfileUserNumFriends.text= user.friendsList.size.toString()
 
         setContentView(viewBinding.root)
 
@@ -64,5 +65,6 @@ class ProfileUserActivity: AppCompatActivity() {
         super.onResume()
         viewBinding.activityProfileUserName.text= UserSession.getUser().name
         viewBinding.activityProfileUserUsername.text= "@"+UserSession.getUser().username
+        viewBinding.activityProfileUserNumFriends.text= UserSession.getUser().friendsList.size.toString()
     }
 }

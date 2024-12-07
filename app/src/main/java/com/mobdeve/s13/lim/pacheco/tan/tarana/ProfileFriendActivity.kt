@@ -72,9 +72,9 @@ class ProfileFriendActivity:AppCompatActivity() {
                         viewBinding.followingText.text = "Follow"
                     }
                 } else if (viewBinding.followingText.text == "Accept Request"){
-                    UserSession.getUser().friendRequestsSent.remove(intent.getStringExtra(USER_KEY).toString())
+                    UserSession.getUser().friendRequestsReceived.remove(intent.getStringExtra(USER_KEY).toString())
                     UserSession.getUser().friendsList.add(intent.getStringExtra(USER_KEY).toString())
-                    user.friendRequestsReceived.remove(UserSession.getUser().username)
+                    user.friendRequestsSent.remove(UserSession.getUser().username)
                     user.friendsList.add(UserSession.getUser().username)
                     DBHelper.updateUser(UserSession.getUser())
                     DBHelper.updateUser(user)
