@@ -8,6 +8,7 @@ import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.tasks.await
 import java.time.LocalDateTime
 import java.util.Date
+import com.google.type.LatLng
 
 object DBHelper {
 
@@ -45,7 +46,9 @@ object DBHelper {
                                 value.get(User.FRIEND_REQUESTS_SENT_KEY) as ArrayList<String>,
                                 value.get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
                                 tempUnavailable,
-                                value.id
+                                value.id,
+                                value.get(User.LOCATION_KEY) as LatLng,
+                                value.get(User.SALT_KEY).toString()
                             )
                         )
                     }
@@ -65,7 +68,10 @@ object DBHelper {
             User.LAKWATSA_LIST_KEY to user.lakwatsaList,
             User.FRIEND_REQUESTS_SENT_KEY to user.friendRequestsSent,
             User.FRIEND_REQUESTS_RECEIVED_KEY to user.friendRequestsReceived,
-            User.UNAVAILABLE_LIST_KEY to user.unavailableList
+            User.UNAVAILABLE_LIST_KEY to user.unavailableList,
+            User.UID_KEY to user.uid,
+            User.LOCATION_KEY to user.location,
+            User.SALT_KEY to user.salt
         )
         val db = Firebase.firestore
         // add the user to the database
@@ -107,7 +113,9 @@ object DBHelper {
             result.documents[0].get(User.FRIEND_REQUESTS_SENT_KEY) as ArrayList<String>,
             result.documents[0].get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
             tempUnavailable,
-            result.documents[0].id
+            result.documents[0].id,
+            result.documents[0].get(User.LOCATION_KEY) as LatLng,
+            result.documents[0].get(User.SALT_KEY).toString()
         )
     }
 
@@ -150,7 +158,9 @@ object DBHelper {
                 document.get(User.FRIEND_REQUESTS_SENT_KEY) as ArrayList<String>,
                 document.get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
                 tempUnavailable,
-                document.id
+                document.id,
+                document.get(User.LOCATION_KEY) as LatLng,
+                document.get(User.SALT_KEY).toString()
             ))
         }
         return users
@@ -184,7 +194,9 @@ object DBHelper {
             result.documents[0].get(User.FRIEND_REQUESTS_SENT_KEY) as ArrayList<String>,
             result.documents[0].get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
             tempUnavailable,
-            result.documents[0].id
+            result.documents[0].id,
+            result.documents[0].get(User.LOCATION_KEY) as LatLng,
+            result.documents[0].get(User.SALT_KEY).toString()
         )
     }
 
@@ -217,7 +229,9 @@ object DBHelper {
                 document.get(User.FRIEND_REQUESTS_SENT_KEY) as ArrayList<String>,
                 document.get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
                 tempUnavailable,
-                document.id
+                document.id,
+                document.get(User.LOCATION_KEY) as LatLng,
+                document.get(User.SALT_KEY).toString()
             ))
         }
         return users
@@ -235,7 +249,11 @@ object DBHelper {
             User.LAKWATSA_LIST_KEY to user.lakwatsaList,
             User.FRIEND_REQUESTS_SENT_KEY to user.friendRequestsSent,
             User.FRIEND_REQUESTS_RECEIVED_KEY to user.friendRequestsReceived,
-            User.UNAVAILABLE_LIST_KEY to user.unavailableList
+            User.UNAVAILABLE_LIST_KEY to user.unavailableList,
+            User.UID_KEY to user.uid,
+            User.LOCATION_KEY to user.location,
+            User.SALT_KEY to user.salt
+
         )
         val db = Firebase.firestore
         // update the user in the database

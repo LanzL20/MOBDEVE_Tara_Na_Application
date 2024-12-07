@@ -70,14 +70,6 @@ class BoardingPhoneAuthActivity:AppCompatActivity() {
 
         signInButton.setOnClickListener {
             val otp= otpInput.text.toString()
-            /*if(otp.isEmpty()){
-                otpInput.error= "Please fill up this field"
-                return@setOnClickListener
-            }
-            if(otp.length!=6){
-                otpInput.error= "Invalid OTP"
-                return@setOnClickListener
-            }*/
             val credential:PhoneAuthCredential= PhoneAuthProvider.getCredential(verificationCode, otp)
             signIn(credential)
         }

@@ -18,7 +18,9 @@ class BoardingSignUpActivity: AppCompatActivity() {
             val intent = Intent(this, BoardingPhoneAuthActivity::class.java)
             var phoneNumber= viewBinding.activitySignupLoginEtPhone.text.toString()
             val name= viewBinding.activitySignupLoginEtName.text.toString()
-            val password= viewBinding.activitySignupLoginEtPasswordd.text.toString()
+            val salt= PasswordHashing.generateSalt()
+            val password= PasswordHashing.hashPassword(viewBinding.activitySignupLoginEtPasswordd.text.toString(), salt).toString()
+
             //username will be the name without spaces and attached with a random 4 digit number
             val username= name.replace("\\s".toRegex(), "")+((1000..9999).random()).toString()
             phoneNumber= "+63${phoneNumber.substring(1)}"
@@ -26,6 +28,7 @@ class BoardingSignUpActivity: AppCompatActivity() {
             intent.putExtra(User.USERNAME_KEY, username)
             intent.putExtra(User.PHONE_NUMBER_KEY, phoneNumber)
             intent.putExtra(User.PASSWORD_KEY, password)
+            intent.putExtra(User.SALT_KEY, salt)
             intent.putExtra("from", "signup")
 
             if(phoneNumber.isEmpty() || username.isEmpty() || password.isEmpty()){

@@ -1,5 +1,7 @@
 package com.mobdeve.s13.lim.pacheco.tan.tarana
 
+import com.google.type.LatLng
+
 class User {
     companion object {
         const val NAME_KEY = "name"
@@ -12,6 +14,9 @@ class User {
         const val FRIEND_REQUESTS_SENT_KEY = "friendRequestsSent"
         const val FRIEND_REQUESTS_RECEIVED_KEY = "friendRequestsReceived"
         const val UNAVAILABLE_LIST_KEY = "unavailableList"
+        const val UID_KEY = "uid"
+        const val LOCATION_KEY = "location"
+        const val SALT_KEY = "salt"
     }
 
     override fun toString(): String {
@@ -44,6 +49,10 @@ class User {
         private set
     var uid: String
         private set
+    var location: LatLng
+        private set
+    var salt: String
+        private set
     //var notificationList: ArrayList<Notification>
     //    private set
 
@@ -55,7 +64,8 @@ class User {
         username: String,
         password: String,
         profilePicture: Int,
-        phoneNumber: String
+        phoneNumber: String,
+        salt: String
     ) {
         this.name = name
         this.username = username
@@ -68,6 +78,8 @@ class User {
         this.friendRequestsReceived = ArrayList()
         this.unavailableList = ArrayList()
         this.uid = username
+        this.location = LatLng.newBuilder().setLatitude(0.0).setLongitude(0.0).build()
+        this.salt = salt
     }
 
     /*
@@ -84,7 +96,9 @@ class User {
         friendRequestsSent: ArrayList<String>,
         friendRequestsReceived: ArrayList<String>,
         unavailableList: ArrayList<Unavailable>,
-        uid: String
+        uid: String,
+        location: LatLng,
+        salt: String
     ) {
         this.name = name
         this.username = username
@@ -97,6 +111,8 @@ class User {
         this.friendRequestsReceived = friendRequestsReceived
         this.unavailableList = unavailableList
         this.uid = uid
+        this.location = location
+        this.salt = salt
     }
 
     fun addFriend(userId: String) {
@@ -167,6 +183,22 @@ class User {
 
     fun updateUnavailableListAtIndex(index: Int, unavailable: Unavailable) {
         this.unavailableList[index] = unavailable
+    }
+
+    fun setSalt(salt: String) {
+        this.salt = salt
+    }
+
+    fun getSalt(): String {
+        return this.salt
+    }
+
+    fun setLocation(location: LatLng) {
+        this.location = location
+    }
+
+    fun getLocation(): LatLng {
+        return this.location
     }
 
 }
