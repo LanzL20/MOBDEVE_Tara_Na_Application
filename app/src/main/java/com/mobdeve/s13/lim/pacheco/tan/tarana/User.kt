@@ -14,6 +14,14 @@ class User {
         const val UNAVAILABLE_LIST_KEY = "unavailableList"
     }
 
+    override fun toString(): String {
+        return "User(username='$username')"
+    }
+
+    override fun hashCode(): Int {
+        return username.hashCode()
+    }
+
     var name: String
         private set
     var username: String

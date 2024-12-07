@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+android:id="@+id/activity_friends_add_friend1_ll"
+android:layout_width="match_parent"
+android:layout_height="80dp"
+android:orientation="horizontal"
+android:paddingLeft="25dp"
+android:paddingRight="25dp">
+
+<ImageView
+    android:id="@+id/item_layout_friend_to_add_iv"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:layout_gravity="center_vertical"
+    android:layout_marginRight="20dp"
+    android:src="@drawable/asset_profile2" />
+
+<LinearLayout
+    android:id="@+id/item_layout_friend_to_add_ll"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:layout_weight="1"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/item_layout_friend_to_add_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/jeko_demo_extrabold"
+        android:text="Ashley Tsang"
+        android:textColor="#070802"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/item_layout_friend_to_add_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/jeko_demo_extralight"
+        android:text="\@ashley_yvonne2003"
+        android:textColor="#070802" />
+</LinearLayout>
+
+</LinearLayout>

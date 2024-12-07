@@ -167,14 +167,9 @@ class ScheduleMainActivity : AppCompatActivity() {
                             val startDateFormatted = unavailable.startDate
                             val endDateFormatted = unavailable.endDate
 
-                            Log.e("BLOCK", blockDateFormatted)
-                            Log.e("START", startDateFormatted)
-                            Log.e("END", endDateFormatted)
-
                             if(blockDateFormatted >= startDateFormatted && blockDateFormatted <= endDateFormatted){
                                 container.constraintLayout.setBackgroundResource(R.drawable.date_round_light_orange_10_no_outline)
                                 container.textView.setTextColor(0xFFF6895A.toInt())
-                                Log.e("BLOCK", "BLOCKED")
                             }
 
                         }

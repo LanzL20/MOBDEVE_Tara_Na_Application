@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="20dp"
             android:fontFamily="@font/jeko_demo_extrabold"
             android:text="Find Friends"
             android:textAlignment="center"
@@ -100,38 +100,28 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_round_white_80"
                 android:fontFamily="@font/jeko_demo_medium"
-                android:hint="Search by username"
+                android:hint="Search by Username or Phone #"
                 android:inputType="text"
                 android:padding="10dp"
                 android:paddingStart="25dp"
                 android:paddingEnd="25dp"
                 android:drawableStart="@drawable/ic_search"
-                android:drawablePadding="10dp" />
+                android:drawablePadding="10dp"
+                android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/activity_friends_add_etl_number"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/activity_friends_add_btn"
+            android:layout_width="190dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="25dp"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/activity_friends_add_et_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_round_white_80"
-                android:fontFamily="@font/jeko_demo_medium"
-                android:hint="Search by phone number"
-                android:inputType="text"
-                android:padding="10dp"
-                android:paddingStart="25dp"
-                android:paddingEnd="25dp"
-                android:drawableStart="@drawable/ic_contact"
-                android:drawablePadding="10dp"/>
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="0dp"
+            android:background="@drawable/btn_round_yellow_80"
+            android:fontFamily="@font/jeko_demo_extrabold"
+            android:text="Search"
+            android:textAllCaps="false"
+            android:textSize="20sp" />
 
         <View
             android:id="@+id/divider"
@@ -150,66 +140,10 @@
         app:layout_constraintBottom_toTopOf="@id/back_profile_line"
         android:fillViewport="true">
 
-        <LinearLayout
-            android:id="@+id/activity_friends_add_list_ll"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/activity_friends_add_rv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/activity_friends_add_friend1_ll"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:orientation="horizontal"
-                android:paddingLeft="25dp"
-                android:paddingRight="25dp">
-
-                <ImageView
-                    android:id="@+id/activity_friends_add_friend1_iv"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="20dp"
-                    android:src="@drawable/asset_profile2" />
-
-                <LinearLayout
-                    android:id="@+id/activity_friends_view_details_ll"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/activity_friends_view_name1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/jeko_demo_extrabold"
-                        android:text="Ashley Tsang"
-                        android:textColor="#070802"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/activity_friends_view_username1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/jeko_demo_extralight"
-                        android:text="\@ashley_yvonne2003"
-                        android:textColor="#070802" />
-                </LinearLayout>
-
-                <ImageButton
-                    android:id="@+id/add_friend_grey_icon"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="20dp"
-                    android:src="@drawable/ic_add_user_grey"
-                    android:background="?android:attr/selectableItemBackgroundBorderless"
-                    android:scaleType="centerInside"/>
-            </LinearLayout>
-
-        </LinearLayout>
+            android:layout_height="wrap_content" />
     </ScrollView>
 
     <View

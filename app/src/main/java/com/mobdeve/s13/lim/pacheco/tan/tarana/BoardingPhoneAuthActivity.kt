@@ -162,7 +162,7 @@ class BoardingPhoneAuthActivity:AppCompatActivity() {
                     Log.d("BoardingPhoneAuthActivityDebugging", "Sign in successful")
                     if(from=="signup"){
                         //TODO:ADD ENCRYPTION FOR PASSWORD
-                        DBHelper.addUser(User(name, username, password, R.drawable.asset_profile1, phoneNumber))
+                        DBHelper.addUser(User(name, username, password, 1, phoneNumber))
                     }
                     lifecycleScope.launch {
                         val user= DBHelper.getUserFromNumber(phoneNumber)

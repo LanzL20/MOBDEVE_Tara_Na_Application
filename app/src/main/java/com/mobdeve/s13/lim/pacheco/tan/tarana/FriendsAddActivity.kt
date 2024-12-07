@@ -2,8 +2,11 @@ package com.mobdeve.s13.lim.pacheco.tan.tarana
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityFriendsAddBinding
+import kotlinx.coroutines.launch
 
 class FriendsAddActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -11,9 +14,21 @@ class FriendsAddActivity: AppCompatActivity() {
         val viewBinding = ActivityFriendsAddBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
-        viewBinding.activityFriendsAddFriend1Ll.setOnClickListener {
-            val intent = Intent(this, ProfileFriendActivity::class.java)
-            startActivity(intent)
+
+        val friendList = ArrayList<User>()
+        viewBinding.activityFriendsAddRv.adapter = AdapterFriendsAdd(friendList)
+        viewBinding.activityFriendsAddRv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+
+        viewBinding.activityFriendsAddBtn.setOnClickListener(){
+            lifecycleScope.launch {
+                val friendsList = DBHelper.getUsersByUsernameOrPhoneNumber(viewBinding.activityFriendsAddEtUsername.text.toString())
+                Log.e("FriendsAddActivity", friendsList.toString())
+                friendsList.removeIf {
+                    it.username == UserSession.getUser().username || UserSession.getUser().friendsList.contains(it.username)
+                }
+                // TODO: fix: do not include sessioned in user, do not include friends in user
+                (viewBinding.activityFriendsAddRv.adapter as AdapterFriendsAdd).setData(friendsList)
+            }
         }
 
         // NAVIGATION BUTTONS
