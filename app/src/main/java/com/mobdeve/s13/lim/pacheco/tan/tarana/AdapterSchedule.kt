@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ItemLayoutScheduleBinding
 
-class AdapterSchedule(private var dataUnavailable: ArrayList<Unavailable>, private var dataLakwatsa: ArrayList<Lakwatsa>): RecyclerView.Adapter<ViewHolderSchedule>() {
+class AdapterSchedule(private var dataUnavailable: ArrayList<Unavailable>, private var dataLakwatsa: ArrayList<Lakwatsa>, private var hide: Boolean): RecyclerView.Adapter<ViewHolderSchedule>() {
 
     private var data: ArrayList<Event> = ArrayList()
 
@@ -99,6 +99,6 @@ class AdapterSchedule(private var dataUnavailable: ArrayList<Unavailable>, priva
     }
 
     override fun onBindViewHolder(holder: ViewHolderSchedule, position: Int) {
-        holder.bindData(data[position])
+        holder.bindData(data[position], hide)
     }
 }

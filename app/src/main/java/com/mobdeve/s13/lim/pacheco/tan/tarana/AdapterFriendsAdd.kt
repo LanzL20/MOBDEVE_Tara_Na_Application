@@ -23,6 +23,7 @@ class AdapterFriendsAdd(private var friendList: ArrayList<User>) : RecyclerView.
         holder.bindData(friendList[position])
         holder.itemView.setOnClickListener(){
             val intent = Intent(holder.itemView.context, ProfileFriendActivity::class.java)
+            intent.putExtra(ProfileFriendActivity.USER_KEY, friendList[position].username)
             holder.itemView.context.startActivity(intent)
         }
     }

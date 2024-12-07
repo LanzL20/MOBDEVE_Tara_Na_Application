@@ -22,11 +22,9 @@ class FriendsAddActivity: AppCompatActivity() {
         viewBinding.activityFriendsAddBtn.setOnClickListener(){
             lifecycleScope.launch {
                 val friendsList = DBHelper.getUsersByUsernameOrPhoneNumber(viewBinding.activityFriendsAddEtUsername.text.toString())
-                Log.e("FriendsAddActivity", friendsList.toString())
                 friendsList.removeIf {
                     it.username == UserSession.getUser().username || UserSession.getUser().friendsList.contains(it.username)
                 }
-                // TODO: fix: do not include sessioned in user, do not include friends in user
                 (viewBinding.activityFriendsAddRv.adapter as AdapterFriendsAdd).setData(friendsList)
             }
         }

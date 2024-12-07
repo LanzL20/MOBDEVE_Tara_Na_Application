@@ -139,7 +139,16 @@ class ScheduleMainActivity : AppCompatActivity() {
         }
 
         lifecycleScope.launch {
-            val lakwatsaIds = UserSession.getUser().lakwatsaList
+            var username = intent.getStringExtra(ProfileFriendActivity.USER_KEY)
+            var user: User
+            if(username == null){
+                user = UserSession.getUser()
+            } else {
+                binding.activityScheduleMainIb.visibility = View.GONE
+                user = DBHelper.getUser(username)
+            }
+
+            val lakwatsaIds = user.lakwatsaList
             val lakwatsaList = DBHelper.getAllLakwatsaFromList(lakwatsaIds)
             binding.activityScheduleMainCalendarView.dayBinder =
                 object : MonthDayBinder<DayViewContainer> {
@@ -162,7 +171,7 @@ class ScheduleMainActivity : AppCompatActivity() {
                         }
 
                         //TODO: For every unavailable...
-                        for(unavailable in UserSession.getUser().unavailableList) {
+                        for(unavailable in user.unavailableList) {
                             val blockDateFormatted = data.date.toString().replace("-", "/")
                             val startDateFormatted = unavailable.startDate
                             val endDateFormatted = unavailable.endDate
@@ -243,7 +252,7 @@ class ScheduleMainActivity : AppCompatActivity() {
                 }
 
 
-            val adapter = AdapterSchedule(UserSession.getUser().unavailableList, lakwatsaList)
+            val adapter = AdapterSchedule(user.unavailableList, lakwatsaList, username != null)
             binding.activityScheduleMainRv.adapter = adapter
             binding.activityScheduleMainRv.layoutManager = LinearLayoutManager(
                 binding.activityScheduleMainRv.context, LinearLayoutManager.VERTICAL, false

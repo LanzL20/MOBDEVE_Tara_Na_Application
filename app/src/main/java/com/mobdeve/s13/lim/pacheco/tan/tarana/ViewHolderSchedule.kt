@@ -21,13 +21,13 @@ import java.util.Calendar
 import kotlin.time.Duration.Companion.days
 
 class ViewHolderSchedule(private val viewBinding: ItemLayoutScheduleBinding) : RecyclerView.ViewHolder(viewBinding.root) {
-    fun bindData(event: Event) {
+    fun bindData(event: Event, hide: Boolean) {
         viewBinding.itemLayoutScheduleTvDate.text = event.dateDays
         viewBinding.itemLayoutScheduleTvMonth.text = event.dateMonths
         viewBinding.itemLayoutScheduleTvEventName.text = event.eventName
         viewBinding.itemLayoutScheduleTvReason.text = event.eventType
 
-        if(event.eventType == Event.EVENT_TYPE_LAKWATSA){
+        if(event.eventType == Event.EVENT_TYPE_LAKWATSA || hide){
             viewBinding.itemLayoutScheduleTvDots.visibility = android.view.View.GONE
         } else {
             viewBinding.itemLayoutScheduleTvDots.visibility = android.view.View.VISIBLE
