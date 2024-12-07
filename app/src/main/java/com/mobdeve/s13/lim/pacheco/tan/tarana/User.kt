@@ -148,6 +148,10 @@ class User {
         this.unavailableList.remove(unavailable)
     }
 
+    fun removeUnavailableAtIndex(index: Int) {
+        this.unavailableList.removeAt(index)
+    }
+
     fun updateUnavailableListAtIndex(index: Int, unavailable: Unavailable) {
         this.unavailableList[index] = unavailable
     }

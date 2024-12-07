@@ -74,10 +74,34 @@ class ScheduleMainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+
+            val startDate = modalBinding.modalScheduleAddEventEt2.text.toString()
+            val endDate = modalBinding.modalScheduleAddEventEt3.text.toString()
+
+            val startDateYear = startDate.split("/")[0]
+            val startDateMonth = startDate.split("/")[1].padStart(2, '0')
+            val startDateDay = startDate.split("/")[2].padStart(2, '0')
+
+            val endDateYear = endDate.split("/")[0]
+            val endDateMonth = endDate.split("/")[1].padStart(2, '0')
+            val endDateDay = endDate.split("/")[2].padStart(2, '0')
+
+            val startDateFormatted = "$startDateYear/$startDateMonth/$startDateDay"
+            val endDateFormatted = "$endDateYear/$endDateMonth/$endDateDay"
+
+            val current = LocalDate.now()
+            val currentFormatted = current.toString().replace("-", "/")
+
+            // if start date is before current date or end date is before start date, show error
+            if (startDateFormatted < currentFormatted || endDateFormatted < startDateFormatted) {
+                Toast.makeText(this, "Invalid date range", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val unavailable = Unavailable(
                 modalBinding.modalScheduleAddEventEt1.text.toString(),
-                modalBinding.modalScheduleAddEventEt2.text.toString(),
-                modalBinding.modalScheduleAddEventEt3.text.toString()
+                startDateFormatted,
+                endDateFormatted
             )
             UserSession.getUser().addUnavailable(unavailable)
             DBHelper.updateUser(UserSession.getUser())
@@ -139,16 +163,18 @@ class ScheduleMainActivity : AppCompatActivity() {
 
                         //TODO: For every unavailable...
                         for(unavailable in UserSession.getUser().unavailableList) {
-                            val startDateYear = unavailable.startDate.split("/")[0].toInt()
-                            val startDateMonth = unavailable.startDate.split("/")[1].toInt()
-                            val startDateDay = unavailable.startDate.split("/")[2].toInt()
-                            val endDateYear = unavailable.endDate.split("/")[0].toInt()
-                            val endDateMonth = unavailable.endDate.split("/")[1].toInt()
-                            val endDateDay = unavailable.endDate.split("/")[2].toInt()
+                            val blockDateFormatted = data.date.toString().replace("-", "/")
+                            val startDateFormatted = unavailable.startDate
+                            val endDateFormatted = unavailable.endDate
 
-                            if (data.date.dayOfMonth >= startDateDay && data.date.dayOfMonth <= endDateDay && data.date.monthValue >= startDateMonth && data.date.monthValue <= endDateMonth && data.date.year >= startDateYear && data.date.year <= endDateYear) {
+                            Log.e("BLOCK", blockDateFormatted)
+                            Log.e("START", startDateFormatted)
+                            Log.e("END", endDateFormatted)
+
+                            if(blockDateFormatted >= startDateFormatted && blockDateFormatted <= endDateFormatted){
                                 container.constraintLayout.setBackgroundResource(R.drawable.date_round_light_orange_10_no_outline)
                                 container.textView.setTextColor(0xFFF6895A.toInt())
+                                Log.e("BLOCK", "BLOCKED")
                             }
 
                         }
@@ -162,13 +188,14 @@ class ScheduleMainActivity : AppCompatActivity() {
 
                         container.textView.text = data.date.dayOfMonth.toString()
 
+                        /*
                         container.constraintLayout.setOnClickListener {
                             Toast.makeText(
                                 this@ScheduleMainActivity,
                                 "Clicked: ${data.date}",
                                 Toast.LENGTH_SHORT
                             ).show()
-                        }
+                        }*/
                     }
                 }
             val currentMonth = YearMonth.now()
@@ -220,27 +247,8 @@ class ScheduleMainActivity : AppCompatActivity() {
                     }
                 }
 
-            var eventList = ArrayList<Event>()
-            eventList.add(
-                Event(
-                    1, "Lunch with friends", LocalDate.of(2021, 8, 20), Event.EVENT_TYPE_LAKWATSA
-                )
-            )
-            eventList.add(
-                Event(
-                    2,
-                    "Dentist Appointment",
-                    LocalDate.of(2021, 8, 21),
-                    Event.EVENT_TYPE_UNAVAILABLE
-                )
-            )
-            eventList.add(
-                Event(
-                    3, "Movie Night", LocalDate.of(2021, 8, 22), Event.EVENT_TYPE_LAKWATSA
-                )
-            )
 
-            val adapter = AdapterSchedule(eventList)
+            val adapter = AdapterSchedule(UserSession.getUser().unavailableList, lakwatsaList)
             binding.activityScheduleMainRv.adapter = adapter
             binding.activityScheduleMainRv.layoutManager = LinearLayoutManager(
                 binding.activityScheduleMainRv.context, LinearLayoutManager.VERTICAL, false
