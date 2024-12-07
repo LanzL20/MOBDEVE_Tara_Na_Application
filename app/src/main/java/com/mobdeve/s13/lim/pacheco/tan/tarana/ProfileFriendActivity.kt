@@ -20,6 +20,10 @@ class ProfileFriendActivity:AppCompatActivity() {
         val viewBinding = ActivityProfileFriendBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
+        Log.e("ProfileFriendActivity", UserSession.getUser().friendRequestsSent.toString())
+        Log.e("ProfileFriendActivity", UserSession.getUser().friendRequestsReceived.toString())
+        Log.e("ProfileFriendActivity", intent.getStringExtra(USER_KEY).toString())
+
         if(UserSession.getUser().friendsList.contains(intent.getStringExtra(USER_KEY).toString())){
             viewBinding.followingText.text = "Following"
             viewBinding.friendScheduleBtn.visibility = View.VISIBLE

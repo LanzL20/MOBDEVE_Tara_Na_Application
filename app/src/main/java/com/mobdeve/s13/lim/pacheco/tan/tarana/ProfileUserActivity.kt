@@ -13,7 +13,8 @@ class ProfileUserActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val viewBinding = ActivityProfileUserBinding.inflate(layoutInflater)
         Log.d("MainActivity", "Welcome Activity Created")
-        var user=UserSession.getUser()!!
+        var user = UserSession.getUser()!!
+        DBHelper.activateUserListener()
         Log.d("MainActivity", "Welcome Activity Created123")
         viewBinding.activityProfileUserName.text= user.name
         viewBinding.activityProfileUserUsername.text= "@"+user.username

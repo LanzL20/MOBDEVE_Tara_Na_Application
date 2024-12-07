@@ -11,6 +11,47 @@ import java.util.Date
 
 object DBHelper {
 
+    var userListenerActive = false
+
+    fun activateUserListener(){
+        if(!userListenerActive){
+            userListenerActive = true
+            val db = Firebase.firestore
+            db.collection("users")
+                .document(UserSession.getUser().username)
+                .addSnapshotListener { value, e ->
+                    if (e != null) {
+                        Log.w("MainActivity", "Listen failed.", e)
+                        return@addSnapshotListener
+                    }
+                    if (value != null) {
+                        val tempUnavailable = ArrayList<Unavailable>()
+                        for(unavailable in value.get(User.UNAVAILABLE_LIST_KEY) as ArrayList<HashMap<String, Any>>){
+                            tempUnavailable.add(Unavailable(
+                                unavailable["name"] as String,
+                                unavailable["startDate"] as String,
+                                unavailable["endDate"] as String
+                            ))
+                        }
+                        UserSession.setUser(
+                            User(
+                                value.get(User.NAME_KEY).toString(),
+                                value.get(User.USERNAME_KEY).toString(),
+                                value.get(User.PASSWORD_KEY).toString(),
+                                value.get(User.PHONE_NUMBER_KEY).toString(),
+                                value.get(User.PROFILE_PICTURE_KEY).toString().toInt(),
+                                value.get(User.FRIENDS_LIST_KEY) as ArrayList<String>,
+                                value.get(User.LAKWATSA_LIST_KEY) as ArrayList<String>,
+                                value.get(User.FRIEND_REQUESTS_SENT_KEY) as ArrayList<String>,
+                                value.get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
+                                tempUnavailable
+                            )
+                        )
+                    }
+                }
+        }
+    }
+
     // this function will be used to add a user to the database
     fun addUser(user: User) {
         val dbuser = hashMapOf(
@@ -46,6 +87,14 @@ object DBHelper {
             .get()
             .await()
         // return the user
+        val tempUnavailable = ArrayList<Unavailable>()
+        for(unavailable in result.documents[0].get(User.UNAVAILABLE_LIST_KEY) as ArrayList<HashMap<String, Any>>){
+            tempUnavailable.add(Unavailable(
+                unavailable["name"] as String,
+                unavailable["startDate"] as String,
+                unavailable["endDate"] as String
+            ))
+        }
         return User(
             result.documents[0].get(User.NAME_KEY).toString(),
             result.documents[0].get(User.USERNAME_KEY).toString(),
@@ -56,7 +105,7 @@ object DBHelper {
             result.documents[0].get(User.LAKWATSA_LIST_KEY) as ArrayList<String>,
             result.documents[0].get(User.FRIEND_REQUESTS_SENT_KEY) as ArrayList<String>,
             result.documents[0].get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
-            result.documents[0].get(User.UNAVAILABLE_LIST_KEY) as ArrayList<Unavailable>
+            tempUnavailable
         )
     }
 
@@ -133,6 +182,40 @@ object DBHelper {
             result.documents[0].get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
             tempUnavailable
         )
+    }
+
+    suspend fun getUsers(ids: ArrayList<String>):ArrayList<User>{
+        val db = Firebase.firestore
+
+        val result = db.collection("users")
+            .whereIn(User.USERNAME_KEY, ids)
+            .get()
+            .await()
+
+        val users = ArrayList<User>()
+        for(document in result.documents){
+            val tempUnavailable = ArrayList<Unavailable>()
+            for(unavailable in document.get(User.UNAVAILABLE_LIST_KEY) as ArrayList<HashMap<String, Any>>){
+                tempUnavailable.add(Unavailable(
+                    unavailable["name"] as String,
+                    unavailable["startDate"] as String,
+                    unavailable["endDate"] as String
+                ))
+            }
+            users.add(User(
+                document.get(User.NAME_KEY).toString(),
+                document.get(User.USERNAME_KEY).toString(),
+                document.get(User.PASSWORD_KEY).toString(),
+                document.get(User.PHONE_NUMBER_KEY).toString(),
+                document.get(User.PROFILE_PICTURE_KEY).toString().toInt(),
+                document.get(User.FRIENDS_LIST_KEY) as ArrayList<String>,
+                document.get(User.LAKWATSA_LIST_KEY) as ArrayList<String>,
+                document.get(User.FRIEND_REQUESTS_SENT_KEY) as ArrayList<String>,
+                document.get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
+                tempUnavailable
+            ))
+        }
+        return users
     }
 
     // this function will be used to update a user in the database

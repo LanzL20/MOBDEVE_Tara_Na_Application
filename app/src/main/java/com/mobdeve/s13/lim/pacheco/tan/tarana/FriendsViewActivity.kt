@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityFriendsViewBinding
+import kotlinx.coroutines.launch
 
 class FriendsViewActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,16 +20,13 @@ class FriendsViewActivity: AppCompatActivity() {
             val intent = Intent(this, FriendsAddActivity::class.java)
             startActivity(intent)
         }
-        viewBinding.activityFriendsViewFriend1Ll.setOnClickListener {
-            Log.d("FriendsViewActivity", "Details clicked")
-            val intent = Intent(this, ProfileFriendActivity::class.java)
-            startActivity(intent)
-        }
-        viewBinding.activityFriendsViewFriend2Ll.setOnClickListener {
-            Log.d("FriendsViewActivity", "Details clicked")
-            val intent = Intent(this, ProfileFriendActivity::class.java)
-            startActivity(intent)
 
+        lifecycleScope.launch {
+            val friendList = UserSession.getUser().friendsList
+            val friends = DBHelper.getUsers(friendList)
+            val adapter = AdapterFriendsAdd(friends)
+            viewBinding.activityFriendsViewRv.adapter = adapter
+            viewBinding.activityFriendsViewRv.layoutManager = LinearLayoutManager(this@FriendsViewActivity, LinearLayoutManager.VERTICAL, false)
         }
 
         // NAVIGATION BUTTONS
