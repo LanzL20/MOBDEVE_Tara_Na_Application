@@ -130,8 +130,9 @@ class LakwatsaOngoingActivity: AppCompatActivity() {
             startActivity(intent)
         }
         binding.activityLakwatsaOngoingMapIv.setOnClickListener{
-            val intent = Intent(this, LakwatsaLocationActivity::class.java)
-            startActivity(intent)
+            val newintent = Intent(this, LakwatsaLocationActivity::class.java)
+            newintent.putExtra(Lakwatsa.ID_KEY, intent.getStringExtra(Lakwatsa.ID_KEY))
+            startActivity(newintent)
         }
 
         binding.optionsIcon.setOnClickListener { view ->

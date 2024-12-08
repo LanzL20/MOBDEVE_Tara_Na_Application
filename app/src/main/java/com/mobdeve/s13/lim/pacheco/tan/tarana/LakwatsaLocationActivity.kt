@@ -2,13 +2,17 @@ package com.mobdeve.s13.lim.pacheco.tan.tarana
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
@@ -16,10 +20,13 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.Task
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityLakwatsaLocationBinding
+import kotlinx.coroutines.launch
 import java.util.Locale
 
 class LakwatsaLocationActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -31,12 +38,21 @@ class LakwatsaLocationActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityLakwatsaLocationBinding
 
+    private var handler=Handler()
+    private var runnable:Runnable?=null
+    private val LOCATION_UPDATE_INTERVAL:Long=9000
+
+    private lateinit var lakwatsa:Lakwatsa
+
+    private var user: User= UserSession.getUser()
+
+    private var userMarkers= mutableMapOf<String, Marker>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityLakwatsaLocationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         fusedLocationProviderClient= LocationServices.getFusedLocationProviderClient(this)
         getLastLocation()
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -68,10 +84,9 @@ class LakwatsaLocationActivity : AppCompatActivity(), OnMapReadyCallback {
                         val supportMapFragment = supportFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
                         supportMapFragment.getMapAsync { googleMap ->
                             val latLng = LatLng(currentLocation!!.latitude, currentLocation!!.longitude)
-                            val markerOptions = MarkerOptions().position(latLng).title("I am here!")
                             googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
-                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5f))
-                            googleMap.addMarker(markerOptions)
+                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+                            placeOrUpdateUserOnMap(latLng, user.getDrawableProfilePicture(), user.name, user.uid)
                         }
                     }
                 }
@@ -85,10 +100,9 @@ class LakwatsaLocationActivity : AppCompatActivity(), OnMapReadyCallback {
                     val supportMapFragment = supportFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
                     supportMapFragment.getMapAsync { googleMap ->
                         val latLng = LatLng(currentLocation!!.latitude, currentLocation!!.longitude)
-                        val markerOptions = MarkerOptions().position(latLng).title(UserSession.getUser().name)
                         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5f))
-                        googleMap.addMarker(markerOptions)
+                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+                        placeOrUpdateUserOnMap(latLng, user.getDrawableProfilePicture(), user.name, user.uid)
                     }
                     DBHelper.saveLocation(currentLocation!!.latitude, currentLocation!!.longitude)
                 }
@@ -108,14 +122,8 @@ class LakwatsaLocationActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-
         googleMap.setOnMapClickListener { latLng ->
             Log.d("LakwatsaLocationActivityDebugging", "Latitude: ${latLng.latitude}, Longitude: ${latLng.longitude}")
-            mMap.clear()
             val name= getPlaceName(latLng)
             mMap.addMarker(MarkerOptions().position(latLng))
             Log.d("LakwatsaLocationActivity", "Latitude: ${latLng.latitude}, Longitude: ${latLng.longitude}")
@@ -130,5 +138,57 @@ class LakwatsaLocationActivity : AppCompatActivity(), OnMapReadyCallback {
         Log.d("LakwatsaLocationActivityDebugging", addresses[0].getAddressLine(0))
         Log.d("LakwatsaLocationActivityDebugging", "Address: $address")
         return address
+    }
+
+    private fun placeOrUpdateUserOnMap(latLng: LatLng, image: Int, name: String, uid: String){
+        if(userMarkers.containsKey(uid)){
+            userMarkers[uid]?.position=latLng
+            return
+        }
+        else{
+            val bitmap=BitmapFactory.decodeResource(resources, image)
+            val scaledBitmap=Bitmap.createScaledBitmap(bitmap, 100, 100, false)
+            val customMarker=BitmapDescriptorFactory.fromBitmap(scaledBitmap)
+            val marker=mMap.addMarker(MarkerOptions().position(latLng).title(name).icon(customMarker))
+            userMarkers[uid]=marker!!
+        }
+    }
+
+    private fun startLocationUpdates(){
+        retrieveUserLocations()
+        runnable= Runnable {
+            retrieveUserLocations()
+            handler.postDelayed(runnable!!, LOCATION_UPDATE_INTERVAL)
+        }
+        handler.postDelayed(runnable!!, LOCATION_UPDATE_INTERVAL)
+    }
+
+    private fun stopLocationUpdates(){
+        handler.removeCallbacks(runnable!!)
+    }
+
+    private fun retrieveUserLocations(){
+        lifecycleScope.launch {
+            lakwatsa= DBHelper.getLakwatsa(intent.getStringExtra(Lakwatsa.ID_KEY)!!)
+            for (userID in lakwatsa.lakwatsaUsers){
+                val user= DBHelper.getUserbyUid(userID)
+                if (user.latitude!=0.toDouble() && user.longitude!=0.toDouble()){
+                    val latLng= LatLng(user.latitude, user.longitude)
+                    Log.d("LakwatsaLocationActivity", "Latitude: ${latLng.latitude}, Longitude: ${latLng.longitude}")
+                    Log.d("LakwatsaLocationActivity", "User: ${user.name}")
+                    placeOrUpdateUserOnMap(latLng, user.getDrawableProfilePicture(), user.name, user.uid)
+                }
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        startLocationUpdates()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        stopLocationUpdates()
     }
 }

@@ -125,6 +125,40 @@ object DBHelper {
         )
     }
 
+    suspend fun getUserbyUid(uid:String): User {
+        val db = Firebase.firestore
+        // get the user from the database
+        val result = db.collection("users")
+            .whereEqualTo(User.UID_KEY, uid)
+            .get()
+            .await()
+        // return the user
+        val tempUnavailable = ArrayList<Unavailable>()
+        for(unavailable in result.documents[0].get(User.UNAVAILABLE_LIST_KEY) as ArrayList<HashMap<String, Any>>){
+            tempUnavailable.add(Unavailable(
+                unavailable["name"] as String,
+                unavailable["startDate"] as String,
+                unavailable["endDate"] as String
+            ))
+        }
+        return User(
+            result.documents[0].get(User.NAME_KEY).toString(),
+            result.documents[0].get(User.USERNAME_KEY).toString(),
+            result.documents[0].get(User.PASSWORD_KEY).toString(),
+            result.documents[0].get(User.PHONE_NUMBER_KEY).toString(),
+            result.documents[0].get(User.PROFILE_PICTURE_KEY).toString().toInt(),
+            result.documents[0].get(User.FRIENDS_LIST_KEY) as ArrayList<String>,
+            result.documents[0].get(User.LAKWATSA_LIST_KEY) as ArrayList<String>,
+            result.documents[0].get(User.FRIEND_REQUESTS_SENT_KEY) as ArrayList<String>,
+            result.documents[0].get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
+            tempUnavailable,
+            result.documents[0].id,
+            result.documents[0].get(User.LATITUDE_KEY).toString().toDouble(),
+            result.documents[0].get(User.LONGITUDE_KEY).toString().toDouble(),
+            result.documents[0].get(User.SALT_KEY).toString()
+        )
+    }
+
     suspend fun getUsersByUsernameOrPhoneNumber(search: String): ArrayList<User>{
         val db = Firebase.firestore
         val users = ArrayList<User>()
@@ -429,10 +463,26 @@ object DBHelper {
 
 
     fun saveLocation(latitude: Double, longitude: Double){
+        if(UserSession.isLoggedIn()==false){
+            return
+        }
+
         val db = Firebase.firestore
         val user = UserSession.getUser()
         user.latitude = latitude
         user.longitude = longitude
         updateUser(user)
+    }
+
+    suspend fun getLocation(userID:String): LatLng{
+        val db = Firebase.firestore
+        val result = db.collection("users")
+            .whereEqualTo(User.UID_KEY, userID)
+            .get()
+            .await()
+        return LatLng.newBuilder()
+            .setLatitude(result.documents[0].get(User.LATITUDE_KEY).toString().toDouble())
+            .setLongitude(result.documents[0].get(User.LONGITUDE_KEY).toString().toDouble())
+            .build()
     }
 }

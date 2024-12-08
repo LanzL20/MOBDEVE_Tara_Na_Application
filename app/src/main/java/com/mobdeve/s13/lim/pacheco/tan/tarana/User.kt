@@ -191,5 +191,19 @@ class User {
         this.unavailableList[index] = unavailable
     }
 
+    fun getDrawableProfilePicture(): Int {
+        if(this.profilePicture == 1) {
+            return R.drawable.asset_profile1
+        }
+        else if(this.profilePicture == 2) {
+            return R.drawable.asset_profile2
+        }
+        else if(this.profilePicture == 3) {
+            return R.drawable.asset_profile3
+        }
+        else{
+            return R.drawable.asset_profile1
+        }
+    }
 
 }
