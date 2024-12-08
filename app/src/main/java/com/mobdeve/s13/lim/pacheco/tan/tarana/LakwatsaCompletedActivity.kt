@@ -26,6 +26,10 @@ class LakwatsaCompletedActivity: AppCompatActivity() {
         viewBinding = ActivityLakwatsaCompletedBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
+        // User profile button
+        var user = UserSession.getUser()
+        viewBinding.profileUser1.setImageResource(user.getDrawableProfilePicture())
+
         viewBinding.optionsIcon.visibility = View.GONE
         lifecycleScope.launch {
             val lakwatsa = DBHelper.getLakwatsa(intent.getStringExtra(Lakwatsa.ID_KEY)!!)

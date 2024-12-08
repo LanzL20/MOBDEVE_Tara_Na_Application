@@ -14,7 +14,8 @@ import kotlin.reflect.typeOf
 class ProfileInboxActivity: AppCompatActivity() {
     lateinit var viewBinding: ActivityProfileInboxBinding
     private lateinit var adapterInbox: AdapterInbox
-    var user=UserSession.getUser()
+    var user = UserSession.getUser()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityProfileInboxBinding.inflate(layoutInflater)
@@ -24,10 +25,10 @@ class ProfileInboxActivity: AppCompatActivity() {
             DBHelper.setAllNotificationsRead(user)
         }
 
+        // User profile button
+        viewBinding.profileUser1.setImageResource(user.getDrawableProfilePicture())
 
         //val sampleData = fetchNotifications()
-        Log.d("ProfileInboxActivity", user.notificationList::class.simpleName.toString())
-        Log.d("ProfileInboxActivity", user.notificationList[0]::class.java.toString())
         adapterInbox = AdapterInbox(user.notificationList)
         viewBinding.rvNotifications.layoutManager = LinearLayoutManager(this)
         viewBinding.rvNotifications.adapter = adapterInbox

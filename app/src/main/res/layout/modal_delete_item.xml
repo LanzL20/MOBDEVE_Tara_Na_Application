@@ -44,7 +44,7 @@
             android:layout_marginTop="30dp"
             android:fontFamily="@font/jeko_demo_medium"
             android:lineSpacingExtra="10sp"
-            android:text="Downloading all photos might take a while? Is that alright?"
+            android:text="Downloading all photos might take a while. Is that alright?"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="18sp" />

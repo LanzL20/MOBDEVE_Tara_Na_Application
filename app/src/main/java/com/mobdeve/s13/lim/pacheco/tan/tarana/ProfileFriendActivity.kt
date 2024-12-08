@@ -20,6 +20,10 @@ class ProfileFriendActivity:AppCompatActivity() {
         val viewBinding = ActivityProfileFriendBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
+        // User profile button
+        var user = UserSession.getUser()
+        viewBinding.profileUser1.setImageResource(user.getDrawableProfilePicture())
+
         Log.e("ProfileFriendActivity", UserSession.getUser().friendRequestsSent.toString())
         Log.e("ProfileFriendActivity", UserSession.getUser().friendRequestsReceived.toString())
         Log.e("ProfileFriendActivity", intent.getStringExtra(USER_KEY).toString())
