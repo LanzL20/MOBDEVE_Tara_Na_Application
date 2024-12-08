@@ -19,7 +19,7 @@ class AdapterAlbumView(private var data: ArrayList<Lakwatsa>): RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: ViewHolderAlbumView, position: Int) {
-        holder.bindData(data[position])
+        holder.bindData(data[position], position)
         holder.itemView.setOnClickListener{
             val intent = Intent(holder.itemView.context, AlbumAlbumActivity::class.java)
             intent.putExtra(Lakwatsa.ID_KEY, data[position].lakwatsaId)
