@@ -9,7 +9,6 @@ object UserSession {
     fun setUser(user: User) {
         this.user = user
         isUserLoggedIn = true
-        Log.e("UserSession", "User set")
     }
 
     fun getUser(): User {

@@ -20,6 +20,8 @@ import androidx.appcompat.view.ContextThemeWrapper
 import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.firestore
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityLakwatsaCreateBinding
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityLakwatsaUpcomingBinding
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ModalDeleteItemBinding
@@ -97,6 +99,23 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
 
             setupRecyclerView()
 
+            binding.activityLakwtsaUpcomingPollingRv.adapter = AdapterPolling(lakwatsa.pollingList, lakwatsa.lakwatsaId)
+            binding.activityLakwtsaUpcomingPollingRv.layoutManager = LinearLayoutManager(this@LakwatsaUpcomingActivity)
+
+            val db = Firebase.firestore
+            db.collection("lakwatsas")
+                .document(intent.getStringExtra(Lakwatsa.ID_KEY)!!)
+                .addSnapshotListener { value, e ->
+                    if (e != null) {
+                        Log.w("MainActivity", "Listen failed.", e)
+                        return@addSnapshotListener
+                    }
+                    Log.e("MainActivity", "Data: ${value?.data}")
+                    if (value != null) {
+                        (binding.activityLakwtsaUpcomingPollingRv.adapter as AdapterPolling).setData(value.data?.get("pollingList") as HashMap<String, ArrayList<String>>)
+                    }
+                }
+
             var time = ""
             if(binding.activityLakwtsaUpcomingTime.text.toString() != "(No time set yet...)"){
                 time = binding.activityLakwtsaUpcomingTime.text.toString()
@@ -121,6 +140,33 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
                 startActivity(intent2)
                 finish()
             }
+        }
+
+        var cal = Calendar.getInstance()
+        var year = cal.get(Calendar.YEAR)
+        var month = cal.get(Calendar.MONTH)
+        var day = cal.get(Calendar.DAY_OF_MONTH)
+        binding.addIcon.setOnClickListener{
+            val datePickerDialog = DatePickerDialog(this, { _, year, month, dayOfMonth ->
+                val month = (month + 1).toString().padStart(2, '0')
+                val dayOfMonth = dayOfMonth.toString().padStart(2, '0')
+                val date = "$year/$month/$dayOfMonth"
+
+                val timePickerDialog = TimePickerDialog(this, { _, hourOfDay, minute ->
+                    val time = String.format("%02d:%02d", hourOfDay, minute)
+                    val dateTime = "$date $time"
+                    lifecycleScope.launch {
+                        val lakwatsa = DBHelper.getLakwatsa(intent.getStringExtra(Lakwatsa.ID_KEY)!!)
+                        lakwatsa.addPollingOption(dateTime)
+                        DBHelper.updateLakwatsa(lakwatsa)
+                        finish()
+                        startActivity(intent)
+                    }
+                }, 12, 0, true) // Default time: 12:00 (24-hour format)
+                timePickerDialog.show()
+            }, year, month, day)
+
+            datePickerDialog.show()
         }
 
         // NAVIGATION BUTTONS

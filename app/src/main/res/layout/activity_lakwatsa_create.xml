@@ -135,7 +135,8 @@
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge"
-            android:textColorHint="#808080">
+            android:textColorHint="#808080"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/activity_lakwatsa_create_et_friends"
@@ -144,14 +145,17 @@
                 android:background="@drawable/btn_round_white_80"
                 android:fontFamily="@font/jeko_demo_medium"
                 android:hint="Invite friends"
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:padding="10dp"
                 android:paddingStart="25dp"
                 android:paddingEnd="25dp"
                 android:focusable="false"
                 android:drawableStart="@drawable/ic_add_user_small"
                 android:drawablePadding="10dp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:scrollHorizontally="false"
+                android:ellipsize="none"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout

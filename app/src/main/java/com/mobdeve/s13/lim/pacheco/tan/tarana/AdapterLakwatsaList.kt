@@ -9,6 +9,9 @@ import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityLakwatsaListBi
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ItemLayoutLakwatsaListBinding
 
 class AdapterLakwatsaList(private var data: ArrayList<Lakwatsa>): RecyclerView.Adapter<ViewHolderLakwatsaList>() {
+
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderLakwatsaList {
         val layoutInflater = LayoutInflater.from(parent.context)
         val itemBinding = ItemLayoutLakwatsaListBinding.inflate(layoutInflater, parent, false)

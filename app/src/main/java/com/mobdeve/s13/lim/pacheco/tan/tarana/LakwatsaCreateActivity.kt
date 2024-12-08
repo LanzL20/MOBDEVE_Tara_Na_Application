@@ -74,6 +74,14 @@ class LakwatsaCreateActivity : AppCompatActivity() {
             datePickerDialog.show()
         }
         binding.activityLakwatsaCreateBtn.setOnClickListener {
+            if(binding.activityLakwatsaCreateEtTitle.text.toString().isEmpty()){
+                binding.activityLakwatsaCreateEtTitle.error = "Title is required"
+                return@setOnClickListener
+            }
+            if(binding.activityLakwatsaCreateEtDatetime.text.toString().isEmpty()){
+                binding.activityLakwatsaCreateEtDatetime.error = "Tentative date is required"
+                return@setOnClickListener
+            }
             lifecycleScope.launch {
                 val users = ArrayList<User>()
                 val usernames = ArrayList<String>()

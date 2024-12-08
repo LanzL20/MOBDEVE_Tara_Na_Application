@@ -3,7 +3,6 @@ package com.mobdeve.s13.lim.pacheco.tan.tarana
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ItemLayoutFriendToAddBinding
 

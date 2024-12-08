@@ -59,6 +59,7 @@ class LakwatsaCompletedActivity: AppCompatActivity() {
                 viewBinding.activityLakwatsaCompletedFriend2Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[1]).profilePicture, "drawable", packageName))
                 viewBinding.activityLakwatsaCompletedFriend2Iv.visibility = View.VISIBLE
                 viewBinding.moreFriendsTv.setText("+" + (lakwatsa.lakwatsaUsers.size - 2).toString())
+                viewBinding.moreFriends.visibility = View.VISIBLE
             }
         }
 

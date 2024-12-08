@@ -68,24 +68,27 @@ class LakwatsaOngoingActivity: AppCompatActivity() {
 
             }
             binding.endBtn.setOnClickListener{
-                val newLakwatsa = Lakwatsa(
-                    lakwatsa.lakwatsaId,
-                    lakwatsa.lakwatsaUsers,
-                    lakwatsa.locationLatitude,
-                    lakwatsa.locationLongitude,
-                    binding.activityTitleTv.text.toString(),
-                    lakwatsa.date,
-                    lakwatsa.time,
-                    lakwatsa.pollingList,
-                    lakwatsa.album,
-                    Lakwatsa.LAKWATSA_COMPLETED,
-                    lakwatsa.lakwatsaAdmin
-                )
-                DBHelper.updateLakwatsa(newLakwatsa)
-                val intent2 = Intent(this@LakwatsaOngoingActivity, LakwatsaCompletedActivity::class.java)
-                intent2.putExtra(Lakwatsa.ID_KEY, intent.getStringExtra(Lakwatsa.ID_KEY))
-                startActivity(intent2)
-                finish()
+                lifecycleScope.launch{
+                    val lakwatsa = DBHelper.getLakwatsa(intent.getStringExtra(Lakwatsa.ID_KEY)!!)
+                    val newLakwatsa = Lakwatsa(
+                        lakwatsa.lakwatsaId,
+                        lakwatsa.lakwatsaUsers,
+                        lakwatsa.locationLatitude,
+                        lakwatsa.locationLongitude,
+                        binding.activityTitleTv.text.toString(),
+                        lakwatsa.date,
+                        lakwatsa.time,
+                        lakwatsa.pollingList,
+                        lakwatsa.album,
+                        Lakwatsa.LAKWATSA_COMPLETED,
+                        lakwatsa.lakwatsaAdmin
+                    )
+                    DBHelper.updateLakwatsa(newLakwatsa)
+                    val intent2 = Intent(this@LakwatsaOngoingActivity, LakwatsaCompletedActivity::class.java)
+                    intent2.putExtra(Lakwatsa.ID_KEY, intent.getStringExtra(Lakwatsa.ID_KEY))
+                    startActivity(intent2)
+                    finish()
+                }
             }
         }
 

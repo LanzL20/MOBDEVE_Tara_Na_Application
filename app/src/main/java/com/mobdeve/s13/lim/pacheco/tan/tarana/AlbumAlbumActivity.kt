@@ -142,6 +142,38 @@ class AlbumAlbumActivity: AppCompatActivity() {
             viewBinding.albumAlbumRv.addItemDecoration(MarginItemDecoration(10))
             viewBinding.activityAlbumAlbumTitle.text = lakwatsa.lakwatsaTitle
             viewBinding.activityAlbumAlbumDate.text = lakwatsa.date.toString()
+            viewBinding.activityAlbumAlbumFriend1Iv.visibility = View.GONE
+            viewBinding.activityAlbumAlbumFriend2Iv.visibility = View.GONE
+            viewBinding.activityAlbumAlbumFriend3Iv.visibility = View.GONE
+            viewBinding.moreFriends.visibility = View.GONE
+            if(lakwatsa.lakwatsaUsers.size == 1){
+                viewBinding.activityAlbumAlbumFriend1Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[0]).profilePicture, "drawable", packageName))
+                viewBinding.activityAlbumAlbumFriend1Iv.visibility = View.VISIBLE
+            }
+            else if (lakwatsa.lakwatsaUsers.size == 2){
+                viewBinding.activityAlbumAlbumFriend1Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[0]).profilePicture, "drawable", packageName))
+                viewBinding.activityAlbumAlbumFriend2Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[1]).profilePicture, "drawable", packageName))
+                viewBinding.activityAlbumAlbumFriend1Iv.visibility = View.VISIBLE
+                viewBinding.activityAlbumAlbumFriend2Iv.visibility = View.VISIBLE
+            }
+            else if (lakwatsa.lakwatsaUsers.size == 3){
+                viewBinding.activityAlbumAlbumFriend1Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[0]).profilePicture, "drawable", packageName))
+                viewBinding.activityAlbumAlbumFriend2Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[1]).profilePicture, "drawable", packageName))
+                viewBinding.activityAlbumAlbumFriend3Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[2]).profilePicture, "drawable", packageName))
+                viewBinding.activityAlbumAlbumFriend1Iv.visibility = View.VISIBLE
+                viewBinding.activityAlbumAlbumFriend2Iv.visibility = View.VISIBLE
+                viewBinding.activityAlbumAlbumFriend3Iv.visibility = View.VISIBLE
+            }
+            else {
+                viewBinding.activityAlbumAlbumFriend1Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[0]).profilePicture, "drawable", packageName))
+                viewBinding.activityAlbumAlbumFriend1Iv.visibility = View.VISIBLE
+                viewBinding.activityAlbumAlbumFriend2Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[1]).profilePicture, "drawable", packageName))
+                viewBinding.activityAlbumAlbumFriend2Iv.visibility = View.VISIBLE
+                viewBinding.activityAlbumAlbumFriend3Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[2]).profilePicture, "drawable", packageName))
+                viewBinding.activityAlbumAlbumFriend3Iv.visibility = View.VISIBLE
+                viewBinding.moreFriendsTv.text = "+" + (lakwatsa.lakwatsaUsers.size - 3).toString()
+                viewBinding.moreFriends.visibility = View.VISIBLE
+            }
         }
     }
 

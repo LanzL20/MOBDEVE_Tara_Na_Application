@@ -17,6 +17,7 @@ class AlbumViewActivity: AppCompatActivity() {
     lateinit var viewBinding: ActivityAlbumViewBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.e("AlbumViewActivity", "oncreate")
         super.onCreate(savedInstanceState)
         viewBinding = ActivityAlbumViewBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
@@ -40,10 +41,13 @@ class AlbumViewActivity: AppCompatActivity() {
     override fun onResume(){
         super.onResume()
 
+        Log.e("AlbumViewActivity", "onResume")
         lifecycleScope.launch {
+            Log.e("AlbumViewActivity", "onResume")
             val data = UserSession.getUser().lakwatsaList
             if(viewBinding.albumRv.adapter == null) {
                 val lakwatsaList = DBHelper.getAllLakwatsaFromList(data)
+                Log.e("AlbumViewActivity", "lakwatsaList: $lakwatsaList")
                 // remove all upcoming lakwatsas
                 for (lakwatsa in lakwatsaList){
                     if(lakwatsa.status == Lakwatsa.LAKWATSA_UPCOMING){

@@ -1,6 +1,7 @@
 package com.mobdeve.s13.lim.pacheco.tan.tarana
 
 import android.app.Activity
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
