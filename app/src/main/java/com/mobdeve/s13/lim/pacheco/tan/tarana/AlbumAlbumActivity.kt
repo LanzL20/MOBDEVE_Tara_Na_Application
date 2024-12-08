@@ -2,9 +2,12 @@ package com.mobdeve.s13.lim.pacheco.tan.tarana
 
 import AdapterAlbumAlbum
 import MarginItemDecoration
+import android.content.ContentValues
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +17,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -24,7 +28,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.firebase.storage.FirebaseStorage
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityAlbumAlbumBinding
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
+import java.io.File
 import kotlin.math.min
 
 
@@ -103,16 +111,22 @@ class AlbumAlbumActivity: AppCompatActivity() {
             val contextWrapper = ContextThemeWrapper(this, R.style.CustomPopupMenu)
             val popupMenu = PopupMenu(contextWrapper, view)
 
-            popupMenu.menu.add(0, 1, 0, "Delete album")
-            popupMenu.menu.add(0, 2, 1, "Edit album")
+            popupMenu.menu.add(0, 1, 0, "Download Album")
+            popupMenu.menu.add(0, 2, 1, "Edit Album")
 
             popupMenu.show()
 
             popupMenu.setOnMenuItemClickListener { item: MenuItem ->
                 when (item.itemId) {
                     1 -> {
-                        showDeleteConfirmationDialog()
-                        true
+                        if(viewBinding.albumAlbumRv.adapter?.itemCount == 1){
+                            Toast.makeText(this, "Album is empty!", Toast.LENGTH_SHORT).show()
+                            false
+                        }
+                        else {
+                            showDeleteConfirmationDialog()
+                            true
+                        }
                     }
                     2 -> {
                         showEditAlbumDialog()
@@ -177,6 +191,61 @@ class AlbumAlbumActivity: AppCompatActivity() {
         }
     }
 
+    suspend fun downloadAllPhotos(imageLinks: ArrayList<String>, albumName: String) {
+        val storage = FirebaseStorage.getInstance()
+        val storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+
+        // Create the album directory if it doesn't exist
+        val albumDir = File(storageDir, albumName)
+        if (!albumDir.exists()) {
+            albumDir.mkdir()
+        }
+
+        // Iterate through all image links
+        for (imageLink in imageLinks) {
+            try {
+                // Create the StorageReference
+                val storageReference = storage.reference.child(imageLink)
+
+                // Get the file name from the link
+                val fileName = storageReference.name
+
+                // Create a temporary file to download the image
+                val tempFile = File(albumDir, fileName)
+
+                // Download the file to local storage
+                storageReference.getFile(tempFile).await()
+
+                // Save to MediaStore (for gallery visibility)
+                saveToGallery(tempFile, fileName, albumName)
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                // Handle errors (e.g., show a toast or log)
+            }
+        }
+    }
+
+    // Save the file to MediaStore (Android Gallery)
+    private suspend fun saveToGallery(file: File, fileName: String, albumName: String) {
+        withContext(Dispatchers.IO) {
+            val contentValues = ContentValues().apply {
+                put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
+                put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+                put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/" + albumName) // Replace with your folder
+            }
+
+            val resolver = contentResolver
+            val uri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+
+            uri?.let {
+                resolver.openOutputStream(it)?.use { outputStream ->
+                    file.inputStream().copyTo(outputStream)
+                }
+            }
+        }
+    }
+
     private fun showDeleteConfirmationDialog() {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.modal_delete_item, null)
 
@@ -204,7 +273,12 @@ class AlbumAlbumActivity: AppCompatActivity() {
         }
 
         btnConfirm.setOnClickListener {
-            // TODO: DELETE ALBUM LOGIC
+            val lakwatsaId = intent.getStringExtra(Lakwatsa.ID_KEY)
+            lifecycleScope.launch {
+                val lakwatsa = DBHelper.getLakwatsa(lakwatsaId!!)
+                downloadAllPhotos(lakwatsa.album, lakwatsa.lakwatsaTitle)
+                Toast.makeText(this@AlbumAlbumActivity, "Download done!", Toast.LENGTH_SHORT).show()
+            }
             dialog.dismiss()
         }
 

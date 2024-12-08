@@ -184,8 +184,9 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
             startActivity(intent)
         }
         binding.availabilityBtn.setOnClickListener{
-            val intent = Intent(this, LakwatsaAvailabilityActivity::class.java)
-            startActivity(intent)
+            val intent2 = Intent(this, LakwatsaAvailabilityActivity::class.java)
+            intent2.putExtra(Lakwatsa.ID_KEY, intent.getStringExtra(Lakwatsa.ID_KEY))
+            startActivity(intent2)
         }
         binding.optionsIcon.setOnClickListener { view ->
             val contextWrapper = ContextThemeWrapper(this, R.style.CustomPopupMenu)
