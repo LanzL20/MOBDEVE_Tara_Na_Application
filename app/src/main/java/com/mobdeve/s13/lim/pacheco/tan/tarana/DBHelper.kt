@@ -257,6 +257,10 @@ object DBHelper {
     suspend fun getUsers(ids: ArrayList<String>):ArrayList<User>{
         val db = Firebase.firestore
 
+        if(ids.isEmpty()){
+            return ArrayList<User>()
+        }
+
         val result = db.collection("users")
             .whereIn(User.USERNAME_KEY, ids)
             .get()

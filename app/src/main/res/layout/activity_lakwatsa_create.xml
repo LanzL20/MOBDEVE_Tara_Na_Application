@@ -148,6 +148,7 @@
                 android:padding="10dp"
                 android:paddingStart="25dp"
                 android:paddingEnd="25dp"
+                android:focusable="false"
                 android:drawableStart="@drawable/ic_add_user_small"
                 android:drawablePadding="10dp"
                 android:textColor="@color/black"/>
@@ -173,6 +174,7 @@
                 android:padding="10dp"
                 android:paddingStart="25dp"
                 android:paddingEnd="25dp"
+                android:focusable="false"
                 android:hint="Tentative date and time"
                 android:drawableStart="@drawable/ic_calendar_small"
                 android:drawablePadding="10dp"
