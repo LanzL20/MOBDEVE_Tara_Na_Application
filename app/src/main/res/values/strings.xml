@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">tara.na</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_lakwatsa_upcomming_set_location">
+        LakwatsaUpcommingSetLocationActivity
+    </string>
+    <string name="google_places_key">AIzaSyAciqXb0BlphIbaKHt0TLmvrp1ns10fCrw</string>
 </resources>

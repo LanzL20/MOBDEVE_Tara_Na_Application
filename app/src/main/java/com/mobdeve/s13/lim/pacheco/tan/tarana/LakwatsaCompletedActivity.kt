@@ -38,6 +38,7 @@ class LakwatsaCompletedActivity: AppCompatActivity() {
             }
             viewBinding.activityLakwtsaCompletedTitle.text = lakwatsa.lakwatsaTitle
             viewBinding.activityLakwtsaCompletedDate.text = lakwatsa.date
+            viewBinding.activityLakwtsaUpcomingLocation.text = lakwatsa.locationName
             if(lakwatsa.time.isNullOrBlank()){
                 viewBinding.activityLakwtsaCompletedTime.text = ""
             } else{
@@ -153,7 +154,8 @@ class LakwatsaCompletedActivity: AppCompatActivity() {
                     lakwatsa.pollingList,
                     lakwatsa.album,
                     lakwatsa.status,
-                    lakwatsa.lakwatsaAdmin)
+                    lakwatsa.lakwatsaAdmin,
+                    lakwatsa.locationName)
                 DBHelper.updateLakwatsa(newLakwatsa)
             }
 

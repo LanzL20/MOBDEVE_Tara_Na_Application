@@ -43,6 +43,7 @@ class LakwatsaOngoingActivity: AppCompatActivity() {
             }
             binding.activityTitleTv.text = lakwatsa.lakwatsaTitle
             binding.activityLakwtsaUpcomingDate.text = lakwatsa.date
+            binding.activityLakwtsaOngoingLocation.text = lakwatsa.locationName
             if(lakwatsa.time.isNullOrBlank()){
                 binding.activityLakwtsaUpcomingTime.text = ""
             } else{
@@ -84,7 +85,8 @@ class LakwatsaOngoingActivity: AppCompatActivity() {
                         lakwatsa.pollingList,
                         lakwatsa.album,
                         Lakwatsa.LAKWATSA_COMPLETED,
-                        lakwatsa.lakwatsaAdmin
+                        lakwatsa.lakwatsaAdmin,
+                        lakwatsa.locationName
                     )
                     for(user in lakwatsa.lakwatsaUsers){
                         lifecycleScope.launch {
@@ -209,7 +211,8 @@ class LakwatsaOngoingActivity: AppCompatActivity() {
                     lakwatsa.pollingList,
                     lakwatsa.album,
                     lakwatsa.status,
-                    lakwatsa.lakwatsaAdmin)
+                    lakwatsa.lakwatsaAdmin,
+                    lakwatsa.locationName)
                 DBHelper.updateLakwatsa(newLakwatsa)
             }
 

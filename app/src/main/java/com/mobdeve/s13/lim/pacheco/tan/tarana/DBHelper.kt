@@ -486,7 +486,8 @@ object DBHelper {
             Lakwatsa.ALBUM_KEY to lakwatsa.album,
             Lakwatsa.STATUS_KEY to lakwatsa.status,
             Lakwatsa.TIME_KEY to lakwatsa.time,
-            Lakwatsa.ADMIN_KEY to lakwatsa.lakwatsaAdmin
+            Lakwatsa.ADMIN_KEY to lakwatsa.lakwatsaAdmin,
+            Lakwatsa.LOCATION_NAME_KEY to lakwatsa.locationName
         )
         val db = Firebase.firestore
 
@@ -515,7 +516,8 @@ object DBHelper {
                 result.documents[0].get(Lakwatsa.POLLING_LIST_KEY) as HashMap<String, ArrayList<String>>,
                 result.documents[0].get(Lakwatsa.ALBUM_KEY) as ArrayList<String>,
                 result.documents[0].get(Lakwatsa.STATUS_KEY).toString().toInt(),
-                result.documents[0].get(Lakwatsa.ADMIN_KEY).toString()
+                result.documents[0].get(Lakwatsa.ADMIN_KEY).toString(),
+                result.documents[0].get(Lakwatsa.LOCATION_NAME_KEY).toString()
             ))
         }
         return lakwatsas
@@ -538,7 +540,8 @@ object DBHelper {
             result.documents[0].get(Lakwatsa.POLLING_LIST_KEY) as HashMap<String, ArrayList<String>>,
             result.documents[0].get(Lakwatsa.ALBUM_KEY) as ArrayList<String>,
             result.documents[0].get(Lakwatsa.STATUS_KEY).toString().toInt(),
-            result.documents[0].get(Lakwatsa.ADMIN_KEY).toString()
+            result.documents[0].get(Lakwatsa.ADMIN_KEY).toString(),
+            result.documents[0].get(Lakwatsa.LOCATION_NAME_KEY).toString()
         )
     }
 
@@ -553,7 +556,8 @@ object DBHelper {
             Lakwatsa.ALBUM_KEY to lakwatsa.album,
             Lakwatsa.STATUS_KEY to lakwatsa.status,
             Lakwatsa.TIME_KEY to lakwatsa.time,
-            Lakwatsa.ADMIN_KEY to lakwatsa.lakwatsaAdmin
+            Lakwatsa.ADMIN_KEY to lakwatsa.lakwatsaAdmin,
+            Lakwatsa.LOCATION_NAME_KEY to lakwatsa.locationName
         )
         val db = Firebase.firestore
         db.collection("lakwatsas")

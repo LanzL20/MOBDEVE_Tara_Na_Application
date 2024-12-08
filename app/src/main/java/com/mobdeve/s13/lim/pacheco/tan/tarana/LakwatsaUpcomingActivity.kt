@@ -46,6 +46,7 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
         var user = UserSession.getUser()
         binding.profileUser1.setImageResource(user.getDrawableProfilePicture())
 
+
         // Setup invite friends modal
         inviteFriendsModalBinding = ModalInviteFriendsBinding.inflate(layoutInflater)
         inviteFriendsModal = Dialog(this).apply {
@@ -65,6 +66,7 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
             }
             binding.activityTitleTv.text = lakwatsa.lakwatsaTitle
             binding.activityLakwtsaUpcomingDate.text = lakwatsa.date
+            binding.activityLakwtsaUpcomingLocation.text = lakwatsa.locationName
             if(lakwatsa.time.isNullOrBlank()){
                 binding.activityLakwtsaUpcomingTime.text = "(No time set yet...)"
             } else{
@@ -97,6 +99,8 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
             binding.addFriends.setOnClickListener{
                 inviteFriendsModal.show()
             }
+
+
             inviteFriendsModalBinding.modalInviteFriendsBtnClose.setOnClickListener {
                 inviteFriendsModal.dismiss()
             }
@@ -136,7 +140,8 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
                     lakwatsa.pollingList,
                     lakwatsa.album,
                     Lakwatsa.LAKWATSA_ONGOING,
-                    lakwatsa.lakwatsaAdmin
+                    lakwatsa.lakwatsaAdmin,
+                    lakwatsa.locationName
                 )
                 DBHelper.updateLakwatsa(newLakwatsa)
                 for(user in lakwatsa.lakwatsaUsers){
@@ -149,6 +154,12 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
                 startActivity(intent2)
                 finish()
             }
+        }
+
+        binding.activityLakwatsaUpcomingLoc.setOnClickListener(){
+            val newintent = Intent(this, LakwatsaUpcommingSetLocationActivity::class.java)
+            newintent.putExtra(Lakwatsa.ID_KEY, intent.getStringExtra(Lakwatsa.ID_KEY))
+            startActivity(newintent)
         }
 
         var cal = Calendar.getInstance()
@@ -230,9 +241,12 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
         val editName = dialogView.findViewById<EditText>(R.id.modal_schedule_edit_name_et)
         val editDate = dialogView.findViewById<EditText>(R.id.modal_lakwatsa_edit_date_et)
         val editTime = dialogView.findViewById<EditText>(R.id.modal_lakwatsa_edit_time_et)
+        val locationName= dialogView.findViewById<EditText>(R.id.modal_lakwatsa_location_name_et)
+
 
         editName.setText(binding.activityTitleTv.text)
         editDate.setText(binding.activityLakwtsaUpcomingDate.text)
+        locationName.setText(binding.activityLakwtsaUpcomingLocation.text)
         if(binding.activityLakwtsaUpcomingTime.text == "(No time set yet...)"){
             editTime.setText("")
         } else{
@@ -289,7 +303,8 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
                     lakwatsa.pollingList,
                     lakwatsa.album,
                     lakwatsa.status,
-                    lakwatsa.lakwatsaAdmin)
+                    lakwatsa.lakwatsaAdmin,
+                    locationName.text.toString())
                 DBHelper.updateLakwatsa(newLakwatsa)
             }
 
@@ -297,6 +312,7 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
             binding.activityTitleTv.text = editName.text.toString()
             binding.activityLakwtsaUpcomingDate.text = editDate.text.toString()
             binding.activityLakwtsaUpcomingTime.text = editTime.text.toString()
+            binding.activityLakwtsaUpcomingLocation.text = locationName.text.toString()
         }
 
         dialog.show()
@@ -357,7 +373,8 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
                     lakwatsa.pollingList,
                     lakwatsa.album,
                     lakwatsa.status,
-                    lakwatsa.lakwatsaAdmin
+                    lakwatsa.lakwatsaAdmin,
+                    lakwatsa.locationName
                 )
                 DBHelper.updateLakwatsa(newLakwatsa)
                 lifecycleScope.launch {

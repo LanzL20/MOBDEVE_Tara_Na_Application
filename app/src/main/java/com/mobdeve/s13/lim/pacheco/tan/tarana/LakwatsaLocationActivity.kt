@@ -25,6 +25,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.Task
+import com.google.android.libraries.places.api.model.kotlin.place
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityLakwatsaLocationBinding
 import kotlinx.coroutines.launch
 import java.util.Locale
@@ -47,6 +48,8 @@ class LakwatsaLocationActivity : AppCompatActivity(), OnMapReadyCallback {
     private var user: User= UserSession.getUser()
 
     private var userMarkers= mutableMapOf<String, Marker>()
+
+    private var placedLocation:Boolean=false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -121,24 +124,11 @@ class LakwatsaLocationActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
-        googleMap.setOnMapClickListener { latLng ->
-            Log.d("LakwatsaLocationActivityDebugging", "Latitude: ${latLng.latitude}, Longitude: ${latLng.longitude}")
-            val name= getPlaceName(latLng)
-            mMap.addMarker(MarkerOptions().position(latLng))
-            Log.d("LakwatsaLocationActivity", "Latitude: ${latLng.latitude}, Longitude: ${latLng.longitude}")
-
-        }
+        val manila= LatLng(14.5995, 120.9842)
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(manila))
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(manila, 10f))
     }
 
-    private fun getPlaceName(latLng: LatLng):String {
-        val geocoder = Geocoder(this, Locale.getDefault())
-        val addresses: List<Address> = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)!!
-        val address: String = addresses[0].getAddressLine(0)
-        Log.d("LakwatsaLocationActivityDebugging", addresses[0].getAddressLine(0))
-        Log.d("LakwatsaLocationActivityDebugging", "Address: $address")
-        return address
-    }
 
     private fun placeOrUpdateUserOnMap(latLng: LatLng, image: Int, name: String, uid: String){
         if(userMarkers.containsKey(uid)){
@@ -170,6 +160,11 @@ class LakwatsaLocationActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun retrieveUserLocations(){
         lifecycleScope.launch {
             lakwatsa= DBHelper.getLakwatsa(intent.getStringExtra(Lakwatsa.ID_KEY)!!)
+            if(placedLocation==false){
+                val lakwatsaLocation= LatLng(lakwatsa.locationLatitude, lakwatsa.locationLongitude)
+                mMap.addMarker(MarkerOptions().position(lakwatsaLocation).title(lakwatsa.locationName))
+                placedLocation=true 
+            }
             for (userID in lakwatsa.lakwatsaUsers){
                 val user= DBHelper.getUserbyUid(userID)
                 if (user.latitude!=0.toDouble() && user.longitude!=0.toDouble()){

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -30,7 +32,13 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${MAPS_API_KEY}" />
+            android:value="YOUR_API_KEY" />
+
+        <activity
+            android:name=".LakwatsaUpcommingSetLocationActivity"
+            android:exported="false"
+            android:label="@string/title_activity_lakwatsa_upcomming_set_location" />
+
         <meta-data
             android:name="com.google.android.libraries.places.api.API_KEY"
             android:value="${PLACES_API_KEY}" />
@@ -73,12 +81,14 @@
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".ProfileUserActivity" />
         <activity android:name=".ScheduleMainActivity" />
-        <service android:name=".LocationService"
-                android:exported="false"
-                android:foregroundServiceType="location"
-                android:stopWithTask="true"
-                android:permission="android.permission.FOREGROUND_SERVICE"
-                tools:ignore="ForegroundServicePermission"/>
+
+        <service
+            android:name=".LocationService"
+            android:exported="false"
+            android:foregroundServiceType="location"
+            android:permission="android.permission.FOREGROUND_SERVICE"
+            android:stopWithTask="true"
+            tools:ignore="ForegroundServicePermission" />
     </application>
 
 </manifest>

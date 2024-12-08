@@ -20,6 +20,7 @@ class Lakwatsa {
         const val STATUS_KEY = "status"
         const val TIME_KEY = "time"
         const val ADMIN_KEY = "lakwatsaAdmin"
+        const val LOCATION_NAME_KEY = "locationName"
     }
 
     var lakwatsaId: String
@@ -31,6 +32,8 @@ class Lakwatsa {
     var locationLatitude: Double
         private set
     var locationLongitude: Double
+        private set
+    var locationName: String
         private set
     var lakwatsaTitle: String
         private set
@@ -62,6 +65,7 @@ class Lakwatsa {
         this.lakwatsaAdmin = lakwatsaAdmin
         this.locationLatitude = 0.0
         this.locationLongitude = 0.0
+        this.locationName = ""
     }
 
     constructor(
@@ -75,7 +79,8 @@ class Lakwatsa {
         pollingList: HashMap<String, ArrayList<String>>,
         album: ArrayList<String>,
         status: Int,
-        lakwatsaAdmin: String
+        lakwatsaAdmin: String,
+        locationName: String
     ) {
         this.lakwatsaId = lakwatsaId
         this.lakwatsaUsers = lakwatsaUsers
@@ -88,6 +93,7 @@ class Lakwatsa {
         this.album = album
         this.status = status
         this.lakwatsaAdmin = lakwatsaAdmin
+        this.locationName = locationName
     }
 
     fun setLakwatsaTitle(newTitle: String) {
@@ -115,6 +121,10 @@ class Lakwatsa {
         user: String
     ) {
         this.pollingList[date]?.remove(user)
+    }
+
+    fun setLocationName(locationName: String) {
+        this.locationName = locationName
     }
 
 }
