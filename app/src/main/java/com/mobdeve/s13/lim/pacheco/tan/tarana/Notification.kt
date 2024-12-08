@@ -4,6 +4,11 @@ import java.util.Date
 
 // abstract class Notification
 abstract class Notification{
+    companion object{
+        const val FRIEND_REQUEST = 1
+        const val LAKWATSA_INVITE = 2
+    }
+
     var message: String
         private set
     var date: Date
