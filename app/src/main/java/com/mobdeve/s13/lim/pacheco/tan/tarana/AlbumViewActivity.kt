@@ -47,19 +47,28 @@ class AlbumViewActivity: AppCompatActivity() {
             val data = UserSession.getUser().lakwatsaList
             if(viewBinding.albumRv.adapter == null) {
                 val lakwatsaList = DBHelper.getAllLakwatsaFromList(data)
+                val lakwatsaListFiltered = ArrayList<Lakwatsa>()
                 Log.e("AlbumViewActivity", "lakwatsaList: $lakwatsaList")
                 // remove all upcoming lakwatsas
                 for (lakwatsa in lakwatsaList){
-                    if(lakwatsa.status == Lakwatsa.LAKWATSA_UPCOMING){
-                        lakwatsaList.remove(lakwatsa)
+                    if(lakwatsa.status != Lakwatsa.LAKWATSA_UPCOMING){
+                        lakwatsaListFiltered.add(lakwatsa)
                     }
                 }
-                val adapter = AdapterAlbumView(lakwatsaList)
+                val adapter = AdapterAlbumView(lakwatsaListFiltered)
                 viewBinding.albumRv.adapter = adapter
                 val layoutManager = GridLayoutManager(viewBinding.albumRv.context, 2)
                 viewBinding.albumRv.layoutManager = layoutManager
             }else{
-                (viewBinding.albumRv.adapter as AdapterAlbumView).setData(DBHelper.getAllLakwatsaFromList(data))
+                val lakwatsaList = DBHelper.getAllLakwatsaFromList(data)
+                val lakwatsaListFiltered = ArrayList<Lakwatsa>()
+                // remove all upcoming lakwatsas
+                for (lakwatsa in lakwatsaList){
+                    if(lakwatsa.status != Lakwatsa.LAKWATSA_UPCOMING){
+                        lakwatsaListFiltered.add(lakwatsa)
+                    }
+                }
+                (viewBinding.albumRv.adapter as AdapterAlbumView).setData(lakwatsaListFiltered)
             }
         }
     }
