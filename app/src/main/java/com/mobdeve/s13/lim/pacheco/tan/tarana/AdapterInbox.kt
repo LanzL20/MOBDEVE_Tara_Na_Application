@@ -1,5 +1,6 @@
 package com.mobdeve.s13.lim.pacheco.tan.tarana
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +16,23 @@ class AdapterInbox(private val notifications: ArrayList<Notification>): Recycler
     }
 
     override fun onBindViewHolder(holder: ViewHolderInbox, position: Int) {
-        holder.bindData(notifications[position])
+        Log.d("ProfileInboxActivity", (notifications::class.java).toString())
+        Log.d("ProfileInboxActivity", "Binding data")
+        Log.d("ProfileInboxActivity", notifications[position].toString())
+
+        holder.bindData(notifications[position], this, position)
+    }
+
+    fun setNotifications(notifications: ArrayList<Notification>, position: Int){
+        this.notifications.clear()
+        this.notifications.addAll(notifications)
+        notifyItemRangeRemoved(position, notifications.size)
+    }
+
+    fun removeNotification(position: Int){
+        this.notifications.removeAt(position)
+        notifyItemRangeRemoved(position, 1)
+        notifyItemRangeChanged(0, notifications.size)
     }
 
     override fun getItemCount(): Int {

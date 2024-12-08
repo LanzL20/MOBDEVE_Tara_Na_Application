@@ -9,6 +9,7 @@ import kotlinx.coroutines.tasks.await
 import java.time.LocalDateTime
 import java.util.Date
 import com.google.type.LatLng
+import java.sql.Time
 
 object DBHelper {
 
@@ -36,6 +37,21 @@ object DBHelper {
                             tempUnavailable.add(Unavailable(name, startDate, endDate))
                         }
 
+                        val tempNotificationList = ArrayList<Notification>()
+                        for(notification in value.get(User.NOTIFICATION_LIST_KEY) as ArrayList<HashMap<String, Any>>){
+                            var tempdate=notification["date"] as Timestamp
+                            var date=tempdate.toDate()
+                            tempNotificationList.add(Notification(
+                                notification["message"] as String,
+                                date,
+                                notification["read"] as Boolean,
+                                notification["sender"] as String,
+                                notification["receiver"] as String,
+                                notification["type"] as Long,
+                                notification["image"] as Long
+                            ))
+                        }
+
                         UserSession.setUser(
                             User(
                                 value.get(User.NAME_KEY).toString(),
@@ -51,7 +67,8 @@ object DBHelper {
                                 value.id,
                                 value.get(User.LATITUDE_KEY).toString()?.toDoubleOrNull() ?: 0.0,
                                 value.get(User.LONGITUDE_KEY).toString()?.toDoubleOrNull() ?: 0.0,
-                                value.get(User.SALT_KEY).toString()
+                                value.get(User.SALT_KEY).toString(),
+                                tempNotificationList
                             )
                         )
                     }
@@ -75,7 +92,8 @@ object DBHelper {
             User.UID_KEY to user.uid,
             User.LATITUDE_KEY to user.latitude,
             User.LONGITUDE_KEY to user.longitude,
-            User.SALT_KEY to user.salt
+            User.SALT_KEY to user.salt,
+            User.NOTIFICATION_LIST_KEY to user.notificationList
         )
         val db = Firebase.firestore
         // add the user to the database
@@ -107,6 +125,21 @@ object DBHelper {
                 unavailable["endDate"] as String
             ))
         }
+
+        val tempNotificationList = ArrayList<Notification>()
+        for(notification in result.documents[0].get(User.NOTIFICATION_LIST_KEY) as ArrayList<HashMap<String, Any>>){
+            var tempdate=notification["date"] as Timestamp
+            var date=tempdate.toDate()
+            tempNotificationList.add(Notification(
+                notification["message"] as String,
+                date,
+                notification["read"] as Boolean,
+                notification["sender"] as String,
+                notification["receiver"] as String,
+                notification["type"] as Long,
+                notification["image"] as Long
+            ))
+        }
         return User(
             result.documents[0].get(User.NAME_KEY).toString(),
             result.documents[0].get(User.USERNAME_KEY).toString(),
@@ -121,7 +154,8 @@ object DBHelper {
             result.documents[0].id,
             result.documents[0].get(User.LATITUDE_KEY).toString().toDouble(),
             result.documents[0].get(User.LONGITUDE_KEY).toString().toDouble(),
-            result.documents[0].get(User.SALT_KEY).toString()
+            result.documents[0].get(User.SALT_KEY).toString(),
+            tempNotificationList
         )
     }
 
@@ -141,6 +175,21 @@ object DBHelper {
                 unavailable["endDate"] as String
             ))
         }
+
+        val tempNotificationList = ArrayList<Notification>()
+        for(notification in result.documents[0].get(User.NOTIFICATION_LIST_KEY) as ArrayList<HashMap<String, Any>>){
+            var tempdate=notification["date"] as Timestamp
+            var date=tempdate.toDate()
+            tempNotificationList.add(Notification(
+                notification["message"] as String,
+                date,
+                notification["read"] as Boolean,
+                notification["sender"] as String,
+                notification["receiver"] as String,
+                notification["type"] as Long,
+                notification["image"] as Long
+            ))
+        }
         return User(
             result.documents[0].get(User.NAME_KEY).toString(),
             result.documents[0].get(User.USERNAME_KEY).toString(),
@@ -155,7 +204,8 @@ object DBHelper {
             result.documents[0].id,
             result.documents[0].get(User.LATITUDE_KEY).toString().toDouble(),
             result.documents[0].get(User.LONGITUDE_KEY).toString().toDouble(),
-            result.documents[0].get(User.SALT_KEY).toString()
+            result.documents[0].get(User.SALT_KEY).toString(),
+            tempNotificationList
         )
     }
 
@@ -187,6 +237,21 @@ object DBHelper {
                     unavailable["endDate"] as String
                 ))
             }
+
+            val tempNotificationList = ArrayList<Notification>()
+            for(notification in document.get(User.NOTIFICATION_LIST_KEY) as ArrayList<HashMap<String, Any>>){
+                var tempdate=notification["date"] as Timestamp
+                var date=tempdate.toDate()
+                tempNotificationList.add(Notification(
+                    notification["message"] as String,
+                    date,
+                    notification["read"] as Boolean,
+                    notification["sender"] as String,
+                    notification["receiver"] as String,
+                    notification["type"] as Long,
+                    notification["image"] as Long
+                ))
+            }
             users.add(User(
                 document.get(User.NAME_KEY).toString(),
                 document.get(User.USERNAME_KEY).toString(),
@@ -201,7 +266,8 @@ object DBHelper {
                 document.id,
                 document.get(User.LATITUDE_KEY).toString().toDouble(),
                 document.get(User.LONGITUDE_KEY).toString().toDouble(),
-                document.get(User.SALT_KEY).toString()
+                document.get(User.SALT_KEY).toString(),
+                tempNotificationList
             ))
         }
         return users
@@ -233,6 +299,22 @@ object DBHelper {
             )
         }
 
+        val tempNotificationList = ArrayList<Notification>()
+        for(notification in document.get(User.NOTIFICATION_LIST_KEY) as ArrayList<HashMap<String, Any>>){
+            var tempdate=notification["date"] as Timestamp
+            var date=tempdate.toDate()
+            tempNotificationList.add(Notification(
+                notification["message"] as String,
+                date,
+                notification["read"] as Boolean,
+                notification["sender"] as String,
+                notification["receiver"] as String,
+                notification["type"] as Long,
+                notification["image"] as Long
+            ))
+        }
+
+
         val latitude = document.get(User.LATITUDE_KEY)?.toString()?.toDoubleOrNull() ?: 0.0
         val longitude = document.get(User.LONGITUDE_KEY)?.toString()?.toDoubleOrNull() ?: 0.0
 
@@ -250,7 +332,8 @@ object DBHelper {
             document.id,
             latitude,
             longitude,
-            document.get(User.SALT_KEY).toString()
+            document.get(User.SALT_KEY).toString(),
+            tempNotificationList
         )
     }
 
@@ -276,6 +359,21 @@ object DBHelper {
                     unavailable["endDate"] as String
                 ))
             }
+
+            val tempNotificationList = ArrayList<Notification>()
+            for(notification in document.get(User.NOTIFICATION_LIST_KEY) as ArrayList<HashMap<String, Any>>){
+                var tempdate=notification["date"] as Timestamp
+                var date=tempdate.toDate()
+                tempNotificationList.add(Notification(
+                    notification["message"] as String,
+                    date,
+                    notification["read"] as Boolean,
+                    notification["sender"] as String,
+                    notification["receiver"] as String,
+                    notification["type"] as Long,
+                    notification["image"] as Long
+                ))
+            }
             users.add(User(
                 document.get(User.NAME_KEY).toString(),
                 document.get(User.USERNAME_KEY).toString(),
@@ -290,7 +388,8 @@ object DBHelper {
                 document.id,
                 document.get(User.LATITUDE_KEY).toString().toDouble(),
                 document.get(User.LONGITUDE_KEY).toString().toDouble(),
-                document.get(User.SALT_KEY).toString()
+                document.get(User.SALT_KEY).toString(),
+                tempNotificationList
             ))
         }
         return users
@@ -312,8 +411,8 @@ object DBHelper {
             User.UID_KEY to user.uid,
             User.LATITUDE_KEY to user.latitude,
             User.LONGITUDE_KEY to user.longitude,
-            User.SALT_KEY to user.salt
-
+            User.SALT_KEY to user.salt,
+            User.NOTIFICATION_LIST_KEY to user.notificationList
         )
         val db = Firebase.firestore
         // update the user in the database
@@ -489,4 +588,26 @@ object DBHelper {
             .setLongitude(result.documents[0].get(User.LONGITUDE_KEY).toString().toDouble())
             .build()
     }
+
+    suspend fun sendNotification(message: String, sender: String,receiver:String, type: Long){
+        val userReceiver= getUserbyUid(receiver)
+        val userSender= getUserbyUid(sender)
+        Log.d("DBHelper", type.toString())
+        userReceiver.notificationList.add(0,Notification(message, Date(), false, sender, receiver, type,userSender.profilePicture.toLong()))
+        updateUser(userReceiver)
+    }
+
+    suspend fun setAllNotificationsRead(user: User){
+        for(notification in user.notificationList){
+            notification.markAsRead()
+        }
+        updateUser(user)
+    }
+
+    fun deleteNotification(notification: Notification, position: Int) {
+        val user = UserSession.getUser()
+        user.notificationList.remove(notification)
+        updateUser(user)
+    }
+
 }
