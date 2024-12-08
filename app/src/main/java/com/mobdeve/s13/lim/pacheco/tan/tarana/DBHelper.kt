@@ -27,13 +27,15 @@ object DBHelper {
                     }
                     if (value != null) {
                         val tempUnavailable = ArrayList<Unavailable>()
-                        for(unavailable in value.get(User.UNAVAILABLE_LIST_KEY) as ArrayList<HashMap<String, Any>>){
-                            tempUnavailable.add(Unavailable(
-                                unavailable["name"] as String,
-                                unavailable["startDate"] as String,
-                                unavailable["endDate"] as String
-                            ))
+
+                        val unavailableList = value.get(User.UNAVAILABLE_LIST_KEY) as? ArrayList<HashMap<String, Any>>
+                        unavailableList?.forEach { unavailable ->
+                            val name = unavailable["name"] as? String ?: "Unknown"
+                            val startDate = unavailable["startDate"] as? String ?: ""
+                            val endDate = unavailable["endDate"] as? String ?: ""
+                            tempUnavailable.add(Unavailable(name, startDate, endDate))
                         }
+
                         UserSession.setUser(
                             User(
                                 value.get(User.NAME_KEY).toString(),
@@ -47,8 +49,8 @@ object DBHelper {
                                 value.get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
                                 tempUnavailable,
                                 value.id,
-                                value.get(User.LATITUDE_KEY).toString().toDouble(),
-                                value.get(User.LONGITUDE_KEY).toString().toDouble(),
+                                value.get(User.LATITUDE_KEY).toString()?.toDoubleOrNull() ?: 0.0,
+                                value.get(User.LONGITUDE_KEY).toString()?.toDoubleOrNull() ?: 0.0,
                                 value.get(User.SALT_KEY).toString()
                             )
                         )
@@ -182,31 +184,39 @@ object DBHelper {
         if(result.isEmpty()){
             return null
         }
+
         // return the user
+        val document = result.documents[0]
         val tempUnavailable = ArrayList<Unavailable>()
-        for(unavailable in result.documents[0].get(User.UNAVAILABLE_LIST_KEY) as ArrayList<HashMap<String, Any>>){
-            tempUnavailable.add(Unavailable(
-                unavailable["name"] as String,
-                unavailable["startDate"] as String,
-                unavailable["endDate"] as String
-            ))
+        val unavailableList = document.get(User.UNAVAILABLE_LIST_KEY) as? ArrayList<HashMap<String, Any>>
+        unavailableList?.forEach { unavailable ->
+            tempUnavailable.add(
+                Unavailable(
+                    unavailable["name"] as String,
+                    unavailable["startDate"] as String,
+                    unavailable["endDate"] as String
+                )
+            )
         }
 
+        val latitude = document.get(User.LATITUDE_KEY)?.toString()?.toDoubleOrNull() ?: 0.0
+        val longitude = document.get(User.LONGITUDE_KEY)?.toString()?.toDoubleOrNull() ?: 0.0
+
         return User(
-            result.documents[0].get(User.NAME_KEY).toString(),
-            result.documents[0].get(User.USERNAME_KEY).toString(),
-            result.documents[0].get(User.PASSWORD_KEY).toString(),
-            result.documents[0].get(User.PHONE_NUMBER_KEY).toString(),
-            result.documents[0].get(User.PROFILE_PICTURE_KEY).toString().toInt(),
-            result.documents[0].get(User.FRIENDS_LIST_KEY) as ArrayList<String>,
-            result.documents[0].get(User.LAKWATSA_LIST_KEY) as ArrayList<String>,
-            result.documents[0].get(User.FRIEND_REQUESTS_SENT_KEY) as ArrayList<String>,
-            result.documents[0].get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
+            document.get(User.NAME_KEY).toString(),
+            document.get(User.USERNAME_KEY).toString(),
+            document.get(User.PASSWORD_KEY).toString(),
+            document.get(User.PHONE_NUMBER_KEY).toString(),
+            document.get(User.PROFILE_PICTURE_KEY).toString().toInt(),
+            document.get(User.FRIENDS_LIST_KEY) as ArrayList<String>,
+            document.get(User.LAKWATSA_LIST_KEY) as ArrayList<String>,
+            document.get(User.FRIEND_REQUESTS_SENT_KEY) as ArrayList<String>,
+            document.get(User.FRIEND_REQUESTS_RECEIVED_KEY) as ArrayList<String>,
             tempUnavailable,
-            result.documents[0].id,
-            result.documents[0].get(User.LATITUDE_KEY).toString().toDouble(),
-            result.documents[0].get(User.LONGITUDE_KEY).toString().toDouble(),
-            result.documents[0].get(User.SALT_KEY).toString()
+            document.id,
+            latitude,
+            longitude,
+            document.get(User.SALT_KEY).toString()
         )
     }
 

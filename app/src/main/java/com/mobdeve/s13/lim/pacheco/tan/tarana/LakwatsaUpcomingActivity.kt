@@ -1,6 +1,7 @@
 package com.mobdeve.s13.lim.pacheco.tan.tarana
 
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -11,76 +12,101 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.appcompat.widget.PopupMenu
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityLakwatsaCreateBinding
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityLakwatsaUpcomingBinding
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ModalDeleteItemBinding
+import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ModalInviteFriendsBinding
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
 class LakwatsaUpcomingActivity: AppCompatActivity() {
-    private lateinit var viewBinding: ActivityLakwatsaUpcomingBinding
+
+    private lateinit var binding: ActivityLakwatsaUpcomingBinding
+    private lateinit var inviteFriendsModalBinding: ModalInviteFriendsBinding
+    private lateinit var inviteFriendsModal: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewBinding = ActivityLakwatsaUpcomingBinding.inflate(layoutInflater)
-        setContentView(viewBinding.root)
+        binding = ActivityLakwatsaUpcomingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        viewBinding.optionsIcon.visibility = View.GONE
+        // Setup invite friends modal
+        inviteFriendsModalBinding = ModalInviteFriendsBinding.inflate(layoutInflater)
+        inviteFriendsModal = Dialog(this).apply {
+            setContentView(inviteFriendsModalBinding.root)
+            window?.setLayout(
+                (resources.displayMetrics.widthPixels * 0.90).toInt(),
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            window?.setBackgroundDrawableResource(android.R.color.transparent)
+        }
+
+        binding.optionsIcon.visibility = View.GONE
         lifecycleScope.launch {
             val lakwatsa = DBHelper.getLakwatsa(intent.getStringExtra(Lakwatsa.ID_KEY)!!)
             if(lakwatsa.lakwatsaAdmin == UserSession.getUser().username){
-                viewBinding.optionsIcon.visibility = View.VISIBLE
+                binding.optionsIcon.visibility = View.VISIBLE
             }
-            viewBinding.activityTitleTv.text = lakwatsa.lakwatsaTitle
-            viewBinding.activityLakwtsaUpcomingDate.text = lakwatsa.date
+            binding.activityTitleTv.text = lakwatsa.lakwatsaTitle
+            binding.activityLakwtsaUpcomingDate.text = lakwatsa.date
             if(lakwatsa.time.isNullOrBlank()){
-                viewBinding.activityLakwtsaUpcomingTime.text = "(No time set yet...)"
+                binding.activityLakwtsaUpcomingTime.text = "(No time set yet...)"
             } else{
-                viewBinding.activityLakwtsaUpcomingTime.text = lakwatsa.time
+                binding.activityLakwtsaUpcomingTime.text = lakwatsa.time
             }
 
-            viewBinding.activityLakwatsaUpcomingFriend1Iv.visibility = View.GONE
-            viewBinding.activityLakwatsaUpcomingFriend2Iv.visibility = View.GONE
-            viewBinding.moreFriends.visibility = View.GONE
+            binding.activityLakwatsaUpcomingFriend1Iv.visibility = View.GONE
+            binding.activityLakwatsaUpcomingFriend2Iv.visibility = View.GONE
+            binding.moreFriends.visibility = View.GONE
             if(lakwatsa.lakwatsaUsers.size == 1){
-                viewBinding.activityLakwatsaUpcomingFriend1Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[0]).profilePicture, "drawable", packageName))
-                viewBinding.activityLakwatsaUpcomingFriend1Iv.visibility = View.VISIBLE
+                binding.activityLakwatsaUpcomingFriend1Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[0]).profilePicture, "drawable", packageName))
+                binding.activityLakwatsaUpcomingFriend1Iv.visibility = View.VISIBLE
             }
             else if (lakwatsa.lakwatsaUsers.size == 2){
-                viewBinding.activityLakwatsaUpcomingFriend1Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[0]).profilePicture, "drawable", packageName))
-                viewBinding.activityLakwatsaUpcomingFriend2Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[1]).profilePicture, "drawable", packageName))
-                viewBinding.activityLakwatsaUpcomingFriend1Iv.visibility = View.VISIBLE
-                viewBinding.activityLakwatsaUpcomingFriend2Iv.visibility = View.VISIBLE
+                binding.activityLakwatsaUpcomingFriend1Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[0]).profilePicture, "drawable", packageName))
+                binding.activityLakwatsaUpcomingFriend2Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[1]).profilePicture, "drawable", packageName))
+                binding.activityLakwatsaUpcomingFriend1Iv.visibility = View.VISIBLE
+                binding.activityLakwatsaUpcomingFriend2Iv.visibility = View.VISIBLE
             }
             else {
-                viewBinding.activityLakwatsaUpcomingFriend1Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[0]).profilePicture, "drawable", packageName))
-                viewBinding.activityLakwatsaUpcomingFriend1Iv.visibility = View.VISIBLE
-                viewBinding.activityLakwatsaUpcomingFriend2Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[1]).profilePicture, "drawable", packageName))
-                viewBinding.activityLakwatsaUpcomingFriend2Iv.visibility = View.VISIBLE
-                viewBinding.moreFriendsTv.setText("+" + (lakwatsa.lakwatsaUsers.size - 2).toString())
+                binding.activityLakwatsaUpcomingFriend1Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[0]).profilePicture, "drawable", packageName))
+                binding.activityLakwatsaUpcomingFriend1Iv.visibility = View.VISIBLE
+                binding.activityLakwatsaUpcomingFriend2Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[1]).profilePicture, "drawable", packageName))
+                binding.activityLakwatsaUpcomingFriend2Iv.visibility = View.VISIBLE
+                binding.moreFriendsTv.setText("+" + (lakwatsa.lakwatsaUsers.size - 2).toString())
             }
-            // TODO: Add more friends
-            viewBinding.addFriends.setOnClickListener{
 
+            // Invite more friends
+            binding.addFriends.setOnClickListener{
+                inviteFriendsModal.show()
             }
+            inviteFriendsModalBinding.modalInviteFriendsBtnClose.setOnClickListener {
+                inviteFriendsModal.dismiss()
+            }
+
+            setupRecyclerView()
+
             var time = ""
-            if(viewBinding.activityLakwtsaUpcomingTime.text.toString() != "(No time set yet...)"){
-                time = viewBinding.activityLakwtsaUpcomingTime.text.toString()
+            if(binding.activityLakwtsaUpcomingTime.text.toString() != "(No time set yet...)"){
+                time = binding.activityLakwtsaUpcomingTime.text.toString()
             }
-            viewBinding.activityLakwtsaUpcomingStartBtn.setOnClickListener{
+            binding.activityLakwtsaUpcomingStartBtn.setOnClickListener{
                 val newLakwatsa = Lakwatsa(
                     lakwatsa.lakwatsaId,
                     lakwatsa.lakwatsaUsers,
                     lakwatsa.locationLatitude,
                     lakwatsa.locationLongitude,
-                    viewBinding.activityTitleTv.text.toString(),
-                    viewBinding.activityLakwtsaUpcomingDate.text.toString(),
+                    binding.activityTitleTv.text.toString(),
+                    binding.activityLakwtsaUpcomingDate.text.toString(),
                     time,
                     lakwatsa.pollingList,
                     lakwatsa.album,
@@ -97,24 +123,23 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
 
         // NAVIGATION BUTTONS
 
-        viewBinding.inboxIcon.setOnClickListener {
+        binding.inboxIcon.setOnClickListener {
             val intent = Intent(this, ProfileInboxActivity::class.java)
             startActivity(intent)
         }
-        viewBinding.settingsIcon.setOnClickListener {
+        binding.settingsIcon.setOnClickListener {
             val intent = Intent(this, ProfileSettingActivity::class.java)
             startActivity(intent)
         }
-        viewBinding.profileUser1.setOnClickListener{
+        binding.profileUser1.setOnClickListener{
             val intent = Intent(this, ProfileUserActivity::class.java)
             startActivity(intent)
         }
-        viewBinding.availabilityBtn.setOnClickListener{
+        binding.availabilityBtn.setOnClickListener{
             val intent = Intent(this, LakwatsaAvailabilityActivity::class.java)
             startActivity(intent)
         }
-
-        viewBinding.optionsIcon.setOnClickListener { view ->
+        binding.optionsIcon.setOnClickListener { view ->
             val contextWrapper = ContextThemeWrapper(this, R.style.CustomPopupMenu)
             val popupMenu = PopupMenu(contextWrapper, view)
 
@@ -174,12 +199,12 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
         val editDate = dialogView.findViewById<EditText>(R.id.modal_lakwatsa_edit_date_et)
         val editTime = dialogView.findViewById<EditText>(R.id.modal_lakwatsa_edit_time_et)
 
-        editName.setText(viewBinding.activityTitleTv.text)
-        editDate.setText(viewBinding.activityLakwtsaUpcomingDate.text)
-        if(viewBinding.activityLakwtsaUpcomingTime.text == "(No time set yet...)"){
+        editName.setText(binding.activityTitleTv.text)
+        editDate.setText(binding.activityLakwtsaUpcomingDate.text)
+        if(binding.activityLakwtsaUpcomingTime.text == "(No time set yet...)"){
             editTime.setText("")
         } else{
-            editTime.setText(viewBinding.activityLakwtsaUpcomingTime.text)
+            editTime.setText(binding.activityLakwtsaUpcomingTime.text)
         }
 
         editDate.setOnClickListener {
@@ -237,11 +262,26 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
             }
 
             dialog.dismiss()
-            viewBinding.activityTitleTv.text = editName.text.toString()
-            viewBinding.activityLakwtsaUpcomingDate.text = editDate.text.toString()
-            viewBinding.activityLakwtsaUpcomingTime.text = editTime.text.toString()
+            binding.activityTitleTv.text = editName.text.toString()
+            binding.activityLakwtsaUpcomingDate.text = editDate.text.toString()
+            binding.activityLakwtsaUpcomingTime.text = editTime.text.toString()
         }
 
         dialog.show()
+    }
+
+    // HARDCODED CONTENT
+    private fun setupRecyclerView() {
+        val friendsList = arrayListOf(
+            InviteFriendItem(R.drawable.asset_profile2, "Ashley Tsang", "@ashley_yvonne2003", false),
+            InviteFriendItem(R.drawable.asset_profile3, "Cedric Alejo", "@alejo_ced", false),
+            InviteFriendItem(R.drawable.asset_profile1, "Tyler Tan", "@TyTan88", false)
+        )
+
+        Log.d("RecyclerView Setup", "Found ${friendsList.size} items")
+        inviteFriendsModalBinding.inviteFriendsRv.layoutManager = LinearLayoutManager(this)
+
+        val adapter = AdapterInviteFriends(friendsList, this)
+        inviteFriendsModalBinding.inviteFriendsRv.adapter = adapter
     }
 }

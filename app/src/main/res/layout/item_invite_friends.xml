@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/item_invite_friends_ll"
+    android:layout_width="350dp"
+    android:layout_height="80dp"
+    android:orientation="horizontal"
+    android:paddingLeft="25dp"
+    android:paddingRight="25dp">
+
+    <ImageView
+        android:id="@+id/item_layout_friend_to_invite_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/asset_profile2" />
+
+    <LinearLayout
+        android:id="@+id/item_layout_friend_to_invite_ll"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/item_layout_friend_to_invite_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jeko_demo_extrabold"
+            android:text="Ashley Tsang"
+            android:textColor="#070802"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/item_layout_friend_to_invite_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jeko_demo_extralight"
+            android:text="\@ashley_yvonne2003"
+            android:textColor="#070802" />
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/invite_checkbox"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|center"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:buttonTint="@color/black"
+        android:checked="false" />
+</LinearLayout>

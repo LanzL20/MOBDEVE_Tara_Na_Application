@@ -1,35 +1,63 @@
 package com.mobdeve.s13.lim.pacheco.tan.tarana
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityLakwatsaCreateBinding
+import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ModalInviteFriendsBinding
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
-import java.util.Date
 
-class LakwatsaCreateActivity: AppCompatActivity() {
+class LakwatsaCreateActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityLakwatsaCreateBinding
+    private lateinit var inviteFriendsModalBinding: ModalInviteFriendsBinding
+    private lateinit var inviteFriendsModal: Dialog
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewBinding = ActivityLakwatsaCreateBinding.inflate(layoutInflater)
-        setContentView(viewBinding.root)
+        binding = ActivityLakwatsaCreateBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // Setup invite friends modal
+        inviteFriendsModalBinding = ModalInviteFriendsBinding.inflate(layoutInflater)
+        inviteFriendsModal = Dialog(this).apply {
+            setContentView(inviteFriendsModalBinding.root)
+            window?.setLayout(
+                (resources.displayMetrics.widthPixels * 0.90).toInt(),
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            window?.setBackgroundDrawableResource(android.R.color.transparent)
+        }
+
+        binding.activityLakwatsaCreateEtFriends.setOnClickListener {
+            inviteFriendsModal.show()
+        }
+
+        inviteFriendsModalBinding.modalInviteFriendsBtnClose.setOnClickListener {
+            inviteFriendsModal.dismiss()
+        }
+
+        setupRecyclerView()
 
         // NAVIGATION BUTTONS
-
-        viewBinding.inboxIcon.setOnClickListener {
+        binding.inboxIcon.setOnClickListener {
             val intent = Intent(this, ProfileInboxActivity::class.java)
             startActivity(intent)
         }
-        viewBinding.settingsIcon.setOnClickListener {
+        binding.settingsIcon.setOnClickListener {
             val intent = Intent(this, ProfileSettingActivity::class.java)
             startActivity(intent)
         }
-        viewBinding.profileUser1.setOnClickListener{
+        binding.profileUser1.setOnClickListener {
             val intent = Intent(this, ProfileUserActivity::class.java)
             startActivity(intent)
         }
-        viewBinding.activityLakwatsaCreateBtn.setOnClickListener{
+        binding.activityLakwatsaCreateBtn.setOnClickListener {
             // TODO: Very temp code for testing
             val users = ArrayList<User>()
             val usernames = ArrayList<String>()
@@ -39,18 +67,33 @@ class LakwatsaCreateActivity: AppCompatActivity() {
             // TODO: Date be a proper date modal
             val lakwatsa = Lakwatsa(
                 usernames,
-                viewBinding.activityLakwatsaCreateEtTitle.text.toString(),
-                viewBinding.activityLakwatsaCreateEtDatetime.text.toString(),
-                UserSession.getUser().username)
+                binding.activityLakwatsaCreateEtTitle.text.toString(),
+                binding.activityLakwatsaCreateEtDatetime.text.toString(),
+                UserSession.getUser().username
+            )
             lifecycleScope.launch {
                 val lakwatsaId = DBHelper.addLakwatsa(lakwatsa)
-                for(user in users){
+                for (user in users) {
                     user.addLakwatsa(lakwatsaId)
                     DBHelper.updateUser(user)
                 }
                 finish()
             }
-
         }
+    }
+
+    // HARDCODED CONTENT
+    private fun setupRecyclerView() {
+        val friendsList = arrayListOf(
+            InviteFriendItem(R.drawable.asset_profile2, "Ashley Tsang", "@ashley_yvonne2003", false),
+            InviteFriendItem(R.drawable.asset_profile3, "Cedric Alejo", "@alejo_ced", false),
+            InviteFriendItem(R.drawable.asset_profile1, "Tyler Tan", "@TyTan88", false)
+        )
+
+        Log.d("RecyclerView Setup", "Found ${friendsList.size} items")
+        inviteFriendsModalBinding.inviteFriendsRv.layoutManager = LinearLayoutManager(this)
+
+        val adapter = AdapterInviteFriends(friendsList, this)
+        inviteFriendsModalBinding.inviteFriendsRv.adapter = adapter
     }
 }
