@@ -18,7 +18,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="20dp"
-            android:src="@drawable/asset_profile3" />
+            android:src="@drawable/logo_chat" />
 
         <LinearLayout
             android:id="@+id/activity_profile_inbox_message_ll"

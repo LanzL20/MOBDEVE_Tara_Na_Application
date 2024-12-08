@@ -4,22 +4,31 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityProfileInboxBinding
+import kotlinx.coroutines.launch
 import java.util.Date
+import kotlin.reflect.typeOf
 
 class ProfileInboxActivity: AppCompatActivity() {
     lateinit var viewBinding: ActivityProfileInboxBinding
     private lateinit var adapterInbox: AdapterInbox
-
+    var user=UserSession.getUser()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityProfileInboxBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
+        UserSession.setUnreadNotifications(false)
+        lifecycleScope.launch {
+            DBHelper.setAllNotificationsRead(user)
+        }
 
-        val sampleData = fetchNotifications()
 
-        adapterInbox = AdapterInbox(sampleData)
+        //val sampleData = fetchNotifications()
+        Log.d("ProfileInboxActivity", user.notificationList::class.simpleName.toString())
+        Log.d("ProfileInboxActivity", user.notificationList[0]::class.java.toString())
+        adapterInbox = AdapterInbox(user.notificationList)
         viewBinding.rvNotifications.layoutManager = LinearLayoutManager(this)
         viewBinding.rvNotifications.adapter = adapterInbox
 
@@ -50,7 +59,16 @@ class ProfileInboxActivity: AppCompatActivity() {
         Log.d("AdapterInbox", "Item count: ${adapterInbox.itemCount}")
     }
 
-    private fun fetchNotifications(): ArrayList<Notification> {
+    override fun onResume() {
+        super.onResume()
+        if(user.notificationList.size!=adapterInbox.itemCount){
+            adapterInbox.notifyDataSetChanged()
+        }
+        if(UserSession.hasUnreadNotifications()){
+            viewBinding.inboxIcon.setImageResource(R.drawable.ic_inbox_unread)
+        }
+    }
+    /*private fun fetchNotifications(): ArrayList<Notification> {
         val notifications = ArrayList<Notification>()
 
         notifications.add(
@@ -72,5 +90,5 @@ class ProfileInboxActivity: AppCompatActivity() {
         )
 
         return notifications
-    }
+    }*/
 }

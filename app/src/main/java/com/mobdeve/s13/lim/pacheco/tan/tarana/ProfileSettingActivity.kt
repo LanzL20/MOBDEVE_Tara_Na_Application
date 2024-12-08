@@ -67,7 +67,8 @@ class ProfileSettingActivity:AppCompatActivity() {
                         UserSession.getUser().uid,
                         UserSession.getUser().latitude,
                         UserSession.getUser().longitude,
-                        UserSession.getUser().salt
+                        UserSession.getUser().salt,
+                        UserSession.getUser().notificationList
                     )
                     DBHelper.updateUser(newUser)
                     Toast.makeText(binding.root.context, "Profile updated.", Toast.LENGTH_SHORT).show()
@@ -95,10 +96,13 @@ class ProfileSettingActivity:AppCompatActivity() {
         }
 
         binding.logOutBtn.setOnClickListener{
-            val intent = Intent(this, BoardingLoginActivity::class.java)
+            val serviceIntent= Intent(this, LocationService::class.java)
+            stopService(serviceIntent)
+            val intent = Intent(this, BoardingWelcomeActivity::class.java)
             Firebase.auth.signOut()
             UserSession.clearUser()
             startActivity(intent)
+            finish()
         }
     }
 }

@@ -85,6 +85,10 @@ class ProfileUserActivity: AppCompatActivity() {
         viewBinding.activityProfileUserName.text= UserSession.getUser().name
         viewBinding.activityProfileUserUsername.text= "@"+UserSession.getUser().username
         viewBinding.activityProfileUserNumFriends.text= UserSession.getUser().friendsList.size.toString()
+
+        if(UserSession.hasUnreadNotifications()){
+            viewBinding.inboxIcon.setImageResource(R.drawable.ic_inbox_unread)
+        }
     }
 
     private fun areLocationPermissionsGranted(): Boolean {

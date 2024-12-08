@@ -18,6 +18,7 @@ class User {
         const val LATITUDE_KEY = "latitude"
         const val LONGITUDE_KEY = "longitude"
         const val SALT_KEY = "salt"
+        const val NOTIFICATION_LIST_KEY = "notificationList"
     }
 
     override fun toString(): String {
@@ -56,8 +57,8 @@ class User {
         public set
     var salt: String
         private set
-    //var notificationList: ArrayList<Notification>
-    //    private set
+    var notificationList: ArrayList<Notification>
+        private set
 
     /*
     * Constructor for a new User
@@ -84,6 +85,7 @@ class User {
         this.latitude = 0.0
         this.longitude = 0.0
         this.salt = salt
+        this.notificationList = ArrayList()
     }
 
     /*
@@ -103,7 +105,8 @@ class User {
         uid: String,
         latitude: Double,
         longitude: Double,
-        salt: String
+        salt: String,
+        notificationList: ArrayList<Notification>
     ) {
         this.name = name
         this.username = username
@@ -119,6 +122,7 @@ class User {
         this.latitude = latitude
         this.longitude = longitude
         this.salt = salt
+        this.notificationList = notificationList
     }
 
     fun addFriend(userId: String) {

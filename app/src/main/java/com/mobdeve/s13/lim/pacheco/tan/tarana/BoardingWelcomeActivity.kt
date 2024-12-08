@@ -18,6 +18,13 @@ class BoardingWelcomeActivity:AppCompatActivity() {
         setContentView(viewBinding.root)
         Log.d("MainActivity", "Welcome Activity Created")
         val currentuser= Firebase.auth.currentUser
+        lifecycleScope.launch{
+            DBHelper.sendNotification("Welcome to Tarana!1", "LANZ2182", "SelenaDrago3096", 1L)
+            DBHelper.sendNotification("Welcome to Tarana!2", "LANZ2182", "SelenaDrago3096", 2L)
+            DBHelper.sendNotification("Welcome to Tarana!3", "LANZ2182", "SelenaDrago3096", 3L)
+            DBHelper.sendNotification("Welcome to Tarana!4", "LANZ2182", "SelenaDrago3096", 4L)
+
+        }
         if(currentuser!=null){
             val intent = Intent(this, ProfileUserActivity::class.java)
             var user: User?= null
