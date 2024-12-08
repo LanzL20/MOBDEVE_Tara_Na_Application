@@ -86,6 +86,12 @@ class LakwatsaOngoingActivity: AppCompatActivity() {
                         Lakwatsa.LAKWATSA_COMPLETED,
                         lakwatsa.lakwatsaAdmin
                     )
+                    for(user in lakwatsa.lakwatsaUsers){
+                        lifecycleScope.launch {
+                            Log.d("LakwatsaOngoingActivity", "Sending notification to $user")
+                            DBHelper.sendNotification("${lakwatsa.lakwatsaTitle} lakwatsa has completed! Hope you had fun!", UserSession.getUser().username, user, Notification.LAKWATSA_ENDED)
+                        }
+                    }
                     DBHelper.updateLakwatsa(newLakwatsa)
                     val intent2 = Intent(this@LakwatsaOngoingActivity, LakwatsaCompletedActivity::class.java)
                     intent2.putExtra(Lakwatsa.ID_KEY, intent.getStringExtra(Lakwatsa.ID_KEY))

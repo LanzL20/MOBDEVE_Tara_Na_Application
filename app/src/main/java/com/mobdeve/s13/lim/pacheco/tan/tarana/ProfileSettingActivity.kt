@@ -38,24 +38,20 @@ class ProfileSettingActivity:AppCompatActivity() {
 
         deleteAccModal.window!!.setBackgroundDrawableResource(android.R.color.transparent)
 
-        binding.deleteAccBtn.setOnClickListener {
-            deleteAccModal.show()
-        }
 
         binding.saveBtn.setOnClickListener{
             lifecycleScope.launch {
-                if(DBHelper.checkIfUserExists(binding.activityProfileSettingsEtUsername.text.toString(), UserSession.getUser().phoneNumber) != 2){
-                    Toast.makeText(binding.root.context, "Username already exists.", Toast.LENGTH_SHORT).show()
-                } else if(binding.activityProfileSettingsEtName.text.toString().isNotEmpty() && binding.activityProfileSettingsEtUsername.text.toString().isNotEmpty()){
+                if(binding.activityProfileSettingsEtName.text.toString().isNotEmpty()){
                     var newPassword = UserSession.getUser().password
                     var newSalt = UserSession.getUser().salt
                     if(binding.activityProfileSettingsEtPassword.text.toString().isNotEmpty()){
                         newSalt = PasswordHashing.byteArrayToHexString(PasswordHashing.generateSalt())
-                        newPassword = PasswordHashing.byteArrayToHexString(PasswordHashing.hashPassword(binding.activityProfileSettingsEtPassword.text.toString(), PasswordHashing.hexStringToByteArray(newSalt)))}
+                        newPassword = PasswordHashing.byteArrayToHexString(PasswordHashing.hashPassword(binding.activityProfileSettingsEtPassword.text.toString(), PasswordHashing.hexStringToByteArray(newSalt)))
+                    }
 
                     var newUser = User(
                         binding.activityProfileSettingsEtName.text.toString(),
-                        binding.activityProfileSettingsEtUsername.text.toString(),
+                        UserSession.getUser().username,
                         newPassword,
                         UserSession.getUser().phoneNumber,
                         UserSession.getUser().profilePicture,
@@ -67,13 +63,13 @@ class ProfileSettingActivity:AppCompatActivity() {
                         UserSession.getUser().uid,
                         UserSession.getUser().latitude,
                         UserSession.getUser().longitude,
-                        UserSession.getUser().salt,
+                        newSalt,
                         UserSession.getUser().notificationList
                     )
                     DBHelper.updateUser(newUser)
                     Toast.makeText(binding.root.context, "Profile updated.", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(binding.root.context, "Name and Username cannot be empty.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(binding.root.context, "Name cannot be empty.", Toast.LENGTH_SHORT).show()
                 }
             }
 

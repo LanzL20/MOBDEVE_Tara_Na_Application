@@ -2,6 +2,7 @@ package com.mobdeve.s13.lim.pacheco.tan.tarana
 
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.appcompat.widget.PopupMenu
@@ -27,6 +28,28 @@ class ViewHolderInbox(private var viewBinding: ItemLayoutNotificationBinding) : 
             viewBinding.activityProfileInboxUserIv.setImageResource(notification.getDrawable())
             viewBinding.acceptBtn.setOnClickListener {
                 //ADD FUNCTIONALITY TO ACCEPT FRIEND REQUEST
+                // check if the user is already friends with the sender
+                if(UserSession.getUser().friendsList.contains(notification.sender)){
+                    Toast.makeText(viewBinding.root.context, "You are already friends with this user!", Toast.LENGTH_SHORT).show()
+
+                    val receiverUser= UserSession.getUser()
+                    receiverUser.notificationList.removeAt(position)
+                    DBHelper.updateUser(receiverUser)
+                    adapter.removeNotification(position)
+
+                    return@setOnClickListener
+                }
+                // check if the user can still accept the friend request
+                if(!UserSession.getUser().friendRequestsReceived.contains(notification.sender)){
+                    Toast.makeText(viewBinding.root.context, "You can no longer accept this friend request!", Toast.LENGTH_SHORT).show()
+
+                    val receiverUser= UserSession.getUser()
+                    receiverUser.notificationList.removeAt(position)
+                    DBHelper.updateUser(receiverUser)
+                    adapter.removeNotification(position)
+
+                    return@setOnClickListener
+                }
                 (viewBinding.root.context as AppCompatActivity).lifecycleScope.launch {
                     val senderUser= DBHelper.getUserbyUid(notification.sender)
                     senderUser.friendRequestsSent.remove(notification.receiver)

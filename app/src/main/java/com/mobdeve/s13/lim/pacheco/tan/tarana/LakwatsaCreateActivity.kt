@@ -103,6 +103,15 @@ class LakwatsaCreateActivity : AppCompatActivity() {
                     user.addLakwatsa(lakwatsaId)
                     DBHelper.updateUser(user)
                 }
+                for(friends in friendsToInviteList){
+                    Log.e("LakwatsaCreateActivity", "Sending notification to $friends")
+                    DBHelper.sendNotification(
+                        "${UserSession.getUser().username} has invited you to the ${binding.activityLakwatsaCreateEtTitle.text.toString()} lakwatsa!",
+                        UserSession.getUser().username,
+                        friends,
+                        Notification.LAKWATSA_INVITE
+                    )
+                }
                 finish()
             }
         }

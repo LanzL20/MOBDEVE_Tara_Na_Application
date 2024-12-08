@@ -139,6 +139,11 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
                     lakwatsa.lakwatsaAdmin
                 )
                 DBHelper.updateLakwatsa(newLakwatsa)
+                for(user in lakwatsa.lakwatsaUsers){
+                    lifecycleScope.launch {
+                        DBHelper.sendNotification("${lakwatsa.lakwatsaTitle} lakwatsa has started! Enjoy your time!", UserSession.getUser().username, user, Notification.LAKWATSA_ON_GOING)
+                    }
+                }
                 val intent2 = Intent(this@LakwatsaUpcomingActivity, LakwatsaOngoingActivity::class.java)
                 intent2.putExtra(Lakwatsa.ID_KEY, intent.getStringExtra(Lakwatsa.ID_KEY))
                 startActivity(intent2)
@@ -196,18 +201,13 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
             val contextWrapper = ContextThemeWrapper(this, R.style.CustomPopupMenu)
             val popupMenu = PopupMenu(contextWrapper, view)
 
-            popupMenu.menu.add(0, 1, 0, "Delete lakwatsa")
-            popupMenu.menu.add(0, 2, 1, "Edit details")
+            popupMenu.menu.add(0, 1, 0, "Edit Details")
 
             popupMenu.show()
 
             popupMenu.setOnMenuItemClickListener { item: MenuItem ->
                 when (item.itemId) {
                     1 -> {
-                        showDeleteConfirmationDialog()
-                        true
-                    }
-                    2 -> {
                         showEditDetailsDateDialog()
                         true
                     }
@@ -217,27 +217,6 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
         }
     }
 
-    private fun showDeleteConfirmationDialog() {
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.modal_delete_item, null)
-
-        val dialog = AlertDialog.Builder(this)
-            .setView(dialogView)
-            .create()
-
-        val btnCancel = dialogView.findViewById<ImageButton>(R.id.modal_delete_item_btn_close)
-        val btnConfirm = dialogView.findViewById<Button>(R.id.modal_delete_item_btn_delete)
-
-        btnCancel.setOnClickListener {
-            dialog.dismiss()
-        }
-
-        btnConfirm.setOnClickListener {
-            // TODO: DELETE LAKWATSA LOGIC
-            dialog.dismiss()
-        }
-
-        dialog.show()
-    }
 
     private fun showEditDetailsDateDialog() {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.modal_edit_details_date, null)
@@ -360,12 +339,16 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
                     Toast.makeText(this@LakwatsaUpcomingActivity, "Please select friends to invite...", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
+                val newLakwatsaUsers = ArrayList<String>()
+                for(friend in friendsToInviteList){
+                    newLakwatsaUsers.add(friend)
+                }
                 for(friend in lakwatsa.lakwatsaUsers){
-                    friendsToInviteList.add(friend)
+                    newLakwatsaUsers.add(friend)
                 }
                 val newLakwatsa = Lakwatsa(
                     lakwatsa.lakwatsaId,
-                    friendsToInviteList,
+                    newLakwatsaUsers,
                     lakwatsa.locationLatitude,
                     lakwatsa.locationLongitude,
                     lakwatsa.lakwatsaTitle,
@@ -377,6 +360,16 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
                     lakwatsa.lakwatsaAdmin
                 )
                 DBHelper.updateLakwatsa(newLakwatsa)
+                lifecycleScope.launch {
+                    for (friends in friendsToInviteList) {
+                        DBHelper.sendNotification(
+                            "${UserSession.getUser().username} has invited you to the ${lakwatsa.lakwatsaTitle} lakwatsa!",
+                            UserSession.getUser().username,
+                            friends,
+                            Notification.LAKWATSA_INVITE
+                        )
+                    }
+                }
                 finish()
                 startActivity(intent)
             }

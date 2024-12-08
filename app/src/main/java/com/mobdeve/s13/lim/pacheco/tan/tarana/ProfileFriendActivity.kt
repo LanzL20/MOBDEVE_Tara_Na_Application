@@ -57,41 +57,52 @@ class ProfileFriendActivity:AppCompatActivity() {
                 startActivity(intent)
             }
             viewBinding.followingBtn.setOnClickListener {
+                lifecycleScope.launch {
+                    val user = DBHelper.getUser(intent.getStringExtra(USER_KEY).toString())
+                    if(viewBinding.followingText.text == "Follow"){
+                        UserSession.getUser().friendRequestsSent.add(intent.getStringExtra(USER_KEY).toString())
+                        user.friendRequestsReceived.add(UserSession.getUser().username)
+                        DBHelper.updateUser(UserSession.getUser())
+                        DBHelper.updateUser(user)
+                        runOnUiThread{
+                            viewBinding.followingText.text = "Request Sent"
+                        }
+                        lifecycleScope.launch {
+                            DBHelper.sendNotification(
+                                "${UserSession.getUser().username} has sent you a friend request!",
+                                UserSession.getUser().username,
+                                user.username,
+                                Notification.FRIEND_REQUEST_PENDING
+                            )
+                        }
+                    }
+                    else if (viewBinding.followingText.text == "Request Sent"){
+                        UserSession.getUser().friendRequestsSent.remove(intent.getStringExtra(USER_KEY).toString())
+                        user.friendRequestsReceived.remove(UserSession.getUser().username)
+                        DBHelper.updateUser(UserSession.getUser())
+                        DBHelper.updateUser(user)
+                        runOnUiThread{
+                            viewBinding.followingText.text = "Follow"
+                        }
 
-                if(viewBinding.followingText.text == "Follow"){
-                    UserSession.getUser().friendRequestsSent.add(intent.getStringExtra(USER_KEY).toString())
-                    user.friendRequestsReceived.add(UserSession.getUser().username)
-                    DBHelper.updateUser(UserSession.getUser())
-                    DBHelper.updateUser(user)
-                    runOnUiThread{
-                        viewBinding.followingText.text = "Request Sent"
-                    }
-                }
-                else if (viewBinding.followingText.text == "Request Sent"){
-                    UserSession.getUser().friendRequestsSent.remove(intent.getStringExtra(USER_KEY).toString())
-                    user.friendRequestsReceived.remove(UserSession.getUser().username)
-                    DBHelper.updateUser(UserSession.getUser())
-                    DBHelper.updateUser(user)
-                    runOnUiThread{
-                        viewBinding.followingText.text = "Follow"
-                    }
-                } else if (viewBinding.followingText.text == "Accept Request"){
-                    UserSession.getUser().friendRequestsReceived.remove(intent.getStringExtra(USER_KEY).toString())
-                    UserSession.getUser().friendsList.add(intent.getStringExtra(USER_KEY).toString())
-                    user.friendRequestsSent.remove(UserSession.getUser().username)
-                    user.friendsList.add(UserSession.getUser().username)
-                    DBHelper.updateUser(UserSession.getUser())
-                    DBHelper.updateUser(user)
-                    runOnUiThread{
-                        viewBinding.followingText.text = "Following"
-                    }
-                } else if (viewBinding.followingText.text == "Following"){
-                    UserSession.getUser().friendsList.remove(intent.getStringExtra(USER_KEY).toString())
-                    user.friendsList.remove(UserSession.getUser().username)
-                    DBHelper.updateUser(UserSession.getUser())
-                    DBHelper.updateUser(user)
-                    runOnUiThread{
-                        viewBinding.followingText.text = "Follow"
+                    } else if (viewBinding.followingText.text == "Accept Request"){
+                        UserSession.getUser().friendRequestsReceived.remove(intent.getStringExtra(USER_KEY).toString())
+                        UserSession.getUser().friendsList.add(intent.getStringExtra(USER_KEY).toString())
+                        user.friendRequestsSent.remove(UserSession.getUser().username)
+                        user.friendsList.add(UserSession.getUser().username)
+                        DBHelper.updateUser(UserSession.getUser())
+                        DBHelper.updateUser(user)
+                        runOnUiThread{
+                            viewBinding.followingText.text = "Following"
+                        }
+                    } else if (viewBinding.followingText.text == "Following"){
+                        UserSession.getUser().friendsList.remove(intent.getStringExtra(USER_KEY).toString())
+                        user.friendsList.remove(UserSession.getUser().username)
+                        DBHelper.updateUser(UserSession.getUser())
+                        DBHelper.updateUser(user)
+                        runOnUiThread{
+                            viewBinding.followingText.text = "Follow"
+                        }
                     }
                 }
             }

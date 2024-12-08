@@ -153,14 +153,13 @@
                 android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar.Bridge"
                 android:textColorHint="#808080">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <TextView
                     android:id="@+id/activity_profile_settings_et_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/btn_round_white_80"
                     android:fontFamily="@font/jeko_demo_medium"
-                    android:hint="Add Username"
-                    android:inputType="text"
+                    android:text="tylertan"
                     android:padding="15dp"
                     android:paddingStart="25dp"
                     android:paddingEnd="25dp"
@@ -257,19 +256,6 @@
                 android:textColor="#070802"
                 android:textSize="20sp" />
 
-            <Button
-                android:id="@+id/delete_acc_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="40dp"
-                android:background="@drawable/btn_round_grey_30"
-                android:fontFamily="@font/jeko_demo_extrabold"
-                android:text="Delete Account"
-                android:textAllCaps="false"
-                android:textColor="#070802"
-                android:textSize="20sp" />
 
         </LinearLayout>
     </ScrollView>

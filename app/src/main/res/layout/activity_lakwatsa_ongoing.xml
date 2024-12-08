@@ -270,16 +270,6 @@
             </LinearLayout>
         </LinearLayout>
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/viewSwitch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Share Location"
-            android:fontFamily="@font/jeko_demo_medium"
-            android:textColor="#070802"
-            android:checked="true"
-            android:textSize="18sp" />
-
         <ImageView
             android:id="@+id/activity_lakwatsa_ongoing_map_iv"
             android:layout_width="300dp"

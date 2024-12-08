@@ -244,7 +244,7 @@ class AlbumAlbumActivity: AppCompatActivity() {
     }
 
     private fun showDeleteConfirmationDialog() {
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.modal_delete_item, null)
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.modal_download_all, null)
 
         val dialog = AlertDialog.Builder(this)
             .setView(dialogView)
