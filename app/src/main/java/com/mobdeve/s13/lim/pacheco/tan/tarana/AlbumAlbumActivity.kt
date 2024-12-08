@@ -4,6 +4,8 @@ import AdapterAlbumAlbum
 import MarginItemDecoration
 import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -112,7 +114,6 @@ class AlbumAlbumActivity: AppCompatActivity() {
             val popupMenu = PopupMenu(contextWrapper, view)
 
             popupMenu.menu.add(0, 1, 0, "Download Album")
-            popupMenu.menu.add(0, 2, 1, "Edit Album")
 
             popupMenu.show()
 
@@ -127,10 +128,6 @@ class AlbumAlbumActivity: AppCompatActivity() {
                             showDeleteConfirmationDialog()
                             true
                         }
-                    }
-                    2 -> {
-                        showEditAlbumDialog()
-                        true
                     }
                     else -> false
                 }
@@ -279,59 +276,6 @@ class AlbumAlbumActivity: AppCompatActivity() {
                 downloadAllPhotos(lakwatsa.album, lakwatsa.lakwatsaTitle)
                 Toast.makeText(this@AlbumAlbumActivity, "Download done!", Toast.LENGTH_SHORT).show()
             }
-            dialog.dismiss()
-        }
-
-        dialog.show()
-    }
-
-    private fun showEditAlbumDialog() {
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.modal_edit_album, null)
-        Log.d("AlbumAlbumActivity", "Dialog view inflated: $dialogView")
-
-        val dialog = AlertDialog.Builder(this)
-            .setView(dialogView)
-            .create()
-
-        dialog.setOnShowListener {
-            val displayMetrics = this.resources.displayMetrics
-            val screenWidth = displayMetrics.widthPixels
-            val margin = (24 * displayMetrics.density).toInt()
-
-            dialog.window?.setLayout(
-                screenWidth - 2 * margin,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-        }
-
-        val btnCancel = dialogView.findViewById<ImageButton>(R.id.modal_edit_album_btn_close)
-        val btnEdit = dialogView.findViewById<Button>(R.id.modal_edit_album_btn_save)
-        val etAlbumName = dialogView.findViewById<EditText>(R.id.modal_edit_album_et)
-
-        val lakwatsaId = intent.getStringExtra(Lakwatsa.ID_KEY)
-        lifecycleScope.launch {
-            val lakwatsa = DBHelper.getLakwatsa(lakwatsaId!!)
-            etAlbumName.setText(lakwatsa.lakwatsaTitle)
-        }
-
-        btnCancel.setOnClickListener {
-            dialog.dismiss()
-        }
-
-        btnEdit.setOnClickListener {
-            val newTitle = dialogView.findViewById<EditText>(R.id.modal_edit_album_et).text.toString()
-            val lakwatsaId = intent.getStringExtra(Lakwatsa.ID_KEY)
-
-            lifecycleScope.launch {
-                val lakwatsa = DBHelper.getLakwatsa(lakwatsaId!!)
-                lakwatsa.setLakwatsaTitle(newTitle)
-                DBHelper.updateLakwatsa(lakwatsa)
-                viewBinding.activityAlbumAlbumTitle.text = newTitle
-            }
-
-            // TODO: CHANGE ALBUM COLOR
-
             dialog.dismiss()
         }
         dialog.show()

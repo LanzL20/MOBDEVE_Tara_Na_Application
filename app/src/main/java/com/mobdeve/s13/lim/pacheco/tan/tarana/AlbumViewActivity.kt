@@ -22,6 +22,10 @@ class AlbumViewActivity: AppCompatActivity() {
         viewBinding = ActivityAlbumViewBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
+        // User profile button
+        var user = UserSession.getUser()
+        viewBinding.profileUser1.setImageResource(user.getDrawableProfilePicture())
+
         // NAVIGATION BUTTONS
 
         viewBinding.inboxIcon.setOnClickListener {

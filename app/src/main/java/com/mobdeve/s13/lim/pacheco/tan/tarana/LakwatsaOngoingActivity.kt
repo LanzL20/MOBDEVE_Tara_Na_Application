@@ -29,8 +29,11 @@ class LakwatsaOngoingActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLakwatsaOngoingBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
+
+        // User profile button
+        var user = UserSession.getUser()
+        binding.profileUser1.setImageResource(user.getDrawableProfilePicture())
 
         binding.optionsIcon.visibility = View.GONE
         lifecycleScope.launch {

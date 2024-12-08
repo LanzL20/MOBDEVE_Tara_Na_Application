@@ -205,9 +205,15 @@ class User {
         else if(this.profilePicture == 3) {
             return R.drawable.asset_profile3
         }
+        else if(this.profilePicture == 4) {
+            return R.drawable.asset_profile4
+        }
         else{
             return R.drawable.asset_profile1
         }
     }
 
+    fun updateProfilePicture(newProfilePicture: Int) {
+        this.profilePicture = newProfilePicture
+    }
 }

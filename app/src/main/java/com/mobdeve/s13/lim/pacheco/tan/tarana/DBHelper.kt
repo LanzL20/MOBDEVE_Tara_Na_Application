@@ -563,8 +563,6 @@ object DBHelper {
             .addOnFailureListener { e -> Log.w("MainActivity", "Error updating document", e) }
     }
 
-
-
     fun saveLocation(latitude: Double, longitude: Double){
         if(UserSession.isLoggedIn()==false){
             return

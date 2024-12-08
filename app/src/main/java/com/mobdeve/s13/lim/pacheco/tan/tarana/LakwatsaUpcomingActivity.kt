@@ -42,6 +42,10 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
         binding = ActivityLakwatsaUpcomingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // User profile button
+        var user = UserSession.getUser()
+        binding.profileUser1.setImageResource(user.getDrawableProfilePicture())
+
         // Setup invite friends modal
         inviteFriendsModalBinding = ModalInviteFriendsBinding.inflate(layoutInflater)
         inviteFriendsModal = Dialog(this).apply {

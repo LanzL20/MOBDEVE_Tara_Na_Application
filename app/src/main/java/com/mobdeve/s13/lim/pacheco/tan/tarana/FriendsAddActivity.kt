@@ -14,6 +14,9 @@ class FriendsAddActivity: AppCompatActivity() {
         val viewBinding = ActivityFriendsAddBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
+        // User profile button
+        var user = UserSession.getUser()
+        viewBinding.profileUser1.setImageResource(user.getDrawableProfilePicture())
 
         val friendList = ArrayList<User>()
         viewBinding.activityFriendsAddRv.adapter = AdapterFriendsAdd(friendList)

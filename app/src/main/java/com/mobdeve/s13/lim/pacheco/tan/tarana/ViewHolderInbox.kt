@@ -65,9 +65,24 @@ class ViewHolderInbox(private var viewBinding: ItemLayoutNotificationBinding) : 
             val popupMenu = PopupMenu(contextWrapper, view)
 
             popupMenu.menu.add(0, 1, 0, "Delete notification")
-            popupMenu.menu.add(0, 2, 1, "Mark as read")
+            //popupMenu.menu.add(0, 2, 1, "Mark as read")
 
             popupMenu.show()
+
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    1 -> {
+                        (viewBinding.root.context as AppCompatActivity).lifecycleScope.launch {
+                            val user = UserSession.getUser()
+                            user.notificationList.removeAt(position)
+                            DBHelper.updateUser(user)
+                            adapter.removeNotification(position)
+                        }
+                    }
+
+                }
+                true
+            }
         }
     }
 }

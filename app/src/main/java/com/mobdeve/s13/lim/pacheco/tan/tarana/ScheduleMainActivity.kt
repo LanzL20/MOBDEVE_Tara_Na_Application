@@ -44,10 +44,13 @@ class ScheduleMainActivity : AppCompatActivity() {
     private lateinit var modal: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         binding = ActivityScheduleMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // User profile button
+        var user = UserSession.getUser()
+        binding.activityScheduleMainProfileUser.setImageResource(user.getDrawableProfilePicture())
 
         modal = Dialog(this)
         modalBinding = ModalScheduleAddEventBinding.inflate(layoutInflater)

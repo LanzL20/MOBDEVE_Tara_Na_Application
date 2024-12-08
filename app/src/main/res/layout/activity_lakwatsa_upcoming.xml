@@ -322,7 +322,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="300dp">
+            android:layout_height="280dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/activity_lakwtsa_upcoming_polling_rv"
@@ -335,7 +335,7 @@
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/btn_round_yellow_80"
             android:fontFamily="@font/jeko_demo_extrabold"

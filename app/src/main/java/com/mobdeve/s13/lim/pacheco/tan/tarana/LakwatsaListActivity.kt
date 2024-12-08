@@ -67,6 +67,10 @@ class LakwatsaListActivity: AppCompatActivity() {
         binding.ongoingLl.visibility = View.GONE
         binding.completedLl.visibility = View.GONE
 
+        // User profile button
+        var user = UserSession.getUser()
+        binding.profileUser1.setImageResource(user.getDrawableProfilePicture())
+
         lifecycleScope.launch {
             refreshData()
         }
