@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ContextThemeWrapper
@@ -83,6 +84,7 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
                 binding.activityLakwatsaUpcomingFriend2Iv.setImageResource(resources.getIdentifier("asset_profile" + DBHelper.getUser(lakwatsa.lakwatsaUsers[1]).profilePicture, "drawable", packageName))
                 binding.activityLakwatsaUpcomingFriend2Iv.visibility = View.VISIBLE
                 binding.moreFriendsTv.setText("+" + (lakwatsa.lakwatsaUsers.size - 2).toString())
+                binding.moreFriends.visibility = View.VISIBLE
             }
 
             // Invite more friends
@@ -272,16 +274,61 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
 
     // HARDCODED CONTENT
     private fun setupRecyclerView() {
-        val friendsList = arrayListOf(
-            InviteFriendItem(R.drawable.asset_profile2, "Ashley Tsang", "@ashley_yvonne2003", false),
-            InviteFriendItem(R.drawable.asset_profile3, "Cedric Alejo", "@alejo_ced", false),
-            InviteFriendItem(R.drawable.asset_profile1, "Tyler Tan", "@TyTan88", false)
-        )
+        lifecycleScope.launch {
+            val lakwatsa = DBHelper.getLakwatsa(intent.getStringExtra(Lakwatsa.ID_KEY)!!)
+            var friendsList = DBHelper.getUsers(UserSession.getUser().friendsList)
+            val friendListFiltered = ArrayList<User>()
+            for(friend in friendsList){
+                if(!lakwatsa.lakwatsaUsers.contains(friend.username)){
+                    friendListFiltered.add(friend)
+                }
+            }
+            friendsList = friendListFiltered
 
-        Log.d("RecyclerView Setup", "Found ${friendsList.size} items")
-        inviteFriendsModalBinding.inviteFriendsRv.layoutManager = LinearLayoutManager(this)
+            val items = ArrayList<InviteFriendItem>()
+            for(friend in friendsList){
+                items.add(InviteFriendItem(friend.getDrawableProfilePicture(), friend.name, "@" + friend.username, false))
+            }
+            inviteFriendsModalBinding.inviteFriendsRv.layoutManager = LinearLayoutManager(inviteFriendsModalBinding.root.context)
 
-        val adapter = AdapterInviteFriends(friendsList, this)
-        inviteFriendsModalBinding.inviteFriendsRv.adapter = adapter
+            val adapter = AdapterInviteFriends(items, inviteFriendsModalBinding.root.context)
+            inviteFriendsModalBinding.inviteFriendsRv.adapter = adapter
+
+            inviteFriendsModalBinding.activityFriendsAddBtn.setOnClickListener {
+                adapter.filterItems(inviteFriendsModalBinding.modalInviteFriendsEt.text.toString())
+            }
+
+            inviteFriendsModalBinding.modalInviteFriendsBtnInvite.setOnClickListener{
+                val friendsToInviteList = ArrayList<String>()
+                for (item in items) {
+                    if (item.isChecked) {
+                        friendsToInviteList.add(item.username.substring(1))
+                    }
+                }
+                if(friendsToInviteList.isEmpty()){
+                    Toast.makeText(this@LakwatsaUpcomingActivity, "Please select friends to invite...", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                for(friend in lakwatsa.lakwatsaUsers){
+                    friendsToInviteList.add(friend)
+                }
+                val newLakwatsa = Lakwatsa(
+                    lakwatsa.lakwatsaId,
+                    friendsToInviteList,
+                    lakwatsa.locationLatitude,
+                    lakwatsa.locationLongitude,
+                    lakwatsa.lakwatsaTitle,
+                    lakwatsa.date,
+                    lakwatsa.time,
+                    lakwatsa.pollingList,
+                    lakwatsa.album,
+                    lakwatsa.status,
+                    lakwatsa.lakwatsaAdmin
+                )
+                DBHelper.updateLakwatsa(newLakwatsa)
+                finish()
+                startActivity(intent)
+            }
+        }
     }
 }
