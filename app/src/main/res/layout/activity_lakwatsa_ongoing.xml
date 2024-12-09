@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="30dp"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/activity_lakwatsa_upcoming_logo">
 
@@ -274,6 +274,7 @@
             android:id="@+id/activity_lakwatsa_ongoing_map_iv"
             android:layout_width="300dp"
             android:layout_height="300dp"
+
             android:layout_gravity="center"
             app:srcCompat="@drawable/temp_map" />
 

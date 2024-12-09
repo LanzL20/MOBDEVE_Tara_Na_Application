@@ -127,7 +127,7 @@
                     android:layout_width="170dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
-                    android:layout_marginBottom="25dp"
+                    android:layout_marginBottom="20dp"
                     android:background="@drawable/btn_round_yellow_no_outline"
                     android:fontFamily="@font/jeko_demo_extrabold"
                     android:padding="10dp"
@@ -139,7 +139,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/activity_lakwatsa_list_rv_1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -154,7 +154,7 @@
                     android:layout_width="170dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
-                    android:layout_marginBottom="25dp"
+                    android:layout_marginBottom="20dp"
                     android:background="@drawable/btn_round_orange_no_outline"
                     android:fontFamily="@font/jeko_demo_extrabold"
                     android:padding="10dp"
@@ -166,7 +166,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/activity_lakwatsa_list_rv_2"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -182,7 +182,7 @@
                     android:layout_width="170dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25dp"
-                    android:layout_marginBottom="25dp"
+                    android:layout_marginBottom="20dp"
                     android:background="@drawable/btn_round_green_no_outline"
                     android:fontFamily="@font/jeko_demo_extrabold"
                     android:padding="10dp"
@@ -194,9 +194,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/activity_lakwatsa_list_rv_3"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
         </LinearLayout>

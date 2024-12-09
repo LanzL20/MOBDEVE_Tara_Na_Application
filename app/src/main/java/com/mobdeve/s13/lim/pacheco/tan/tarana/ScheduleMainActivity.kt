@@ -56,7 +56,7 @@ class ScheduleMainActivity : AppCompatActivity() {
         modalBinding = ModalScheduleAddEventBinding.inflate(layoutInflater)
         modal.setContentView(modalBinding.root)
         modal.window!!.setLayout(
-            LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT
+            (resources.displayMetrics.widthPixels * 0.90).toInt(), LinearLayout.LayoutParams.WRAP_CONTENT
         )
 
         modal.window!!.setBackgroundDrawableResource(android.R.color.transparent)

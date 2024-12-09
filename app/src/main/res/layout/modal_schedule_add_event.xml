@@ -156,6 +156,7 @@
             android:fontFamily="@font/jeko_demo_extrabold"
             android:text="Submit"
             android:textAllCaps="false"
+            android:textColor="#070802"
             android:textSize="20sp" />
 
     </LinearLayout>
