@@ -71,6 +71,10 @@ class BoardingPhoneAuthActivity:AppCompatActivity() {
 
         signInButton.setOnClickListener {
             val otp= otpInput.text.toString()
+            if(otp.isEmpty()){
+                Toast.makeText(this, "Please enter the OTP", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             val credential:PhoneAuthCredential= PhoneAuthProvider.getCredential(verificationCode, otp)
             signIn(credential)
         }
