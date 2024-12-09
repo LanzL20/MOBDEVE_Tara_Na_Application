@@ -399,16 +399,20 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
                 DBHelper.updateLakwatsa(newLakwatsa)
                 lifecycleScope.launch {
                     for (friends in friendsToInviteList) {
+                        Log.e("LakwatsaUpcomigneActivity", "Sending notification to $friends")
                         DBHelper.sendNotification(
                             "${UserSession.getUser().username} has invited you to the ${lakwatsa.lakwatsaTitle} lakwatsa!",
                             UserSession.getUser().username,
                             friends,
                             Notification.LAKWATSA_INVITE
                         )
+                        val frie = DBHelper.getUser(friends)
+                        frie.addLakwatsa(lakwatsa.lakwatsaId)
+                        DBHelper.updateUser(frie)
                     }
+                    finish()
+                    startActivity(intent)
                 }
-                finish()
-                startActivity(intent)
             }
         }
     }
