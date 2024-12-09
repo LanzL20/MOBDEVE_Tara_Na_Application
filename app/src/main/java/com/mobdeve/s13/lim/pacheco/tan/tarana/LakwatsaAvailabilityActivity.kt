@@ -205,5 +205,7 @@ class LakwatsaAvailabilityActivity: AppCompatActivity() {
             binding.activityLakwatsaAvailabilityIbInbox.setImageResource(R.drawable.ic_inbox)
         }
 
+        binding.activityLakwatsaAvailabilityProfileUser.setImageResource(UserSession.getUser().getDrawableProfilePicture())
+
     }
 }
