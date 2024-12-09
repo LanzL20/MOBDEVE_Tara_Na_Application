@@ -70,6 +70,9 @@ class Notification{
         if(this.image==3L){
             return R.drawable.asset_profile3
         }
+        if(this.image==4L){
+            return R.drawable.asset_profile4
+        }
         return R.drawable.logo_chat
     }
 
