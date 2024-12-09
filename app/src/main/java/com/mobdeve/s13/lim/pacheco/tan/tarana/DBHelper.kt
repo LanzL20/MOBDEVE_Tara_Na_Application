@@ -209,6 +209,14 @@ object DBHelper {
         )
     }
 
+    fun removeLeadingZero(input: String): String {
+        return if (input.startsWith("0")) {
+            input.substring(1) // Removes the first character
+        } else {
+            input
+        }
+    }
+
     suspend fun getUsersByUsernameOrPhoneNumber(search: String): ArrayList<User>{
         val db = Firebase.firestore
         val users = ArrayList<User>()
@@ -222,8 +230,8 @@ object DBHelper {
                     Filter.lessThanOrEqualTo(User.USERNAME_KEY, search+ '\uf8ff')
                 ),
                 Filter.and(
-                    Filter.greaterThanOrEqualTo(User.PHONE_NUMBER_KEY, "+63" + search.substring(1)),
-                    Filter.lessThanOrEqualTo(User.PHONE_NUMBER_KEY, "+63" + search.substring(1) + '\uf8ff')
+                    Filter.greaterThanOrEqualTo(User.PHONE_NUMBER_KEY, "+63" + removeLeadingZero(search)),
+                    Filter.lessThanOrEqualTo(User.PHONE_NUMBER_KEY, "+63" + removeLeadingZero(search) + '\uf8ff')
                 )
             ))
             .get()
