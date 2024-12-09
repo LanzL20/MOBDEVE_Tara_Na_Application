@@ -40,10 +40,7 @@ class BoardingLoginActivity : AppCompatActivity() {
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
         }
-
-        binding.activityBoardingLoginForgotPwBtn.setOnClickListener {
-            forgotPwModal.show()
-        }
+        
 
         forgotPwModalBinding.modalForgotPwBtnSubmit.setOnClickListener {
             val phoneNum = forgotPwModalBinding.modalForgotPwEt.text.toString()
