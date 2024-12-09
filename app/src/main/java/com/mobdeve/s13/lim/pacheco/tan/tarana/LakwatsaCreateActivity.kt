@@ -125,6 +125,7 @@ class LakwatsaCreateActivity : AppCompatActivity() {
         else{
             binding.inboxIcon.setImageResource(R.drawable.ic_inbox)
         }
+        binding.profileUser1.setImageResource(UserSession.getUser().getDrawableProfilePicture())
     }
 
     // HARDCODED CONTENT
