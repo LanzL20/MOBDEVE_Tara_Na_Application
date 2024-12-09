@@ -322,7 +322,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="280dp">
+            android:layout_height="230dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/activity_lakwtsa_upcoming_polling_rv"

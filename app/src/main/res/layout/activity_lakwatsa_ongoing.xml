@@ -274,7 +274,6 @@
             android:id="@+id/activity_lakwatsa_ongoing_map_iv"
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:layout_marginTop="15dp"
             android:layout_gravity="center"
             app:srcCompat="@drawable/temp_map" />
 

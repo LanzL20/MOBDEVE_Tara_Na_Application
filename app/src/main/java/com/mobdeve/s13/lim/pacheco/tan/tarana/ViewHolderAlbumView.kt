@@ -9,7 +9,18 @@ import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ItemLayoutNotification
 
 class ViewHolderAlbumView(private var viewBinding: ItemAlbumViewBinding) : RecyclerView.ViewHolder(viewBinding.root) {
 
+    private val backgrounds = listOf(
+        R.drawable.btn_round_orange_30,
+        R.drawable.btn_round_blue_30,
+        R.drawable.btn_round_green_30,
+        R.drawable.btn_round_yellow_30,
+        R.drawable.btn_round_pink_30
+    )
+
     fun bindData(lakwatsa: Lakwatsa, position: Int) {
         viewBinding.albumText.text = lakwatsa.lakwatsaTitle + "\n" + lakwatsa.album.size + " photos"
+
+        val backgroundRes = backgrounds[position % backgrounds.size]
+        viewBinding.albumItem.setBackgroundResource(backgroundRes)
     }
 }

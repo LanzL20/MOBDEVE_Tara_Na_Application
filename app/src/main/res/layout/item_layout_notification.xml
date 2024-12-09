@@ -10,7 +10,7 @@
         android:orientation="horizontal"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="5dp">
 
         <ImageView
             android:id="@+id/activity_profile_inbox_user_iv"
