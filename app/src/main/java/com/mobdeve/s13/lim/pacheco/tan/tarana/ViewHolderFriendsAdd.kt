@@ -9,7 +9,7 @@ class ViewHolderFriendsAdd(private var viewBinding: ItemLayoutFriendToAddBinding
 
     fun bindData(user: User) {
         viewBinding.itemLayoutFriendToAddName.text = user.name
-        viewBinding.itemLayoutFriendToAddUsername.text = user.username
+        viewBinding.itemLayoutFriendToAddUsername.text = "@" + user.username
         val resourceId = viewBinding.root.context.getResources().getIdentifier("asset_profile" + user.profilePicture, "drawable", viewBinding.root.context.getPackageName());
         viewBinding.itemLayoutFriendToAddIv.setImageResource(resourceId)
     }

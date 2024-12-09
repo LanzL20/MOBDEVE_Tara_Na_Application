@@ -48,7 +48,7 @@ class ProfileFriendActivity:AppCompatActivity() {
         lifecycleScope.launch {
             val user = DBHelper.getUser(intent.getStringExtra(USER_KEY).toString())
             viewBinding.activityProfileUserName.text = user.name
-            viewBinding.activityProfileUserUsername.text = user.username
+            viewBinding.activityProfileUserUsername.text = "@" + user.username
             viewBinding.activityProfileUserNumFriends.text = user.friendsList.size.toString()
             val resourceId = viewBinding.root.context.getResources().getIdentifier("asset_profile" + user.profilePicture, "drawable", viewBinding.root.context.getPackageName());
             viewBinding.profileUser2.setImageResource(resourceId)
