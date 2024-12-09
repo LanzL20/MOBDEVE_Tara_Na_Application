@@ -59,7 +59,7 @@
 
             <EditText
                 android:id="@+id/modal_schedule_edit_name_et"
-                android:layout_width="200dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/et_round_gray_no_outline"
                 android:ems="10"
@@ -97,7 +97,7 @@
 
             <EditText
                 android:id="@+id/modal_lakwatsa_edit_date_et"
-                android:layout_width="200dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/et_round_gray_no_outline"
                 android:ems="10"
@@ -137,7 +137,7 @@
 
             <EditText
                 android:id="@+id/modal_lakwatsa_edit_time_et"
-                android:layout_width="200dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/et_round_gray_no_outline"
                 android:ems="10"
@@ -177,7 +177,7 @@
 
             <EditText
                 android:id="@+id/modal_lakwatsa_location_name_et"
-                android:layout_width="200dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/et_round_gray_no_outline"
                 android:clickable="true"

@@ -59,7 +59,7 @@
 
             <EditText
                 android:id="@+id/modal_schedule_edit_name_et"
-                android:layout_width="220dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/et_round_gray_no_outline"
                 android:ems="10"
@@ -97,7 +97,7 @@
 
             <EditText
                 android:id="@+id/modal_schedule_edit_start_et"
-                android:layout_width="220dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/et_round_gray_no_outline"
                 android:ems="10"
@@ -136,7 +136,7 @@
 
             <EditText
                 android:id="@+id/modal_schedule_edit_end_et"
-                android:layout_width="220dp"
+                android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/et_round_gray_no_outline"
                 android:ems="10"

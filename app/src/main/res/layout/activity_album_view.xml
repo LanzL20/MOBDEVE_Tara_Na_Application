@@ -101,22 +101,21 @@
             android:alignmentMode="alignMargins"
             android:columnCount="2"
             android:foregroundGravity="center_horizontal"
+            android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:paddingLeft="20dp"
             android:paddingTop="15dp"
-            android:paddingRight="20dp"
             android:paddingBottom="15dp"
             android:rowOrderPreserved="false"
             android:useDefaultMargins="true">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/albumRv"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="30dp"
                 android:layout_gravity="center_horizontal"
                 android:foregroundGravity="center_horizontal" />
-
-
         </GridLayout>
     </ScrollView>
 
