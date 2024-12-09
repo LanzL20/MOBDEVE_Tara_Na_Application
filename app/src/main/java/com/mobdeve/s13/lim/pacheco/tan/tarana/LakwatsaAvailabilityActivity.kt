@@ -105,11 +105,9 @@ class LakwatsaAvailabilityActivity: AppCompatActivity() {
 
                     // Called every time we need to reuse a container.
                     override fun bind(container: DayViewContainer, data: CalendarDay) {
-                        // TODO: Temp code for testing multiple colors
                         // for every lawaktsa event, set the background to a different color
 
                         var unavailableCount = 0
-
 
                         for(user in lakwatsaUsers){
                             var breakFlag = false
@@ -140,9 +138,6 @@ class LakwatsaAvailabilityActivity: AppCompatActivity() {
                             if(breakFlag)
                                 continue
                         }
-                        Log.e("LakwatsaAvailabilityActivity", "Date: ${data.date}")
-                        Log.e("LakwatsaAvailabilityActivity", "Unavailable Count: $unavailableCount")
-                        Log.e("LakwatsaAvailabilityActivity", "Lakwatsa Users Size: ${lakwatsaUsers.size}")
 
                         var unavailabilityScore = unavailableCount.toFloat() / lakwatsaUsers.size.toFloat()
                         val color = getGradientColorBg(unavailabilityScore) // Your gradient function
@@ -210,6 +205,9 @@ class LakwatsaAvailabilityActivity: AppCompatActivity() {
         }
 
         binding.activityLakwatsaAvailabilityProfileUser.setImageResource(UserSession.getUser().getDrawableProfilePicture())
-
+        binding.activityLakwatsaAvailabilityProfileUser.setOnClickListener{
+            val intent = Intent(this, ProfileUserActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

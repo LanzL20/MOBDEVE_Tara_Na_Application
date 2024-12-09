@@ -95,6 +95,7 @@ class ProfileSettingActivity:AppCompatActivity() {
             val serviceIntent= Intent(this, LocationService::class.java)
             stopService(serviceIntent)
             val intent = Intent(this, BoardingWelcomeActivity::class.java)
+            intent.apply { flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK }
             Firebase.auth.signOut()
             UserSession.clearUser()
             startActivity(intent)
