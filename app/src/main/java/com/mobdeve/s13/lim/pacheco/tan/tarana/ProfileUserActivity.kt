@@ -103,6 +103,7 @@ class ProfileUserActivity: AppCompatActivity() {
 
         // Save new profile picture
         changeProfileModalBinding.modalChangeProfileBtnSave.setOnClickListener {
+            val user = UserSession.getUser()
             user.updateProfilePicture(selectedProfilePictureRes)
             viewBinding.profileUser1.setImageResource(user.getDrawableProfilePicture())
             changeProfileModal.dismiss()
