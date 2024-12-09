@@ -21,7 +21,7 @@ class LakwatsaUpcommingSetLocationActivity : AppCompatActivity(), OnMapReadyCall
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityLakwatsaUpcommingSetLocationBinding
-    private lateinit var finalLocation: LatLng
+    private var finalLocation= LatLng(0.0,0.0)
     private lateinit var lakwatsa: Lakwatsa
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -161,9 +161,11 @@ class LakwatsaLocationActivity : AppCompatActivity(), OnMapReadyCallback {
         lifecycleScope.launch {
             lakwatsa= DBHelper.getLakwatsa(intent.getStringExtra(Lakwatsa.ID_KEY)!!)
             if(placedLocation==false){
-                val lakwatsaLocation= LatLng(lakwatsa.locationLatitude, lakwatsa.locationLongitude)
-                mMap.addMarker(MarkerOptions().position(lakwatsaLocation).title(lakwatsa.locationName))
-                placedLocation=true 
+                if(lakwatsa.locationLatitude!=0.toDouble() && lakwatsa.locationLongitude!=0.toDouble()){
+                    val lakwatsaLocation= LatLng(lakwatsa.locationLatitude, lakwatsa.locationLongitude)
+                    mMap.addMarker(MarkerOptions().position(lakwatsaLocation).title(lakwatsa.locationName))
+                    placedLocation=true
+                }
             }
             for (userID in lakwatsa.lakwatsaUsers){
                 val user= DBHelper.getUserbyUid(userID)
