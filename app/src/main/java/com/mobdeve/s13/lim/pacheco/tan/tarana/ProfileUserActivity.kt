@@ -156,6 +156,9 @@ class ProfileUserActivity: AppCompatActivity() {
         if(UserSession.hasUnreadNotifications()){
             viewBinding.inboxIcon.setImageResource(R.drawable.ic_inbox_unread)
         }
+        else{
+            viewBinding.inboxIcon.setImageResource(R.drawable.ic_inbox)
+        }
         viewBinding.profileUser1.setImageResource(UserSession.getUser().getDrawableProfilePicture())
     }
 
