@@ -110,6 +110,7 @@ class LakwatsaAvailabilityActivity: AppCompatActivity() {
 
                         var unavailableCount = 0
 
+
                         for(user in lakwatsaUsers){
                             var breakFlag = false
                             for (lakwatsa in lakwatsaForEachUser[user.username]!!) {
@@ -123,7 +124,7 @@ class LakwatsaAvailabilityActivity: AppCompatActivity() {
                                 }
                             }
                             if(breakFlag){
-                                break
+                                continue
                             }
                             for (unavailable in user.unavailableList) {
                                 val blockDateFormatted = data.date.toString().replace("-", "/")
@@ -137,8 +138,11 @@ class LakwatsaAvailabilityActivity: AppCompatActivity() {
                                 }
                             }
                             if(breakFlag)
-                                break
+                                continue
                         }
+                        Log.e("LakwatsaAvailabilityActivity", "Date: ${data.date}")
+                        Log.e("LakwatsaAvailabilityActivity", "Unavailable Count: $unavailableCount")
+                        Log.e("LakwatsaAvailabilityActivity", "Lakwatsa Users Size: ${lakwatsaUsers.size}")
 
                         var unavailabilityScore = unavailableCount.toFloat() / lakwatsaUsers.size.toFloat()
                         val color = getGradientColorBg(unavailabilityScore) // Your gradient function
