@@ -18,6 +18,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.Firebase
@@ -128,31 +129,40 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
             if(binding.activityLakwtsaUpcomingTime.text.toString() != "(No time set yet...)"){
                 time = binding.activityLakwtsaUpcomingTime.text.toString()
             }
-            binding.activityLakwtsaUpcomingStartBtn.setOnClickListener{
-                val newLakwatsa = Lakwatsa(
-                    lakwatsa.lakwatsaId,
-                    lakwatsa.lakwatsaUsers,
-                    lakwatsa.locationLatitude,
-                    lakwatsa.locationLongitude,
-                    binding.activityTitleTv.text.toString(),
-                    binding.activityLakwtsaUpcomingDate.text.toString(),
-                    time,
-                    lakwatsa.pollingList,
-                    lakwatsa.album,
-                    Lakwatsa.LAKWATSA_ONGOING,
-                    lakwatsa.lakwatsaAdmin,
-                    lakwatsa.locationName
-                )
-                DBHelper.updateLakwatsa(newLakwatsa)
-                for(user in lakwatsa.lakwatsaUsers){
-                    lifecycleScope.launch {
-                        DBHelper.sendNotification("${lakwatsa.lakwatsaTitle} lakwatsa has started! Enjoy your time!", UserSession.getUser().username, user, Notification.LAKWATSA_ON_GOING)
+            binding.activityLakwtsaUpcomingStartBtn.setOnClickListener {
+                lifecycleScope.launch {
+                    val lakwatsa = DBHelper.getLakwatsa(intent.getStringExtra(Lakwatsa.ID_KEY)!!)
+                    val newLakwatsa = Lakwatsa(
+                        lakwatsa.lakwatsaId,
+                        lakwatsa.lakwatsaUsers,
+                        lakwatsa.locationLatitude,
+                        lakwatsa.locationLongitude,
+                        binding.activityTitleTv.text.toString(),
+                        binding.activityLakwtsaUpcomingDate.text.toString(),
+                        time,
+                        lakwatsa.pollingList,
+                        lakwatsa.album,
+                        Lakwatsa.LAKWATSA_ONGOING,
+                        lakwatsa.lakwatsaAdmin,
+                        lakwatsa.locationName
+                    )
+                    DBHelper.updateLakwatsa(newLakwatsa)
+                    for (user in lakwatsa.lakwatsaUsers) {
+                        lifecycleScope.launch {
+                            DBHelper.sendNotification(
+                                "${lakwatsa.lakwatsaTitle} lakwatsa has started! Enjoy your time!",
+                                UserSession.getUser().username,
+                                user,
+                                Notification.LAKWATSA_ON_GOING
+                            )
+                        }
                     }
+                    val intent2 =
+                        Intent(this@LakwatsaUpcomingActivity, LakwatsaOngoingActivity::class.java)
+                    intent2.putExtra(Lakwatsa.ID_KEY, intent.getStringExtra(Lakwatsa.ID_KEY))
+                    startActivity(intent2)
+                    finish()
                 }
-                val intent2 = Intent(this@LakwatsaUpcomingActivity, LakwatsaOngoingActivity::class.java)
-                intent2.putExtra(Lakwatsa.ID_KEY, intent.getStringExtra(Lakwatsa.ID_KEY))
-                startActivity(intent2)
-                finish()
             }
         }
 
