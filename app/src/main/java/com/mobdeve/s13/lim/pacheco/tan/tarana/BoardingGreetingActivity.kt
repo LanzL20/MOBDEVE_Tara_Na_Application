@@ -11,8 +11,11 @@ class BoardingGreetingActivity: AppCompatActivity() {
         val viewBinding = ActivityBoardingGreetingBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
         viewBinding.activityBoardingGreetingMainCl.setOnClickListener {
-            val intent = Intent(this, ProfileUserActivity::class.java)
+            val intent = Intent(this, ProfileUserActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
             startActivity(intent)
+            finish()
         }
     }
 }

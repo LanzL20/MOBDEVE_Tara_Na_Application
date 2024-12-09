@@ -151,7 +151,9 @@ class BoardingPhoneAuthActivity:AppCompatActivity() {
             .addOnCompleteListener { task ->
                 setInProgress(false)
                 if(task.isSuccessful){
-                    val intent= Intent(this, BoardingGreetingActivity::class.java)
+                    val intent= Intent(this, BoardingGreetingActivity::class.java).apply {
+                        flags= Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    }
                     Log.d("BoardingPhoneAuthActivityDebugging", "Sign in successful")
 
                     lifecycleScope.launch {

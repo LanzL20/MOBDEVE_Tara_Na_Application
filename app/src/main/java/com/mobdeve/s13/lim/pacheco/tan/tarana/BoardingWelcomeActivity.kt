@@ -25,6 +25,7 @@ class BoardingWelcomeActivity:AppCompatActivity() {
                 user= DBHelper.getUserFromNumber(currentuser.phoneNumber!!)
                 UserSession.setUser(user!!)
                 startActivity(intent)
+                finish()
             }
         }
 
