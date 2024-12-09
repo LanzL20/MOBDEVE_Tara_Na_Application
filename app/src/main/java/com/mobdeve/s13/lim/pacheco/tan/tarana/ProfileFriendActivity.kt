@@ -15,9 +15,11 @@ class ProfileFriendActivity:AppCompatActivity() {
         const val USER_KEY = "USER_KEY"
     }
 
+    lateinit var viewBinding: ActivityProfileFriendBinding
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
-        val viewBinding = ActivityProfileFriendBinding.inflate(layoutInflater)
+        viewBinding = ActivityProfileFriendBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
         // User profile button
@@ -120,6 +122,16 @@ class ProfileFriendActivity:AppCompatActivity() {
         viewBinding.profileUser1.setOnClickListener{
             val intent = Intent(this, ProfileUserActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    override fun onResume(){
+        super.onResume()
+        if(UserSession.hasUnreadNotifications()){
+            viewBinding.inboxIcon.setImageResource(R.drawable.ic_inbox_unread)
+        }
+        else{
+            viewBinding.inboxIcon.setImageResource(R.drawable.ic_inbox)
         }
     }
 

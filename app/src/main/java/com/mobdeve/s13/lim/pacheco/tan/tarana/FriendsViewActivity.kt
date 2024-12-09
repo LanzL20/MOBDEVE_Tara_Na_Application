@@ -11,9 +11,11 @@ import com.mobdeve.s13.lim.pacheco.tan.tarana.databinding.ActivityFriendsViewBin
 import kotlinx.coroutines.launch
 
 class FriendsViewActivity: AppCompatActivity() {
+    lateinit var viewBinding: ActivityFriendsViewBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewBinding = ActivityFriendsViewBinding.inflate(layoutInflater)
+        viewBinding = ActivityFriendsViewBinding.inflate(layoutInflater)
+        Log.d("FriendsViewActivity", "onCreate")
         setContentView(viewBinding.root)
 
         // User profile button
@@ -46,6 +48,16 @@ class FriendsViewActivity: AppCompatActivity() {
         viewBinding.profileUser1.setOnClickListener{
             val intent = Intent(this, ProfileUserActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(UserSession.hasUnreadNotifications()){
+            viewBinding.inboxIcon.setImageResource(R.drawable.ic_inbox_unread)
+        }
+        else{
+            viewBinding.inboxIcon.setImageResource(R.drawable.ic_inbox)
         }
     }
 }

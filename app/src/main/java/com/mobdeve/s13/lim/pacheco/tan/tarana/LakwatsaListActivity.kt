@@ -116,5 +116,11 @@ class LakwatsaListActivity: AppCompatActivity() {
         lifecycleScope.launch {
             refreshData()
         }
+        if(UserSession.hasUnreadNotifications()){
+            binding.inboxIcon.setImageResource(R.drawable.ic_inbox_unread)
+        }
+        else{
+            binding.inboxIcon.setImageResource(R.drawable.ic_inbox)
+        }
     }
 }

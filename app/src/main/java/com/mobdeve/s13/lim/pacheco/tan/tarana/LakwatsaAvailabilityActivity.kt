@@ -198,5 +198,12 @@ class LakwatsaAvailabilityActivity: AppCompatActivity() {
                     }
                 }
         }
+        if(UserSession.hasUnreadNotifications()){
+            binding.activityLakwatsaAvailabilityIbInbox.setImageResource(R.drawable.ic_inbox_unread)
+        }
+        else{
+            binding.activityLakwatsaAvailabilityIbInbox.setImageResource(R.drawable.ic_inbox)
+        }
+
     }
 }

@@ -289,4 +289,14 @@ class ScheduleMainActivity : AppCompatActivity() {
 
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        if(UserSession.hasUnreadNotifications()){
+            binding.activityScheduleMainIbInbox.setImageResource(R.drawable.ic_inbox_unread)
+        }
+        else{
+            binding.activityScheduleMainIbInbox.setImageResource(R.drawable.ic_inbox)
+        }
+    }
 }

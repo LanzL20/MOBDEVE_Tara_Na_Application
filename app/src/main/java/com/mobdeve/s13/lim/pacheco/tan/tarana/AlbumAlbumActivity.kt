@@ -188,6 +188,16 @@ class AlbumAlbumActivity: AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(UserSession.hasUnreadNotifications()){
+            viewBinding.inboxIcon.setImageResource(R.drawable.ic_inbox_unread)
+        }
+        else{
+            viewBinding.inboxIcon.setImageResource(R.drawable.ic_inbox)
+        }
+    }
+
     suspend fun downloadAllPhotos(imageLinks: ArrayList<String>, albumName: String) {
         val storage = FirebaseStorage.getInstance()
         val storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)

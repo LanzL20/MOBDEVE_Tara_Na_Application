@@ -75,5 +75,11 @@ class AlbumViewActivity: AppCompatActivity() {
                 (viewBinding.albumRv.adapter as AdapterAlbumView).setData(lakwatsaListFiltered)
             }
         }
+        if(UserSession.hasUnreadNotifications()){
+            viewBinding.inboxIcon.setImageResource(R.drawable.ic_inbox_unread)
+        }
+        else{
+            viewBinding.inboxIcon.setImageResource(R.drawable.ic_inbox)
+        }
     }
 }

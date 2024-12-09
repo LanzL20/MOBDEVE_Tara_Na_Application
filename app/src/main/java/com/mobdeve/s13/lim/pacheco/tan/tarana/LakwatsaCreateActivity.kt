@@ -117,6 +117,16 @@ class LakwatsaCreateActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(UserSession.hasUnreadNotifications()){
+            binding.inboxIcon.setImageResource(R.drawable.ic_inbox_unread)
+        }
+        else{
+            binding.inboxIcon.setImageResource(R.drawable.ic_inbox)
+        }
+    }
+
     // HARDCODED CONTENT
     private fun setupRecyclerView() {
         lifecycleScope.launch {

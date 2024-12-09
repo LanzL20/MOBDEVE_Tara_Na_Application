@@ -112,6 +112,16 @@ class LakwatsaCompletedActivity: AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(UserSession.hasUnreadNotifications()){
+            viewBinding.inboxIcon.setImageResource(R.drawable.ic_inbox_unread)
+        }
+        else{
+            viewBinding.inboxIcon.setImageResource(R.drawable.ic_inbox)
+        }
+    }
+
     private fun showEditDetailsDialog() {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.modal_edit_details, null)
 

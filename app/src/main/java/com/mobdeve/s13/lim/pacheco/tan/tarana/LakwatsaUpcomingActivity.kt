@@ -228,6 +228,16 @@ class LakwatsaUpcomingActivity: AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(UserSession.hasUnreadNotifications()){
+            binding.inboxIcon.setImageResource(R.drawable.ic_inbox_unread)
+        }
+        else{
+            binding.inboxIcon.setImageResource(R.drawable.ic_inbox)
+        }
+    }
+
 
     private fun showEditDetailsDateDialog() {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.modal_edit_details_date, null)
